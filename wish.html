@@ -27,7 +27,6 @@ button,input,textarea,select{
   padding:18px 6%;
   background:#fff;
   border-bottom:1px solid #f1e4ef;
-
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -188,11 +187,9 @@ textarea{
   border-radius:16px;
   border:3px solid transparent;
   cursor:pointer;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   text-align:center;
   font-weight:900;
   color:#fff;
@@ -217,7 +214,6 @@ textarea{
 
 .preview{
   min-height:500px;
-
   display:flex;
   align-items:center;
   justify-content:center;
@@ -227,30 +223,23 @@ textarea{
   width:100%;
   max-width:460px;
   min-height:430px;
-
   border-radius:28px;
   padding:35px 25px;
-
   color:#fff;
   text-align:center;
-
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-
   overflow:hidden;
   position:relative;
 }
 
 .preview-card::before{
   content:"✨";
-
   position:absolute;
-
   font-size:150px;
   opacity:.08;
-
   top:-20px;
   right:-10px;
 }
@@ -273,15 +262,10 @@ textarea{
 .preview-photo{
   width:100px;
   height:100px;
-
   border-radius:50%;
-
   object-fit:cover;
-
   margin-bottom:15px;
-
   border:4px solid rgba(255,255,255,.8);
-
   display:none;
 }
 
@@ -293,46 +277,19 @@ textarea{
 
 .create-final{
   width:100%;
-
   margin-top:22px;
-
   border:0;
-
   padding:15px;
-
   border-radius:28px;
-
   background:linear-gradient(135deg,#ff4d91,#8f39d9);
-
   color:#fff;
-
   font-weight:900;
-
   cursor:pointer;
-
   transition:.2s;
 }
 
 .create-final:hover{
   transform:translateY(-2px);
-}
-
-.result{
-  display:none;
-
-  margin-top:20px;
-
-  padding:18px;
-
-  border-radius:16px;
-
-  background:#f3fff7;
-
-  color:#237047;
-
-  text-align:center;
-
-  font-weight:700;
 }
 
 @media(max-width:800px){
@@ -381,7 +338,7 @@ textarea{
   </div>
 
   <button class="back" onclick="goHome()">
-    ← Home
+    ← Back
   </button>
 
 </header>
@@ -429,57 +386,45 @@ textarea{
         <div class="occasion-options">
 
           <button
+            type="button"
             class="occasion-btn active"
             onclick="selectOccasion(this,'Birthday','🎂')">
             🎂 Birthday
           </button>
 
           <button
+            type="button"
             class="occasion-btn"
             onclick="selectOccasion(this,'Anniversary','💍')">
             💍 Anniversary
           </button>
 
           <button
+            type="button"
             class="occasion-btn"
             onclick="selectOccasion(this,'Festival','🎉')">
             🎉 Festival
           </button>
 
           <button
+            type="button"
             class="occasion-btn"
             onclick="selectOccasion(this,'Raksha Bandhan','🪢')">
             🪢 Raksha
           </button>
 
           <button
+            type="button"
             class="occasion-btn"
             onclick="selectOccasion(this,'Diwali','✨')">
             ✨ Diwali
           </button>
 
           <button
+            type="button"
             class="occasion-btn"
             onclick="selectOccasion(this,'Christmas','🎄')">
             🎄 Christmas
-          </button>
-
-          <button
-            class="occasion-btn"
-            onclick="selectOccasion(this,'Eid','🌙')">
-            🌙 Eid
-          </button>
-
-          <button
-            class="occasion-btn"
-            onclick="selectOccasion(this,'Friendship Day','🤝')">
-            🤝 Friendship
-          </button>
-
-          <button
-            class="occasion-btn"
-            onclick="selectOccasion(this,'Valentines Day','❤️')">
-            ❤️ Valentine
           </button>
 
         </div>
@@ -585,9 +530,10 @@ textarea{
       </div>
 
 
-      <!-- CREATE -->
+      <!-- CREATE BUTTON -->
 
       <button
+        type="button"
         class="create-final"
         onclick="createFinalWish()">
 
@@ -595,17 +541,11 @@ textarea{
 
       </button>
 
-
-      <div
-        class="result"
-        id="result">
-      </div>
-
     </section>
 
 
     <!-- =========================
-         LIVE PREVIEW
+         PREVIEW
     ========================== -->
 
     <section class="card preview">
@@ -653,60 +593,26 @@ textarea{
 <script>
 
 /* =========================
-   INITIAL DATA
+   WISH DATA
 ========================= */
 
 let selectedOccasion = "Birthday";
 let selectedEmoji = "🎂";
 let selectedTemplate = "t1";
-
 let selectedPhoto = "";
 
 
 /* =========================
-   READ OCCASION FROM URL
-========================= */
-
-const urlParams =
-  new URLSearchParams(window.location.search);
-
-const urlOccasion =
-  urlParams.get("occasion");
-
-
-if(urlOccasion){
-
-  const buttons =
-    document.querySelectorAll(".occasion-btn");
-
-  buttons.forEach(button => {
-
-    if(
-      button.textContent
-        .toLowerCase()
-        .includes(urlOccasion.toLowerCase())
-    ){
-
-      button.click();
-
-    }
-
-  });
-
-}
-
-
-/* =========================
-   SELECT OCCASION
+   OCCASION
 ========================= */
 
 function selectOccasion(button,occasion,emoji){
 
   document
     .querySelectorAll(".occasion-btn")
-    .forEach(btn =>
-      btn.classList.remove("active")
-    );
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
 
   button.classList.add("active");
 
@@ -714,21 +620,20 @@ function selectOccasion(button,occasion,emoji){
   selectedEmoji = emoji;
 
   updatePreview();
-
 }
 
 
 /* =========================
-   SELECT TEMPLATE
+   TEMPLATE
 ========================= */
 
 function selectTemplate(element,template){
 
   document
     .querySelectorAll(".template")
-    .forEach(item =>
-      item.classList.remove("active")
-    );
+    .forEach(item => {
+      item.classList.remove("active");
+    });
 
   element.classList.add("active");
 
@@ -737,65 +642,45 @@ function selectTemplate(element,template){
   const preview =
     document.getElementById("previewCard");
 
-  preview.classList.remove(
-    "t1",
-    "t2",
-    "t3"
-  );
+  preview.classList.remove("t1","t2","t3");
 
   preview.classList.add(template);
-
 }
 
 
 /* =========================
-   UPDATE PREVIEW
+   LIVE PREVIEW
 ========================= */
 
 function updatePreview(){
 
   const name =
-    document
-      .getElementById("name")
-      .value
-      .trim();
+    document.getElementById("name").value.trim();
 
   const message =
-    document
-      .getElementById("message")
-      .value
-      .trim();
+    document.getElementById("message").value.trim();
 
 
-  document
-    .getElementById("previewEmoji")
-    .textContent =
+  document.getElementById("previewEmoji").textContent =
     selectedEmoji;
 
 
-  document
-    .getElementById("previewName")
-    .textContent =
+  document.getElementById("previewName").textContent =
     name || "Someone Special";
 
 
-  document
-    .getElementById("previewTitle")
-    .textContent =
+  document.getElementById("previewTitle").textContent =
     "Happy " + selectedOccasion + "!";
 
 
-  document
-    .getElementById("previewMessage")
-    .textContent =
+  document.getElementById("previewMessage").textContent =
     message ||
     "May your special day be filled with happiness, beautiful memories and lots of smiles. ✨";
-
 }
 
 
 /* =========================
-   LOAD PHOTO
+   PHOTO
 ========================= */
 
 function loadPhoto(event){
@@ -808,62 +693,51 @@ function loadPhoto(event){
   }
 
 
-  if(!file.type.startsWith("image/")){
-
-    alert("Please choose an image file.");
-
-    return;
-
-  }
-
-
   const reader =
     new FileReader();
 
 
-  reader.onload =
-    function(e){
+  reader.onload = function(e){
 
-      selectedPhoto =
-        e.target.result;
-
-      const photo =
-        document.getElementById(
-          "previewPhoto"
-        );
-
-      photo.src =
-        selectedPhoto;
-
-      photo.style.display =
-        "block";
+    selectedPhoto =
+      e.target.result;
 
 
-      /*
-        Save photo temporarily
-        for wish-result.html
-      */
+    const photo =
+      document.getElementById("previewPhoto");
 
-      try{
 
-        sessionStorage.setItem(
-          "wishPhoto",
-          selectedPhoto
-        );
+    photo.src =
+      selectedPhoto;
 
-      }catch(error){
+    photo.style.display =
+      "block";
 
-        console.log(
-          "Photo could not be saved."
-        );
 
-      }
+    /*
+      Save photo temporarily
+      for wish-result.html
+    */
 
-    };
+    try{
+
+      sessionStorage.setItem(
+        "wishPhoto",
+        selectedPhoto
+      );
+
+    }catch(error){
+
+      console.log(
+        "Photo could not be saved."
+      );
+
+    }
+
+  };
 
 
   reader.readAsDataURL(file);
-
 }
 
 
@@ -874,17 +748,13 @@ function loadPhoto(event){
 function createFinalWish(){
 
   const name =
-    document
-      .getElementById("name")
-      .value
-      .trim();
+    document.getElementById("name").value.trim();
 
   const message =
-    document
-      .getElementById("message")
-      .value
-      .trim();
+    document.getElementById("message").value.trim();
 
+
+  /* NAME CHECK */
 
   if(!name){
 
@@ -897,9 +767,10 @@ function createFinalWish(){
       .focus();
 
     return;
-
   }
 
+
+  /* MESSAGE CHECK */
 
   if(!message){
 
@@ -912,70 +783,90 @@ function createFinalWish(){
       .focus();
 
     return;
-
   }
 
 
   /*
-    Save the photo temporarily.
+    Save important information
+    temporarily in browser
   */
 
-  if(selectedPhoto){
+  try{
 
-    try{
-
-      sessionStorage.setItem(
-        "wishPhoto",
-        selectedPhoto
-      );
-
-    }catch(error){
-
-      console.log(
-        "Photo storage unavailable."
-      );
-
-    }
-
-  }
-
-
-  /*
-    Create result page URL.
-  */
-
-  const resultURL =
-    "wish-result.html" +
-    "?occasion=" +
-    encodeURIComponent(
+    sessionStorage.setItem(
+      "wishOccasion",
       selectedOccasion
-    ) +
-    "&name=" +
-    encodeURIComponent(
+    );
+
+    sessionStorage.setItem(
+      "wishName",
       name
-    ) +
-    "&message=" +
-    encodeURIComponent(
+    );
+
+    sessionStorage.setItem(
+      "wishMessage",
       message
-    ) +
-    "&template=" +
-    encodeURIComponent(
+    );
+
+    sessionStorage.setItem(
+      "wishEmoji",
+      selectedEmoji
+    );
+
+    sessionStorage.setItem(
+      "wishTemplate",
       selectedTemplate
     );
 
+  }catch(error){
+
+    console.log(
+      "Session storage error."
+    );
+
+  }
+
 
   /*
-    Go to final Wish page.
+    Create shareable result URL
+  */
+
+  const params =
+    new URLSearchParams();
+
+
+  params.set(
+    "occasion",
+    selectedOccasion
+  );
+
+
+  params.set(
+    "name",
+    name
+  );
+
+
+  params.set(
+    "message",
+    message
+  );
+
+
+  /*
+    IMPORTANT:
+    Go to wish-result.html
   */
 
   window.location.href =
-    resultURL;
+    "wish-result.html?" +
+    params.toString();
 
 }
 
 
 /* =========================
-   HOME
+   BACK HOME
 ========================= */
 
 function goHome(){
@@ -984,7 +875,7 @@ function goHome(){
     "index.html";
 
 }
-console.log("WISHNOW BUTTON CODE IS WORKING");
+
 </script>
 
 </body>
