@@ -1,569 +1,1206 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
 <title>WishNow — Your Wish</title>
 
 <style>
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-  font-family:Inter,Arial,sans-serif;
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 10% 10%,#ffd6e9,transparent 30%),
-    radial-gradient(circle at 90% 20%,#ddd1ff,transparent 30%),
+    font-family:Inter,Arial,sans-serif;
+    min-height:100vh;
+
+    background:
+    radial-gradient(
+        circle at 10% 10%,
+        #ffd6e9,
+        transparent 30%
+    ),
+
+    radial-gradient(
+        circle at 90% 20%,
+        #ddd1ff,
+        transparent 30%
+    ),
+
     #fff8fc;
-  color:#29152f;
+
+    color:#29152f;
 }
 
 .topbar{
-  padding:18px 6%;
-  background:rgba(255,255,255,.8);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #f0e3ee;
+    padding:18px 6%;
 
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+    background:rgba(255,255,255,.8);
+
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid #f0e3ee;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
-  font-size:25px;
-  font-weight:900;
+    font-size:25px;
+    font-weight:900;
 }
 
 .logo span{
-  color:#e83e8c;
+    color:#e83e8c;
 }
 
 .back{
-  border:0;
-  padding:10px 18px;
-  border-radius:25px;
-  background:#f8eaf4;
-  color:#54205f;
-  cursor:pointer;
-  font-weight:800;
+    border:0;
+    padding:10px 18px;
+    border-radius:25px;
+    background:#f8eaf4;
+    color:#54205f;
+    cursor:pointer;
+    font-weight:800;
 }
 
 .container{
-  width:min(1050px,92%);
-  margin:auto;
-  padding:55px 0 70px;
+    width:min(1050px,92%);
+    margin:auto;
+    padding:55px 0 70px;
 }
 
 .heading{
-  text-align:center;
-  margin-bottom:35px;
+    text-align:center;
+    margin-bottom:35px;
 }
 
 .tag{
-  color:#df3983;
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
+    color:#df3983;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
 }
 
 .heading h1{
-  font-size:clamp(34px,5vw,55px);
-  margin:10px 0;
+    font-size:clamp(34px,5vw,55px);
+    margin:10px 0;
 }
 
 .heading p{
-  color:#806f83;
+    color:#806f83;
 }
 
 .result-layout{
-  display:grid;
-  grid-template-columns:1fr 330px;
-  gap:25px;
-  align-items:start;
+    display:grid;
+    grid-template-columns:1fr 330px;
+    gap:25px;
+    align-items:start;
 }
 
 .wish-area{
-  padding:18px;
-  background:#fff;
-  border:1px solid #f0e2ee;
-  border-radius:30px;
-  box-shadow:0 20px 55px rgba(60,20,70,.08);
+    padding:18px;
+
+    background:#fff;
+
+    border:1px solid #f0e2ee;
+
+    border-radius:30px;
+
+    box-shadow:
+    0 20px 55px rgba(60,20,70,.08);
 }
 
 .wish-card{
-  min-height:560px;
-  border-radius:25px;
-  padding:45px 30px;
+    min-height:560px;
 
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+    border-radius:25px;
 
-  text-align:center;
-  color:#fff;
+    padding:45px 30px;
 
-  position:relative;
-  overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
-  background:
-    linear-gradient(135deg,#ff4d91,#8f39d9);
+    text-align:center;
+
+    color:#fff;
+
+    position:relative;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff4d91,
+        #8f39d9
+    );
 }
 
 .wish-card::before{
-  content:"✨";
-  position:absolute;
-  font-size:190px;
-  opacity:.08;
-  top:-45px;
-  right:-15px;
+    content:"✨";
+
+    position:absolute;
+
+    font-size:190px;
+
+    opacity:.08;
+
+    top:-45px;
+    right:-15px;
 }
 
 .wish-card::after{
-  content:"💖";
-  position:absolute;
-  font-size:150px;
-  opacity:.06;
-  bottom:-35px;
-  left:-15px;
+    content:"💖";
+
+    position:absolute;
+
+    font-size:150px;
+
+    opacity:.06;
+
+    bottom:-35px;
+    left:-15px;
 }
 
 .emoji{
-  font-size:60px;
-  margin-bottom:18px;
-  position:relative;
-  z-index:2;
+    font-size:60px;
+    margin-bottom:18px;
+    position:relative;
+    z-index:2;
 }
 
 .photo{
-  width:125px;
-  height:125px;
-  border-radius:50%;
-  object-fit:cover;
-  border:5px solid rgba(255,255,255,.9);
-  margin-bottom:20px;
-  display:none;
-  position:relative;
-  z-index:2;
+    width:125px;
+    height:125px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid rgba(255,255,255,.9);
+
+    margin-bottom:20px;
+
+    display:none;
+
+    position:relative;
+    z-index:2;
 }
 
 .name{
-  font-size:21px;
-  font-weight:900;
-  margin-bottom:12px;
-  position:relative;
-  z-index:2;
+    font-size:21px;
+    font-weight:900;
+    margin-bottom:12px;
+
+    position:relative;
+    z-index:2;
 }
 
 .wish-card h2{
-  font-size:42px;
-  margin-bottom:17px;
-  position:relative;
-  z-index:2;
+    font-size:42px;
+    margin-bottom:17px;
+
+    position:relative;
+    z-index:2;
 }
 
 .message{
-  max-width:570px;
-  font-size:17px;
-  line-height:1.8;
-  color:rgba(255,255,255,.92);
-  position:relative;
-  z-index:2;
+    max-width:570px;
+
+    font-size:17px;
+    line-height:1.8;
+
+    color:rgba(255,255,255,.92);
+
+    position:relative;
+    z-index:2;
 }
 
 .actions{
-  display:grid;
-  gap:12px;
+    display:grid;
+    gap:12px;
 }
 
 .action-card{
-  background:#fff;
-  border:1px solid #f0e2ee;
-  border-radius:22px;
-  padding:22px;
+    background:#fff;
+
+    border:1px solid #f0e2ee;
+
+    border-radius:22px;
+
+    padding:22px;
 }
 
 .action-card h3{
-  margin-bottom:8px;
+    margin-bottom:8px;
 }
 
 .action-card p{
-  color:#88758b;
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:16px;
+    color:#88758b;
+
+    font-size:13px;
+
+    line-height:1.5;
+
+    margin-bottom:16px;
 }
 
 .action-btn{
-  width:100%;
-  border:0;
-  padding:13px;
-  border-radius:24px;
-  cursor:pointer;
-  font-weight:900;
-  margin-top:8px;
+    width:100%;
+
+    border:0;
+
+    padding:13px;
+
+    border-radius:24px;
+
+    cursor:pointer;
+
+    font-weight:900;
+
+    margin-top:8px;
 }
 
 .share{
-  background:linear-gradient(135deg,#ff4d91,#8f39d9);
-  color:#fff;
+    background:
+    linear-gradient(
+        135deg,
+        #ff4d91,
+        #8f39d9
+    );
+
+    color:#fff;
 }
 
 .copy{
-  background:#f4eaf3;
-  color:#4e205a;
+    background:#f4eaf3;
+    color:#4e205a;
 }
 
 .new{
-  background:#29152f;
-  color:#fff;
+    background:#29152f;
+    color:#fff;
 }
 
 .status{
-  margin-top:14px;
-  padding:12px;
-  border-radius:14px;
-  background:#f2fff7;
-  color:#26724c;
-  font-size:13px;
-  display:none;
-  text-align:center;
+    margin-top:14px;
+
+    padding:12px;
+
+    border-radius:14px;
+
+    background:#f2fff7;
+
+    color:#26724c;
+
+    font-size:13px;
+
+    display:none;
+
+    text-align:center;
+}
+
+.lock-box{
+    margin-top:12px;
+
+    padding:22px;
+
+    background:#fff;
+
+    border:1px solid #f0e2ee;
+
+    border-radius:22px;
+}
+
+.lock-box h3{
+    margin-bottom:8px;
+}
+
+.lock-box p{
+    color:#88758b;
+
+    font-size:13px;
+
+    line-height:1.5;
+
+    margin-bottom:15px;
+}
+
+.question{
+    margin-bottom:15px;
+}
+
+.question label{
+    display:block;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    margin-bottom:7px;
+}
+
+.question input{
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #e2d7e5;
+
+    border-radius:12px;
+
+    outline:none;
+}
+
+.unlock-btn{
+    width:100%;
+
+    border:0;
+
+    padding:14px;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff4d91,
+        #8f39d9
+    );
+
+    color:#fff;
+
+    font-weight:900;
+}
+
+.score{
+    margin-top:12px;
+
+    padding:12px;
+
+    border-radius:14px;
+
+    background:#fff7e8;
+
+    color:#8a5a00;
+
+    text-align:center;
+
+    font-size:13px;
+
+    display:none;
+}
+
+.loading{
+    text-align:center;
+
+    padding:80px 20px;
+
+    font-weight:900;
+
+    color:#7b6380;
+}
+
+.error{
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:#a12626;
+}
+
+.hidden{
+    display:none !important;
 }
 
 @media(max-width:800px){
 
-  .result-layout{
-    grid-template-columns:1fr;
-  }
+    .result-layout{
+        grid-template-columns:1fr;
+    }
 
-  .wish-card{
-    min-height:500px;
-  }
+    .wish-card{
+        min-height:500px;
+    }
 }
 
 @media(max-width:500px){
 
-  .container{
-    padding-top:35px;
-  }
+    .container{
+        padding-top:35px;
+    }
 
-  .wish-area{
-    padding:10px;
-  }
+    .wish-area{
+        padding:10px;
+    }
 
-  .wish-card{
-    min-height:480px;
-    padding:35px 20px;
-  }
+    .wish-card{
+        min-height:480px;
+        padding:35px 20px;
+    }
 
-  .wish-card h2{
-    font-size:34px;
-  }
+    .wish-card h2{
+        font-size:34px;
+    }
 
-  .message{
-    font-size:15px;
-  }
+    .message{
+        font-size:15px;
+    }
 }
+
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
+
 
 <body>
 
+
 <header class="topbar">
 
-  <div class="logo">
-    Wish<span>Now</span> ✨
-  </div>
+<div class="logo">
+Wish<span>Now</span> ✨
+</div>
 
-  <button class="back" onclick="goBack()">
-    ← Create Another
-  </button>
+<button class="back" onclick="goBack()">
+← Create Another
+</button>
 
 </header>
 
 
 <main class="container">
 
-  <div class="heading">
 
-    <div class="tag">
-      YOUR WISH IS READY
-    </div>
-
-    <h1>
-      A Special Moment Made For You ✨
-    </h1>
-
-    <p>
-      Your personalized wish is ready to share.
-    </p>
-
-  </div>
+<div
+id="loading"
+class="loading"
+>
+⏳ Loading your Wish...
+</div>
 
 
-  <div class="result-layout">
+<div
+id="error"
+class="error hidden"
+>
+❌ This Wish could not be found.
+</div>
 
 
-    <!-- WISH -->
-
-    <section class="wish-area">
-
-      <div class="wish-card" id="wishCard">
-
-        <div class="emoji" id="resultEmoji">
-          🎂
-        </div>
-
-        <img
-          class="photo"
-          id="resultPhoto"
-          alt="Wish memory"
-        >
-
-        <div class="name" id="resultName">
-          Someone Special
-        </div>
-
-        <h2 id="resultTitle">
-          Happy Birthday!
-        </h2>
-
-        <p class="message" id="resultMessage">
-          Wishing you a beautiful day filled with
-          happiness, smiles and unforgettable memories. ✨
-        </p>
-
-      </div>
-
-    </section>
+<div id="content" class="hidden">
 
 
-    <!-- ACTIONS -->
+<div class="heading">
 
-    <aside class="actions">
+<div class="tag">
+YOUR WISH IS READY
+</div>
 
-      <div class="action-card">
+<h1>
+A Special Moment Made For You ✨
+</h1>
 
-        <h3>🔗 Share Your Wish</h3>
+<p>
+Answer the WishLock challenge to unlock the surprise.
+</p>
 
-        <p>
-          Share your special wish with friends
-          and family.
-        </p>
-
-        <button
-          class="action-btn share"
-          onclick="shareWish()">
-          Share Wish
-        </button>
-
-        <button
-          class="action-btn copy"
-          onclick="copyWishLink()">
-          📋 Copy Wish Link
-        </button>
-
-        <div
-          class="status"
-          id="status">
-        </div>
-
-      </div>
+</div>
 
 
-      <div class="action-card">
-
-        <h3>✨ Create Another</h3>
-
-        <p>
-          Want to create another wish for
-          someone special?
-        </p>
-
-        <button
-          class="action-btn new"
-          onclick="goBack()">
-          Create New Wish
-        </button>
-
-      </div>
+<div class="result-layout">
 
 
-      <div class="action-card">
+<section class="wish-area">
 
-        <h3>💎 WishNow Premium</h3>
+<div class="wish-card" id="wishCard">
 
-        <p>
-          Premium users will later get saved
-          wishes, profiles, reminders and more.
-        </p>
+<div
+class="emoji"
+id="resultEmoji"
+>
+🎂
+</div>
 
-      </div>
 
-    </aside>
+<img
+class="photo"
+id="resultPhoto"
+alt="Wish memory"
+>
 
-  </div>
+
+<div
+class="name"
+id="resultName"
+>
+Someone Special
+</div>
+
+
+<h2 id="resultTitle">
+Happy Birthday!
+</h2>
+
+
+<p
+class="message"
+id="resultMessage"
+>
+Your wish will appear here.
+</p>
+
+</div>
+
+</section>
+
+
+<aside class="actions">
+
+
+<div class="action-card">
+
+<h3>
+🔐 WishLock
+</h3>
+
+<p>
+Answer the questions correctly. You need
+60/100 marks to unlock the Wish.
+</p>
+
+
+<div id="questionsArea"></div>
+
+
+<button
+class="unlock-btn"
+onclick="checkAnswers()"
+>
+🔓 Unlock My Wish
+</button>
+
+
+<div
+class="score"
+id="score"
+></div>
+
+</div>
+
+
+<div class="action-card">
+
+<h3>
+🔗 Share Your Wish
+</h3>
+
+<p>
+Send this Wish link to someone special.
+</p>
+
+
+<button
+class="action-btn share"
+onclick="shareWish()"
+>
+Share Wish
+</button>
+
+
+<button
+class="action-btn copy"
+onclick="copyWishLink()"
+>
+📋 Copy Wish Link
+</button>
+
+
+<div
+class="status"
+id="status"
+></div>
+
+</div>
+
+
+<div class="action-card">
+
+<h3>
+✨ Create Another
+</h3>
+
+<p>
+Create another beautiful WishNow surprise.
+</p>
+
+<button
+class="action-btn new"
+onclick="goBack()"
+>
+Create New Wish
+</button>
+
+</div>
+
+
+</aside>
+
+
+</div>
+
+</div>
 
 </main>
 
 
 <script>
 
-const params =
-  new URLSearchParams(window.location.search);
+/* =====================================================
+   SUPABASE CONFIG
+   ===================================================== */
+
+const SUPABASE_URL =
+"YOUR_SUPABASE_URL";
+
+const SUPABASE_KEY =
+"YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
-const occasion =
-  params.get("occasion") || "Birthday";
+/* GLOBAL */
 
-const name =
-  params.get("name") || "Someone Special";
+let wish = null;
+let questions = [];
 
-const message =
-  params.get("message") ||
-  "Wishing you a beautiful day filled with happiness, smiles and unforgettable memories. ✨";
+
+/* EMOJI */
 
 const emojiMap = {
 
-  "Birthday":"🎂",
-  "Anniversary":"💍",
-  "Festival":"🎉",
-  "Raksha Bandhan":"🪢",
-  "Diwali":"✨",
-  "Christmas":"🎄",
-  "Eid":"🌙",
-  "Friendship Day":"🤝",
-  "Valentines Day":"❤️"
+    "Birthday":"🎂",
+
+    "Anniversary":"💍",
+
+    "Raksha Bandhan":"🪢",
+
+    "Durga Puja":"🪔",
+
+    "Diwali":"✨",
+
+    "Christmas":"🎄",
+
+    "Eid":"🌙",
+
+    "Friendship Day":"🤝",
+
+    "Valentine's Day":"❤️"
 
 };
 
 
-document.getElementById("resultEmoji").textContent =
-  emojiMap[occasion] || "✨";
+/* GET ID */
+
+const params =
+new URLSearchParams(
+    window.location.search
+);
+
+const wishId =
+params.get("id");
 
 
-document.getElementById("resultName").textContent =
-  name;
+/* LOAD */
 
+async function loadWish(){
 
-document.getElementById("resultTitle").textContent =
-  "Happy " + occasion + "!";
+    if(!wishId){
 
+        showError();
 
-document.getElementById("resultMessage").textContent =
-  message;
+        return;
+    }
 
-
-/*
-  Photo preview
-  The current version can receive a photo
-  through sessionStorage from wish.html.
-*/
-
-const savedPhoto =
-  sessionStorage.getItem("wishPhoto");
-
-
-if(savedPhoto){
-
-  const photo =
-    document.getElementById("resultPhoto");
-
-  photo.src = savedPhoto;
-  photo.style.display = "block";
-
-}
-
-
-function getWishLink(){
-
-  return window.location.href;
-
-}
-
-
-async function shareWish(){
-
-  const link =
-    getWishLink();
-
-  const shareData = {
-
-    title:"A Wish From WishNow ✨",
-
-    text:
-      "Someone created a special wish for you on WishNow. 💌",
-
-    url:link
-
-  };
-
-
-  if(navigator.share){
 
     try{
 
-      await navigator.share(shareData);
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+        .from("wishes")
+        .select("*")
+        .eq("id",wishId)
+        .single();
+
+
+        if(error || !data){
+
+            throw error ||
+            new Error(
+                "Wish not found"
+            );
+        }
+
+
+        wish = data;
+
+
+        const {
+            data: questionData,
+            error: questionError
+        } =
+        await supabaseClient
+        .from("wish_questions")
+        .select(
+            "id,question,question_no"
+        )
+        .eq(
+            "wish_id",
+            wishId
+        )
+        .order(
+            "question_no",
+            {
+                ascending:true
+            }
+        );
+
+
+        if(questionError){
+
+            throw questionError;
+        }
+
+
+        questions =
+            questionData || [];
+
+
+        renderWish();
+
 
     }catch(error){
 
-      // User closed share menu.
+        console.error(error);
 
+        showError();
     }
-
-  }else{
-
-    copyWishLink();
-
-  }
-
 }
 
+
+/* RENDER */
+
+function renderWish(){
+
+    document.getElementById(
+        "loading"
+    ).classList.add("hidden");
+
+
+    document.getElementById(
+        "content"
+    ).classList.remove("hidden");
+
+
+    document.getElementById(
+        "resultEmoji"
+    ).textContent =
+        emojiMap[
+            wish.occasion
+        ] || "✨";
+
+
+    document.getElementById(
+        "resultName"
+    ).textContent =
+        wish.recipient_name;
+
+
+    document.getElementById(
+        "resultTitle"
+    ).textContent =
+        wish.occasion +
+        " Wishes ❤️";
+
+
+    document.getElementById(
+        "resultMessage"
+    ).textContent =
+        wish.message;
+
+
+    if(wish.photo_url){
+
+        const photo =
+            document.getElementById(
+                "resultPhoto"
+            );
+
+        photo.src =
+            wish.photo_url;
+
+        photo.style.display =
+            "block";
+    }
+
+
+    renderQuestions();
+}
+
+
+/* QUESTIONS */
+
+function renderQuestions(){
+
+    const area =
+        document.getElementById(
+            "questionsArea"
+        );
+
+    area.innerHTML = "";
+
+
+    questions.forEach(
+        (item,index) => {
+
+            area.innerHTML += `
+
+            <div class="question">
+
+                <label>
+                    ${index + 1}.
+                    ${escapeHtml(item.question)}
+                </label>
+
+                <input
+                    id="answer_${item.id}"
+                    type="text"
+                    placeholder="Your answer"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            `;
+        }
+    );
+}
+
+
+/* CHECK ANSWERS */
+
+async function checkAnswers(){
+
+    if(!questions.length){
+
+        alert(
+            "No WishLock questions found."
+        );
+
+        return;
+    }
+
+
+    let score = 0;
+
+
+    try{
+
+        const questionIds =
+            questions.map(
+                q => q.id
+            );
+
+
+        const {
+            data: answerData,
+            error
+        } =
+        await supabaseClient
+        .from("wish_questions")
+        .select(
+            "id,answer"
+        )
+        .in(
+            "id",
+            questionIds
+        );
+
+
+        if(error){
+
+            throw error;
+        }
+
+
+        questions.forEach(
+            question => {
+
+                const input =
+                    document.getElementById(
+                        "answer_" +
+                        question.id
+                    );
+
+                const userAnswer =
+                    input.value
+                    .trim()
+                    .toLowerCase();
+
+
+                const correct =
+                    answerData.find(
+                        row =>
+                        row.id ===
+                        question.id
+                    );
+
+
+                if(
+                    correct &&
+                    userAnswer &&
+                    userAnswer ===
+                    correct.answer
+                    .trim()
+                    .toLowerCase()
+                ){
+
+                    score += 20;
+                }
+
+            }
+        );
+
+
+        const scoreBox =
+            document.getElementById(
+                "score"
+            );
+
+        scoreBox.style.display =
+            "block";
+
+
+        if(score >= 60){
+
+            await supabaseClient
+            .from("wishes")
+            .update({
+                score:score,
+                unlocked:true
+            })
+            .eq(
+                "id",
+                wish.id
+            );
+
+
+            scoreBox.style.background =
+                "#effff5";
+
+            scoreBox.style.color =
+                "#177245";
+
+            scoreBox.innerHTML =
+                `
+                🎉 <strong>Congratulations!</strong>
+                <br>
+                You scored ${score}/100.
+                <br>
+                🔓 Wish Unlocked!
+                `;
+
+
+            document.getElementById(
+                "wishCard"
+            ).style.filter =
+                "none";
+
+
+        }else{
+
+            await supabaseClient
+            .from("wishes")
+            .update({
+                score:score
+            })
+            .eq(
+                "id",
+                wish.id
+            );
+
+
+            scoreBox.style.background =
+                "#fff7e8";
+
+            scoreBox.style.color =
+                "#8a5a00";
+
+            scoreBox.innerHTML =
+                `
+                ⭐ You scored ${score}/100.
+                <br>
+                You need 60 marks to unlock the Wish.
+                `;
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Could not check the answers."
+        );
+    }
+}
+
+
+/* SHARE */
+
+async function shareWish(){
+
+    const link =
+        window.location.href;
+
+
+    const shareData = {
+
+        title:
+            "A Wish From WishNow ✨",
+
+        text:
+            "Someone created a special Wish for you on WishNow. 💌",
+
+        url:
+            link
+    };
+
+
+    if(navigator.share){
+
+        try{
+
+            await navigator.share(
+                shareData
+            );
+
+        }catch(error){
+
+        }
+
+    }else{
+
+        copyWishLink();
+    }
+}
+
+
+/* COPY */
 
 async function copyWishLink(){
 
-  const link =
-    getWishLink();
+    const link =
+        window.location.href;
 
-  const status =
-    document.getElementById("status");
+    const status =
+        document.getElementById(
+            "status"
+        );
 
 
-  try{
+    try{
 
-    await navigator.clipboard.writeText(link);
+        await navigator.clipboard.writeText(
+            link
+        );
 
-    status.textContent =
-      "✅ Wish link copied!";
+        status.textContent =
+            "✅ Wish link copied!";
 
-    status.style.display =
-      "block";
+        status.style.display =
+            "block";
 
-  }catch(error){
+    }catch(error){
 
-    status.textContent =
-      "Please copy the link from your browser.";
+        status.textContent =
+            link;
 
-    status.style.display =
-      "block";
-
-  }
-
+        status.style.display =
+            "block";
+    }
 }
 
+
+/* BACK */
 
 function goBack(){
 
-  window.location.href =
-    "wish.html";
-
+    window.location.href =
+        "wish.html";
 }
+
+
+/* ERROR */
+
+function showError(){
+
+    document.getElementById(
+        "loading"
+    ).classList.add(
+        "hidden"
+    );
+
+    document.getElementById(
+        "error"
+    ).classList.remove(
+        "hidden"
+    );
+}
+
+
+/* SECURITY */
+
+function escapeHtml(text){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text || "";
+
+    return div.innerHTML;
+}
+
+
+/* START */
+
+loadWish();
 
 </script>
 
