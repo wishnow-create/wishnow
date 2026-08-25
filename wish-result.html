@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WishNow — Your Wish</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 10% 10%,#ffd6e9,transparent 30%),
+    radial-gradient(circle at 90% 20%,#ddd1ff,transparent 30%),
+    #fff8fc;
+  color:#29152f;
+}
+
+.topbar{
+  padding:18px 6%;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #f0e3ee;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+}
+
+.logo span{
+  color:#e83e8c;
+}
+
+.back{
+  border:0;
+  padding:10px 18px;
+  border-radius:25px;
+  background:#f8eaf4;
+  color:#54205f;
+  cursor:pointer;
+  font-weight:800;
+}
+
+.container{
+  width:min(1050px,92%);
+  margin:auto;
+  padding:55px 0 70px;
+}
+
+.heading{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.tag{
+  color:#df3983;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.heading h1{
+  font-size:clamp(34px,5vw,55px);
+  margin:10px 0;
+}
+
+.heading p{
+  color:#806f83;
+}
+
+.result-layout{
+  display:grid;
+  grid-template-columns:1fr 330px;
+  gap:25px;
+  align-items:start;
+}
+
+.wish-area{
+  padding:18px;
+  background:#fff;
+  border:1px solid #f0e2ee;
+  border-radius:30px;
+  box-shadow:0 20px 55px rgba(60,20,70,.08);
+}
+
+.wish-card{
+  min-height:560px;
+  border-radius:25px;
+  padding:45px 30px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+  color:#fff;
+
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(135deg,#ff4d91,#8f39d9);
+}
+
+.wish-card::before{
+  content:"✨";
+  position:absolute;
+  font-size:190px;
+  opacity:.08;
+  top:-45px;
+  right:-15px;
+}
+
+.wish-card::after{
+  content:"💖";
+  position:absolute;
+  font-size:150px;
+  opacity:.06;
+  bottom:-35px;
+  left:-15px;
+}
+
+.emoji{
+  font-size:60px;
+  margin-bottom:18px;
+  position:relative;
+  z-index:2;
+}
+
+.photo{
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  object-fit:cover;
+  border:5px solid rgba(255,255,255,.9);
+  margin-bottom:20px;
+  display:none;
+  position:relative;
+  z-index:2;
+}
+
+.name{
+  font-size:21px;
+  font-weight:900;
+  margin-bottom:12px;
+  position:relative;
+  z-index:2;
+}
+
+.wish-card h2{
+  font-size:42px;
+  margin-bottom:17px;
+  position:relative;
+  z-index:2;
+}
+
+.message{
+  max-width:570px;
+  font-size:17px;
+  line-height:1.8;
+  color:rgba(255,255,255,.92);
+  position:relative;
+  z-index:2;
+}
+
+.actions{
+  display:grid;
+  gap:12px;
+}
+
+.action-card{
+  background:#fff;
+  border:1px solid #f0e2ee;
+  border-radius:22px;
+  padding:22px;
+}
+
+.action-card h3{
+  margin-bottom:8px;
+}
+
+.action-card p{
+  color:#88758b;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:16px;
+}
+
+.action-btn{
+  width:100%;
+  border:0;
+  padding:13px;
+  border-radius:24px;
+  cursor:pointer;
+  font-weight:900;
+  margin-top:8px;
+}
+
+.share{
+  background:linear-gradient(135deg,#ff4d91,#8f39d9);
+  color:#fff;
+}
+
+.copy{
+  background:#f4eaf3;
+  color:#4e205a;
+}
+
+.new{
+  background:#29152f;
+  color:#fff;
+}
+
+.status{
+  margin-top:14px;
+  padding:12px;
+  border-radius:14px;
+  background:#f2fff7;
+  color:#26724c;
+  font-size:13px;
+  display:none;
+  text-align:center;
+}
+
+@media(max-width:800px){
+
+  .result-layout{
+    grid-template-columns:1fr;
+  }
+
+  .wish-card{
+    min-height:500px;
+  }
+}
+
+@media(max-width:500px){
+
+  .container{
+    padding-top:35px;
+  }
+
+  .wish-area{
+    padding:10px;
+  }
+
+  .wish-card{
+    min-height:480px;
+    padding:35px 20px;
+  }
+
+  .wish-card h2{
+    font-size:34px;
+  }
+
+  .message{
+    font-size:15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="logo">
+    Wish<span>Now</span> ✨
+  </div>
+
+  <button class="back" onclick="goBack()">
+    ← Create Another
+  </button>
+
+</header>
+
+
+<main class="container">
+
+  <div class="heading">
+
+    <div class="tag">
+      YOUR WISH IS READY
+    </div>
+
+    <h1>
+      A Special Moment Made For You ✨
+    </h1>
+
+    <p>
+      Your personalized wish is ready to share.
+    </p>
+
+  </div>
+
+
+  <div class="result-layout">
+
+
+    <!-- WISH -->
+
+    <section class="wish-area">
+
+      <div class="wish-card" id="wishCard">
+
+        <div class="emoji" id="resultEmoji">
+          🎂
+        </div>
+
+        <img
+          class="photo"
+          id="resultPhoto"
+          alt="Wish memory"
+        >
+
+        <div class="name" id="resultName">
+          Someone Special
+        </div>
+
+        <h2 id="resultTitle">
+          Happy Birthday!
+        </h2>
+
+        <p class="message" id="resultMessage">
+          Wishing you a beautiful day filled with
+          happiness, smiles and unforgettable memories. ✨
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ACTIONS -->
+
+    <aside class="actions">
+
+      <div class="action-card">
+
+        <h3>🔗 Share Your Wish</h3>
+
+        <p>
+          Share your special wish with friends
+          and family.
+        </p>
+
+        <button
+          class="action-btn share"
+          onclick="shareWish()">
+          Share Wish
+        </button>
+
+        <button
+          class="action-btn copy"
+          onclick="copyWishLink()">
+          📋 Copy Wish Link
+        </button>
+
+        <div
+          class="status"
+          id="status">
+        </div>
+
+      </div>
+
+
+      <div class="action-card">
+
+        <h3>✨ Create Another</h3>
+
+        <p>
+          Want to create another wish for
+          someone special?
+        </p>
+
+        <button
+          class="action-btn new"
+          onclick="goBack()">
+          Create New Wish
+        </button>
+
+      </div>
+
+
+      <div class="action-card">
+
+        <h3>💎 WishNow Premium</h3>
+
+        <p>
+          Premium users will later get saved
+          wishes, profiles, reminders and more.
+        </p>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+</main>
+
+
+<script>
+
+const params =
+  new URLSearchParams(window.location.search);
+
+
+const occasion =
+  params.get("occasion") || "Birthday";
+
+const name =
+  params.get("name") || "Someone Special";
+
+const message =
+  params.get("message") ||
+  "Wishing you a beautiful day filled with happiness, smiles and unforgettable memories. ✨";
+
+const emojiMap = {
+
+  "Birthday":"🎂",
+  "Anniversary":"💍",
+  "Festival":"🎉",
+  "Raksha Bandhan":"🪢",
+  "Diwali":"✨",
+  "Christmas":"🎄",
+  "Eid":"🌙",
+  "Friendship Day":"🤝",
+  "Valentines Day":"❤️"
+
+};
+
+
+document.getElementById("resultEmoji").textContent =
+  emojiMap[occasion] || "✨";
+
+
+document.getElementById("resultName").textContent =
+  name;
+
+
+document.getElementById("resultTitle").textContent =
+  "Happy " + occasion + "!";
+
+
+document.getElementById("resultMessage").textContent =
+  message;
+
+
+/*
+  Photo preview
+  The current version can receive a photo
+  through sessionStorage from wish.html.
+*/
+
+const savedPhoto =
+  sessionStorage.getItem("wishPhoto");
+
+
+if(savedPhoto){
+
+  const photo =
+    document.getElementById("resultPhoto");
+
+  photo.src = savedPhoto;
+  photo.style.display = "block";
+
+}
+
+
+function getWishLink(){
+
+  return window.location.href;
+
+}
+
+
+async function shareWish(){
+
+  const link =
+    getWishLink();
+
+  const shareData = {
+
+    title:"A Wish From WishNow ✨",
+
+    text:
+      "Someone created a special wish for you on WishNow. 💌",
+
+    url:link
+
+  };
+
+
+  if(navigator.share){
+
+    try{
+
+      await navigator.share(shareData);
+
+    }catch(error){
+
+      // User closed share menu.
+
+    }
+
+  }else{
+
+    copyWishLink();
+
+  }
+
+}
+
+
+async function copyWishLink(){
+
+  const link =
+    getWishLink();
+
+  const status =
+    document.getElementById("status");
+
+
+  try{
+
+    await navigator.clipboard.writeText(link);
+
+    status.textContent =
+      "✅ Wish link copied!";
+
+    status.style.display =
+      "block";
+
+  }catch(error){
+
+    status.textContent =
+      "Please copy the link from your browser.";
+
+    status.style.display =
+      "block";
+
+  }
+
+}
+
+
+function goBack(){
+
+  window.location.href =
+    "wish.html";
+
+}
+
+</script>
+
+</body>
+</html>
