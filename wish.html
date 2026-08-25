@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>WishNow — Create Your Wish ❤️</title>
 
-<meta
-    name="description"
-    content="Create a beautiful personalized WishNow surprise with a private WishLock challenge."
->
+<meta name="description"
+content="Create a beautiful personalized WishNow surprise with a private WishLock challenge.">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -36,9 +31,7 @@ body{
     overflow-x:hidden;
 }
 
-button,
-input,
-textarea{
+button,input,textarea{
     font:inherit;
 }
 
@@ -50,25 +43,16 @@ a{
     text-decoration:none;
 }
 
-
-/* ================================
-   NAVBAR
-================================ */
-
 .navbar{
     position:sticky;
     top:0;
     z-index:100;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     padding:17px 6%;
-
     background:rgba(255,255,255,.88);
     backdrop-filter:blur(18px);
-
     border-bottom:1px solid #eee3f0;
 }
 
@@ -84,20 +68,12 @@ a{
 
 .back-btn{
     padding:9px 17px;
-
     border:1px solid #eadbea;
     border-radius:25px;
-
     background:#fff;
     color:#4b2855;
-
     font-weight:700;
 }
-
-
-/* ================================
-   HEADER
-================================ */
 
 .page-header{
     text-align:center;
@@ -107,26 +83,20 @@ a{
 
 .creator-label{
     display:inline-block;
-
     padding:8px 15px;
     border-radius:30px;
-
     background:#fff0f7;
     color:#d92f7c;
-
     font-size:13px;
     font-weight:900;
     letter-spacing:.8px;
-
     margin-bottom:15px;
 }
 
 .page-header h1{
     font-size:clamp(34px,5vw,58px);
     line-height:1.05;
-
     letter-spacing:-1.8px;
-
     margin-bottom:15px;
 }
 
@@ -134,11 +104,6 @@ a{
     color:#806f83;
     line-height:1.7;
 }
-
-
-/* ================================
-   PROGRESS
-================================ */
 
 .progress-wrap{
     width:min(900px,90%);
@@ -161,37 +126,23 @@ a{
 .progress-circle{
     width:38px;
     height:38px;
-
     margin:0 auto 7px;
-
     display:grid;
     place-items:center;
-
     border-radius:50%;
-
     background:#eee7f0;
     color:#8b7c90;
 }
 
 .progress-item.active .progress-circle,
 .progress-item.done .progress-circle{
-    background:linear-gradient(
-        135deg,
-        #ff4d91,
-        #8d3bd4
-    );
-
+    background:linear-gradient(135deg,#ff4d91,#8d3bd4);
     color:#fff;
 }
 
 .progress-item.active{
     color:#8d3bd4;
 }
-
-
-/* ================================
-   CREATOR
-================================ */
 
 .creator{
     width:min(1000px,92%);
@@ -223,14 +174,10 @@ a{
 
 .card{
     background:#fff;
-
     border:1px solid #eee3f0;
     border-radius:30px;
-
     padding:35px;
-
-    box-shadow:
-        0 18px 50px rgba(57,20,70,.07);
+    box-shadow:0 18px 50px rgba(57,20,70,.07);
 }
 
 .step-title{
@@ -252,11 +199,6 @@ a{
     line-height:1.6;
 }
 
-
-/* ================================
-   OCCASIONS
-================================ */
-
 .occasion-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -264,22 +206,16 @@ a{
 }
 
 .occasion{
-
     padding:20px;
-
     border:2px solid #eee4ef;
     border-radius:20px;
-
     background:#fff;
-
     transition:.25s;
 }
 
 .occasion:hover{
     transform:translateY(-3px);
-
-    box-shadow:
-        0 12px 25px rgba(60,20,70,.08);
+    box-shadow:0 12px 25px rgba(60,20,70,.08);
 }
 
 .occasion.selected{
@@ -302,11 +238,6 @@ a{
     font-size:13px;
 }
 
-
-/* ================================
-   TEMPLATES
-================================ */
-
 .template-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -314,14 +245,10 @@ a{
 }
 
 .template{
-
     overflow:hidden;
-
     border:2px solid #eee4ef;
     border-radius:24px;
-
     background:#fff;
-
     transition:.25s;
 }
 
@@ -330,78 +257,45 @@ a{
 }
 
 .template.selected{
-
     border-color:#d83d88;
-
-    box-shadow:
-        0 12px 35px rgba(216,61,136,.16);
+    box-shadow:0 12px 35px rgba(216,61,136,.16);
 }
 
 .template-preview{
-
     min-height:190px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     text-align:center;
-
     padding:25px;
-
     color:#fff;
-
     position:relative;
     overflow:hidden;
 }
 
 .template-preview::after{
-
     content:"✨";
-
     position:absolute;
-
     right:15px;
     bottom:5px;
-
     font-size:80px;
     opacity:.12;
 }
 
 .t1{
-    background:
-        linear-gradient(
-            135deg,
-            #ff4d91,
-            #8e3bd4
-        );
+    background:linear-gradient(135deg,#ff4d91,#8e3bd4);
 }
 
 .t2{
-    background:
-        linear-gradient(
-            135deg,
-            #b85c78,
-            #43204f
-        );
+    background:linear-gradient(135deg,#b85c78,#43204f);
 }
 
 .t3{
-    background:
-        linear-gradient(
-            135deg,
-            #e85b86,
-            #ffb36b
-        );
+    background:linear-gradient(135deg,#e85b86,#ffb36b);
 }
 
 .t4{
-    background:
-        linear-gradient(
-            135deg,
-            #30204d,
-            #a13c91
-        );
+    background:linear-gradient(135deg,#30204d,#a13c91);
 }
 
 .template-preview h3{
@@ -421,11 +315,6 @@ a{
     font-size:13px;
 }
 
-
-/* ================================
-   FORM
-================================ */
-
 .form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -442,25 +331,18 @@ a{
 
 .field label{
     display:block;
-
     margin-bottom:8px;
-
     font-weight:800;
     font-size:14px;
 }
 
 .field input,
 .field textarea{
-
     width:100%;
-
     border:1px solid #e4d9e6;
     border-radius:15px;
-
     padding:13px 15px;
-
     outline:none;
-
     background:#fff;
     color:#2a1930;
 }
@@ -472,28 +354,15 @@ a{
 
 .field input:focus,
 .field textarea:focus{
-
     border-color:#d83d88;
-
-    box-shadow:
-        0 0 0 3px rgba(216,61,136,.08);
+    box-shadow:0 0 0 3px rgba(216,61,136,.08);
 }
 
-
-/* ================================
-   PHOTO
-================================ */
-
 .photo-box{
-
     border:2px dashed #dfd1e2;
-
     border-radius:20px;
-
     padding:20px;
-
     text-align:center;
-
     background:#fcf9fd;
 }
 
@@ -502,39 +371,19 @@ a{
 }
 
 .photo-preview{
-
     max-width:180px;
     max-height:180px;
-
     margin:15px auto 0;
-
     border-radius:16px;
-
     display:none;
-
     object-fit:cover;
 }
 
-
-/* ================================
-   WISHLOCK
-================================ */
-
 .lock-intro{
-
     padding:18px;
-
     border-radius:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff4f8,
-            #f4efff
-        );
-
+    background:linear-gradient(135deg,#fff4f8,#f4efff);
     margin-bottom:25px;
-
     line-height:1.6;
 }
 
@@ -543,25 +392,17 @@ a{
 }
 
 .question-card{
-
     padding:22px;
-
     margin-bottom:15px;
-
     border:1px solid #eee3ef;
     border-radius:20px;
-
     background:#fff;
 }
 
 .question-top{
-
     display:flex;
-
     justify-content:space-between;
-
     gap:10px;
-
     margin-bottom:15px;
 }
 
@@ -570,32 +411,20 @@ a{
 }
 
 .mark{
-
     padding:5px 10px;
-
     border-radius:15px;
-
     background:#fff1c9;
-
     color:#9a6b00;
-
     font-size:12px;
-
     font-weight:900;
 }
 
 .question-card input{
-
     width:100%;
-
     padding:12px 14px;
-
     border:1px solid #e2d7e5;
-
     border-radius:13px;
-
     margin-bottom:10px;
-
     outline:none;
 }
 
@@ -605,221 +434,103 @@ a{
 }
 
 .lock-rules{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:10px;
-
     margin-top:22px;
 }
 
 .rule{
-
     padding:15px;
-
     text-align:center;
-
     border-radius:16px;
-
     background:#faf7fc;
-
     font-size:13px;
-
     font-weight:800;
 }
 
-
-/* ================================
-   PREVIEW
-================================ */
-
 .preview-box{
-
     overflow:hidden;
-
     border-radius:26px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #351449,
-            #8d3478
-        );
-
+    background:linear-gradient(135deg,#351449,#8d3478);
     color:#fff;
-
     padding:45px 30px;
-
     text-align:center;
 }
 
 .preview-box .preview-icon{
-
     font-size:50px;
-
     margin-bottom:15px;
 }
 
 .preview-box h2{
-
-    font-size:
-        clamp(
-            28px,
-            5vw,
-            46px
-        );
-
+    font-size:clamp(28px,5vw,46px);
     margin-bottom:10px;
 }
 
 .preview-box p{
-
     max-width:650px;
-
     margin:0 auto;
-
     line-height:1.7;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            .86
-        );
+    color:rgba(255,255,255,.86);
 }
 
 .preview-message{
-
     margin:25px auto 0;
-
     max-width:650px;
-
     padding:22px;
-
     border-radius:20px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            .1
-        );
-
+    background:rgba(255,255,255,.1);
     line-height:1.7;
 }
 
-
-/* ================================
-   BUTTONS
-================================ */
-
 .navigation{
-
     display:flex;
-
     justify-content:space-between;
-
     gap:12px;
-
     margin-top:25px;
 }
 
 .btn{
-
     border:0;
-
     padding:13px 22px;
-
     border-radius:28px;
-
     font-weight:900;
 }
 
 .btn-secondary{
-
     background:#eee8f0;
     color:#4c3155;
 }
 
 .btn-primary{
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4d91,
-            #8d3bd4
-        );
-
+    background:linear-gradient(135deg,#ff4d91,#8d3bd4);
     color:#fff;
 }
 
 .btn-success{
-
-    background:
-        linear-gradient(
-            135deg,
-            #e83f91,
-            #7337c8
-        );
-
+    background:linear-gradient(135deg,#e83f91,#7337c8);
     color:#fff;
-
     width:100%;
-
     padding:16px;
 }
 
-
-/* ================================
-   RESULT
-================================ */
-
 #resultMessage{
-
     display:none;
-
     margin-top:18px;
-
     padding:18px;
-
     border-radius:18px;
-
-    background:#effff5;
-
-    color:#177245;
-
     font-weight:800;
-
     line-height:1.6;
 }
 
-
-/* ================================
-   FOOTER
-================================ */
-
 footer{
-
     margin-top:70px;
-
     padding:30px;
-
     text-align:center;
-
     color:#8a7c8f;
-
     font-size:13px;
 }
-
-
-/* ================================
-   MOBILE
-================================ */
 
 @media(max-width:720px){
 
@@ -871,7 +582,6 @@ footer{
     .navigation .btn{
         width:100%;
     }
-
 }
 
 @media(max-width:420px){
@@ -885,32 +595,21 @@ footer{
     }
 
     .progress-circle{
-
         width:32px;
         height:32px;
-
         font-size:12px;
     }
 
     .step-title h2{
         font-size:25px;
     }
-
 }
 
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 </head>
 
-
 <body>
-
-
-<!-- ================================
-     NAVBAR
-================================ -->
 
 <nav class="navbar">
 
@@ -918,19 +617,12 @@ footer{
         Wish<span>Now</span> ✨
     </div>
 
-    <a
-        class="back-btn"
-        href="index.html"
-    >
+    <a class="back-btn" href="index.html">
         ← Home
     </a>
 
 </nav>
 
-
-<!-- ================================
-     HEADER
-================================ -->
 
 <header class="page-header">
 
@@ -951,81 +643,33 @@ footer{
 </header>
 
 
-<!-- ================================
-     PROGRESS
-================================ -->
-
 <div class="progress-wrap">
 
 <div class="progress">
 
-<div
-    class="progress-item active"
-    id="progress1"
->
-
-    <div class="progress-circle">
-        1
-    </div>
-
-    Occasion
-
+<div class="progress-item active" id="progress1">
+<div class="progress-circle">1</div>
+Occasion
 </div>
 
-
-<div
-    class="progress-item"
-    id="progress2"
->
-
-    <div class="progress-circle">
-        2
-    </div>
-
-    Template
-
+<div class="progress-item" id="progress2">
+<div class="progress-circle">2</div>
+Template
 </div>
 
-
-<div
-    class="progress-item"
-    id="progress3"
->
-
-    <div class="progress-circle">
-        3
-    </div>
-
-    Your Wish
-
+<div class="progress-item" id="progress3">
+<div class="progress-circle">3</div>
+Your Wish
 </div>
 
-
-<div
-    class="progress-item"
-    id="progress4"
->
-
-    <div class="progress-circle">
-        4
-    </div>
-
-    WishLock
-
+<div class="progress-item" id="progress4">
+<div class="progress-circle">4</div>
+WishLock
 </div>
 
-
-<div
-    class="progress-item"
-    id="progress5"
->
-
-    <div class="progress-circle">
-        5
-    </div>
-
-    Preview
-
+<div class="progress-item" id="progress5">
+<div class="progress-circle">5</div>
+Preview
 </div>
 
 </div>
@@ -1036,31 +680,23 @@ footer{
 <main class="creator">
 
 
-<!-- ================================
-     STEP 1
-================================ -->
+<!-- STEP 1 -->
 
-<section
-    class="step active"
-    id="step1"
->
+<section class="step active" id="step1">
 
 <div class="card">
 
 <div class="step-title">
 
-    <small>
-        STEP 1
-    </small>
+<small>STEP 1</small>
 
-    <h2>
-        Choose an Occasion
-    </h2>
+<h2>
+Choose an Occasion
+</h2>
 
-    <p>
-        Your occasion decides which templates
-        and suggestions you will see.
-    </p>
+<p>
+Your occasion decides which templates and suggestions you will see.
+</p>
 
 </div>
 
@@ -1068,191 +704,137 @@ footer{
 <div class="occasion-grid">
 
 
-<div
-    class="occasion"
-    data-occasion="Birthday"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Birthday"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        🎂
-    </div>
+<div class="occasion-icon">🎂</div>
 
-    <h3>
-        Birthday
-    </h3>
+<h3>Birthday</h3>
 
-    <p>
-        Make their birthday unforgettable.
-    </p>
+<p>
+Make their birthday unforgettable.
+</p>
 
 </div>
 
 
-<div
-    class="occasion"
-    data-occasion="Anniversary"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Anniversary"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        💍
-    </div>
+<div class="occasion-icon">💍</div>
 
-    <h3>
-        Anniversary
-    </h3>
+<h3>Anniversary</h3>
 
-    <p>
-        Celebrate beautiful memories.
-    </p>
+<p>
+Celebrate beautiful memories.
+</p>
 
 </div>
 
 
-<div
-    class="occasion"
-    data-occasion="Raksha Bandhan"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Raksha Bandhan"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        🪢
-    </div>
+<div class="occasion-icon">🪢</div>
 
-    <h3>
-        Raksha Bandhan
-    </h3>
+<h3>Raksha Bandhan</h3>
 
-    <p>
-        Celebrate the sibling bond.
-    </p>
+<p>
+Celebrate the sibling bond.
+</p>
 
 </div>
 
 
-<div
-    class="occasion"
-    data-occasion="Durga Puja"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Durga Puja"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        🪔
-    </div>
+<div class="occasion-icon">🪔</div>
 
-    <h3>
-        Durga Puja
-    </h3>
+<h3>Durga Puja</h3>
 
-    <p>
-        Share festive happiness.
-    </p>
+<p>
+Share festive happiness.
+</p>
 
 </div>
 
 
-<div
-    class="occasion"
-    data-occasion="Diwali"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Diwali"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        ✨
-    </div>
+<div class="occasion-icon">✨</div>
 
-    <h3>
-        Diwali
-    </h3>
+<h3>Diwali</h3>
 
-    <p>
-        Spread light and happiness.
-    </p>
+<p>
+Spread light and happiness.
+</p>
 
 </div>
 
 
-<div
-    class="occasion"
-    data-occasion="Eid"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Eid"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        🌙
-    </div>
+<div class="occasion-icon">🌙</div>
 
-    <h3>
-        Eid
-    </h3>
+<h3>Eid</h3>
 
-    <p>
-        Send warm festive wishes.
-    </p>
+<p>
+Send warm festive wishes.
+</p>
 
 </div>
 
 
-<div
-    class="occasion"
-    data-occasion="Christmas"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Christmas"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        🎄
-    </div>
+<div class="occasion-icon">🎄</div>
 
-    <h3>
-        Christmas
-    </h3>
+<h3>Christmas</h3>
 
-    <p>
-        Share festive joy.
-    </p>
+<p>
+Share festive joy.
+</p>
 
 </div>
 
 
-<div
-    class="occasion"
-    data-occasion="Friendship Day"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Friendship Day"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        🤝
-    </div>
+<div class="occasion-icon">🤝</div>
 
-    <h3>
-        Friendship Day
-    </h3>
+<h3>Friendship Day</h3>
 
-    <p>
-        Celebrate true friendship.
-    </p>
+<p>
+Celebrate true friendship.
+</p>
 
 </div>
 
 
-<div
-    class="occasion"
-    data-occasion="Valentine's Day"
-    onclick="selectOccasion(this)"
->
+<div class="occasion"
+data-occasion="Valentine's Day"
+onclick="selectOccasion(this)">
 
-    <div class="occasion-icon">
-        ❤️
-    </div>
+<div class="occasion-icon">❤️</div>
 
-    <h3>
-        Valentine's Day
-    </h3>
+<h3>Valentine's Day</h3>
 
-    <p>
-        Share a heartfelt wish.
-    </p>
+<p>
+Share a heartfelt wish.
+</p>
 
 </div>
 
@@ -1262,14 +844,15 @@ footer{
 
 <div class="navigation">
 
-    <div></div>
+<div></div>
 
-    <button
-        class="btn btn-primary"
-        onclick="nextStep()"
-    >
-        Continue →
-    </button>
+<button
+class="btn btn-primary"
+onclick="nextStep()">
+
+Continue →
+
+</button>
 
 </div>
 
@@ -1278,30 +861,23 @@ footer{
 </section>
 
 
-<!-- ================================
-     STEP 2
-================================ -->
+<!-- STEP 2 -->
 
-<section
-    class="step"
-    id="step2"
->
+<section class="step" id="step2">
 
 <div class="card">
 
 <div class="step-title">
 
-    <small>
-        STEP 2
-    </small>
+<small>STEP 2</small>
 
-    <h2>
-        Pick Your Template 🎨
-    </h2>
+<h2>
+Pick Your Template 🎨
+</h2>
 
-    <p id="templateDescription">
-        Choose the design that feels right.
-    </p>
+<p id="templateDescription">
+Choose the design that feels right.
+</p>
 
 </div>
 
@@ -1309,126 +885,62 @@ footer{
 <div class="template-grid">
 
 
-<div
-    class="template"
-    onclick="selectTemplate(
-        this,
-        'From The Heart'
-    )"
->
+<div class="template"
+onclick="selectTemplate(this,'From The Heart')">
 
-    <div class="template-preview t1">
+<div class="template-preview t1">
+<h3>❤️ From The Heart</h3>
+</div>
 
-        <h3>
-            ❤️ From The Heart
-        </h3>
-
-    </div>
-
-    <div class="template-info">
-
-        <h3>
-            From The Heart
-        </h3>
-
-        <p>
-            Warm & elegant
-        </p>
-
-    </div>
+<div class="template-info">
+<h3>From The Heart</h3>
+<p>Warm & elegant</p>
+</div>
 
 </div>
 
 
-<div
-    class="template"
-    onclick="selectTemplate(
-        this,
-        'Rose & Memories'
-    )"
->
+<div class="template"
+onclick="selectTemplate(this,'Rose & Memories')">
 
-    <div class="template-preview t2">
+<div class="template-preview t2">
+<h3>🌹 Rose & Memories</h3>
+</div>
 
-        <h3>
-            🌹 Rose & Memories
-        </h3>
-
-    </div>
-
-    <div class="template-info">
-
-        <h3>
-            Rose & Memories
-        </h3>
-
-        <p>
-            Soft & premium
-        </p>
-
-    </div>
+<div class="template-info">
+<h3>Rose & Memories</h3>
+<p>Soft & premium</p>
+</div>
 
 </div>
 
 
-<div
-    class="template"
-    onclick="selectTemplate(
-        this,
-        'Love Note'
-    )"
->
+<div class="template"
+onclick="selectTemplate(this,'Love Note')">
 
-    <div class="template-preview t3">
+<div class="template-preview t3">
+<h3>💌 Love Note</h3>
+</div>
 
-        <h3>
-            💌 Love Note
-        </h3>
-
-    </div>
-
-    <div class="template-info">
-
-        <h3>
-            Love Note
-        </h3>
-
-        <p>
-            Sweet & personal
-        </p>
-
-    </div>
+<div class="template-info">
+<h3>Love Note</h3>
+<p>Sweet & personal</p>
+</div>
 
 </div>
 
 
-<div
-    class="template"
-    onclick="selectTemplate(
-        this,
-        'Forever Moment'
-    )"
->
+<div class="template"
+onclick="selectTemplate(this,'Forever Moment')">
 
-    <div class="template-preview t4">
+<div class="template-preview t4">
+<h3>✨ Forever Moment</h3>
+</div>
 
-        <h3>
-            ✨ Forever Moment
-        </h3>
-
-    </div>
-
-    <div class="template-info">
-
-        <h3>
-            Forever Moment
-        </h3>
-
-        <p>
-            Modern & clean
-        </p>
-
-    </div>
+<div class="template-info">
+<h3>Forever Moment</h3>
+<p>Modern & clean</p>
+</div>
 
 </div>
 
@@ -1438,19 +950,21 @@ footer{
 
 <div class="navigation">
 
-    <button
-        class="btn btn-secondary"
-        onclick="prevStep()"
-    >
-        ← Back
-    </button>
+<button
+class="btn btn-secondary"
+onclick="prevStep()">
 
-    <button
-        class="btn btn-primary"
-        onclick="nextStep()"
-    >
-        Continue →
-    </button>
+← Back
+
+</button>
+
+<button
+class="btn btn-primary"
+onclick="nextStep()">
+
+Continue →
+
+</button>
 
 </div>
 
@@ -1459,31 +973,23 @@ footer{
 </section>
 
 
-<!-- ================================
-     STEP 3
-================================ -->
+<!-- STEP 3 -->
 
-<section
-    class="step"
-    id="step3"
->
+<section class="step" id="step3">
 
 <div class="card">
 
 <div class="step-title">
 
-    <small>
-        STEP 3
-    </small>
+<small>STEP 3</small>
 
-    <h2>
-        Add Your Wish ✍️
-    </h2>
+<h2>
+Add Your Wish ✍️
+</h2>
 
-    <p>
-        Photo is optional.
-        Your words are what make the surprise special.
-    </p>
+<p>
+Photo is optional. Your words are what make the surprise special.
+</p>
 
 </div>
 
@@ -1494,13 +1000,13 @@ footer{
 <div class="field">
 
 <label>
-    Your Name
+Your Name
 </label>
 
 <input
-    id="senderName"
-    type="text"
-    placeholder="Enter your name"
+id="senderName"
+type="text"
+placeholder="Enter your name"
 >
 
 </div>
@@ -1509,13 +1015,13 @@ footer{
 <div class="field">
 
 <label>
-    Recipient Name
+Recipient Name
 </label>
 
 <input
-    id="recipientName"
-    type="text"
-    placeholder="Who are you wishing?"
+id="recipientName"
+type="text"
+placeholder="Who are you wishing?"
 >
 
 </div>
@@ -1524,12 +1030,12 @@ footer{
 <div class="field full">
 
 <label>
-    Your Wish
+Your Wish
 </label>
 
 <textarea
-    id="wishMessage"
-    placeholder="Write your heartfelt message here..."
+id="wishMessage"
+placeholder="Write your heartfelt message here..."
 ></textarea>
 
 </div>
@@ -1538,28 +1044,27 @@ footer{
 <div class="field full">
 
 <label>
-    📸 Add a Photo (Optional)
+📸 Add a Photo (Optional)
 </label>
 
 <div class="photo-box">
 
-    <div>
-        You can create a beautiful wish
-        without uploading a photo.
-    </div>
+<div>
+You can create a beautiful wish without uploading a photo.
+</div>
 
-    <input
-        type="file"
-        id="photoInput"
-        accept="image/*"
-        onchange="previewPhoto(event)"
-    >
+<input
+type="file"
+id="photoInput"
+accept="image/*"
+onchange="previewPhoto(event)"
+>
 
-    <img
-        id="photoPreview"
-        class="photo-preview"
-        alt="Selected photo"
-    >
+<img
+id="photoPreview"
+class="photo-preview"
+alt="Selected photo"
+>
 
 </div>
 
@@ -1572,17 +1077,19 @@ footer{
 <div class="navigation">
 
 <button
-    class="btn btn-secondary"
-    onclick="prevStep()"
->
-    ← Back
+class="btn btn-secondary"
+onclick="prevStep()">
+
+← Back
+
 </button>
 
 <button
-    class="btn btn-primary"
-    onclick="nextStep()"
->
-    Add WishLock →
+class="btn btn-primary"
+onclick="nextStep()">
+
+Add WishLock →
+
 </button>
 
 </div>
@@ -1592,51 +1099,37 @@ footer{
 </section>
 
 
-<!-- ================================
-     STEP 4
-================================ -->
+<!-- STEP 4 -->
 
-<section
-    class="step"
-    id="step4"
->
+<section class="step" id="step4">
 
 <div class="card">
 
 <div class="step-title">
 
-    <small>
-        STEP 4
-    </small>
+<small>STEP 4</small>
 
-    <h2>
-        🔐 Add Your WishLock Challenge
-    </h2>
+<h2>
+🔐 Add Your WishLock Challenge
+</h2>
 
-    <p>
-        Your recipient must answer these 3
-        questions before your surprise can be unlocked.
-    </p>
+<p>
+Your recipient must answer these 3 questions before your surprise can be unlocked.
+</p>
 
 </div>
 
 
 <div class="lock-intro">
 
-    <strong>
-        How it works:
-    </strong>
+<strong>How it works:</strong>
 
-    Every correct answer gives
-    <strong>
-        20 marks
-    </strong>.
+Every correct answer gives
+<strong>20 marks</strong>.
 
-    The recipient needs
-    <strong>
-        40/60
-    </strong>
-    to unlock the Wish.
+The recipient needs
+<strong>40/60</strong>
+to unlock the Wish.
 
 </div>
 
@@ -1647,19 +1140,19 @@ footer{
 <div class="lock-rules">
 
 <div class="rule">
-    ❓ 3 Questions
+❓ 3 Questions
 </div>
 
 <div class="rule">
-    ⭐ 20 Marks Each
+⭐ 20 Marks Each
 </div>
 
 <div class="rule">
-    🏆 Pass: 40
+🏆 Pass: 40
 </div>
 
 <div class="rule">
-    🔓 40+ Unlocks
+🔓 40+ Unlocks
 </div>
 
 </div>
@@ -1668,17 +1161,19 @@ footer{
 <div class="navigation">
 
 <button
-    class="btn btn-secondary"
-    onclick="prevStep()"
->
-    ← Back
+class="btn btn-secondary"
+onclick="prevStep()">
+
+← Back
+
 </button>
 
 <button
-    class="btn btn-primary"
-    onclick="nextStep()"
->
-    Preview My Wish →
+class="btn btn-primary"
+onclick="nextStep()">
+
+Preview My Wish →
+
 </button>
 
 </div>
@@ -1688,30 +1183,23 @@ footer{
 </section>
 
 
-<!-- ================================
-     STEP 5
-================================ -->
+<!-- STEP 5 -->
 
-<section
-    class="step"
-    id="step5"
->
+<section class="step" id="step5">
 
 <div class="card">
 
 <div class="step-title">
 
-    <small>
-        STEP 5
-    </small>
+<small>STEP 5</small>
 
-    <h2>
-        Your Wish Is Ready 🎁
-    </h2>
+<h2>
+Your Wish Is Ready 🎁
+</h2>
 
-    <p>
-        Check everything before creating your surprise.
-    </p>
+<p>
+Check everything before creating your surprise.
+</p>
 
 </div>
 
@@ -1719,22 +1207,23 @@ footer{
 <div class="preview-box">
 
 <div class="preview-icon">
-    💌
+💌
 </div>
 
 <h2 id="previewTitle">
-    A Special Wish ❤️
+A Special Wish ❤️
 </h2>
 
 <p id="previewFrom">
-    From someone special
+From someone special
 </p>
 
 <div
-    class="preview-message"
-    id="previewMessage"
->
-    Your beautiful message will appear here.
+class="preview-message"
+id="previewMessage">
+
+Your beautiful message will appear here.
+
 </div>
 
 </div>
@@ -1746,17 +1235,19 @@ footer{
 <div class="navigation">
 
 <button
-    class="btn btn-secondary"
-    onclick="prevStep()"
->
-    ← Edit
+class="btn btn-secondary"
+onclick="prevStep()">
+
+← Edit
+
 </button>
 
 <button
-    class="btn btn-success"
-    onclick="createWish()"
->
-    ❤️ Create & Share My Wish
+class="btn btn-success"
+onclick="createWish()">
+
+❤️ Create & Share My Wish
+
 </button>
 
 </div>
@@ -1771,17 +1262,17 @@ footer{
 
 <footer>
 
-© 2026 WishNow —
-Make Every Moment Special. 🎁
+© 2026 WishNow — Make Every Moment Special. 🎁
 
 </footer>
 
 
 <script>
 
-/* ================================
-   SUPABASE CONFIG
-================================ */
+
+/* ==========================
+   SUPABASE
+========================== */
 
 const SUPABASE_URL =
 "https://izvlpqxsxjcvligkgduh.supabase.co";
@@ -1796,9 +1287,9 @@ supabase.createClient(
 );
 
 
-/* ================================
+/* ==========================
    DATA
-================================ */
+========================== */
 
 let currentStep = 1;
 
@@ -1809,9 +1300,9 @@ let selectedTemplate = "";
 let photoData = "";
 
 
-/* ================================
-   CREATE 3 QUESTIONS
-================================ */
+/* ==========================
+   QUESTIONS
+========================== */
 
 const questionsContainer =
 document.getElementById(
@@ -1819,7 +1310,7 @@ document.getElementById(
 );
 
 
-for(let i = 1; i <= 3; i++){
+for(let i=1;i<=3;i++){
 
     questionsContainer.innerHTML += `
 
@@ -1837,13 +1328,11 @@ for(let i = 1; i <= 3; i++){
 
             </div>
 
-
             <input
                 id="q${i}"
                 type="text"
                 placeholder="Write your question"
             >
-
 
             <input
                 id="a${i}"
@@ -1851,16 +1340,12 @@ for(let i = 1; i <= 3; i++){
                 placeholder="Correct answer"
             >
 
-
             ${
                 i === 1
                 ?
-                `
-                <div class="hint">
-                    💡 The answer stays hidden
-                    from the recipient.
-                </div>
-                `
+                `<div class="hint">
+                    💡 The answer stays hidden from the recipient.
+                </div>`
                 :
                 ""
             }
@@ -1872,77 +1357,64 @@ for(let i = 1; i <= 3; i++){
 }
 
 
-/* ================================
+/* ==========================
    OCCASION
-================================ */
+========================== */
 
 function selectOccasion(element){
 
     document
-        .querySelectorAll(".occasion")
-        .forEach(item =>
-            item.classList.remove("selected")
-        );
-
+    .querySelectorAll(".occasion")
+    .forEach(item =>
+        item.classList.remove("selected")
+    );
 
     element.classList.add("selected");
-
 
     selectedOccasion =
         element.dataset.occasion;
 
-
     document
-        .getElementById("templateDescription")
-        .textContent =
+    .getElementById("templateDescription")
+    .textContent =
         selectedOccasion +
         " templates are ready for your special wish.";
 
 }
 
 
-/* ================================
+/* ==========================
    TEMPLATE
-================================ */
+========================== */
 
-function selectTemplate(
-    element,
-    name
-){
+function selectTemplate(element,name){
 
     document
-        .querySelectorAll(".template")
-        .forEach(item =>
-            item.classList.remove("selected")
-        );
-
+    .querySelectorAll(".template")
+    .forEach(item =>
+        item.classList.remove("selected")
+    );
 
     element.classList.add("selected");
-
 
     selectedTemplate = name;
 
 }
 
 
-/* ================================
+/* ==========================
    PHOTO
-================================ */
+========================== */
 
 function previewPhoto(event){
 
     const file =
         event.target.files[0];
 
-
     if(!file)
         return;
 
-
-    if(
-        file.size >
-        2 * 1024 * 1024
-    ){
+    if(file.size > 2 * 1024 * 1024){
 
         alert(
             "📸 Please choose an image smaller than 2MB."
@@ -1959,26 +1431,23 @@ function previewPhoto(event){
 
 
     reader.onload =
-        function(e){
+    function(e){
 
-            photoData =
-                e.target.result;
+        photoData =
+            e.target.result;
 
+        const preview =
+            document.getElementById(
+                "photoPreview"
+            );
 
-            const preview =
-                document.getElementById(
-                    "photoPreview"
-                );
+        preview.src =
+            photoData;
 
+        preview.style.display =
+            "block";
 
-            preview.src =
-                photoData;
-
-
-            preview.style.display =
-                "block";
-
-        };
+    };
 
 
     reader.readAsDataURL(file);
@@ -1986,9 +1455,9 @@ function previewPhoto(event){
 }
 
 
-/* ================================
+/* ==========================
    VALIDATION
-================================ */
+========================== */
 
 function validateStep(){
 
@@ -2026,13 +1495,11 @@ function validateStep(){
             .value
             .trim();
 
-
         const recipient =
             document
             .getElementById("recipientName")
             .value
             .trim();
-
 
         const message =
             document
@@ -2059,26 +1526,17 @@ function validateStep(){
 
     if(currentStep === 4){
 
-        for(
-            let i = 1;
-            i <= 3;
-            i++
-        ){
+        for(let i=1;i<=3;i++){
 
             const question =
                 document
-                .getElementById(
-                    "q" + i
-                )
+                .getElementById("q"+i)
                 .value
                 .trim();
 
-
             const answer =
                 document
-                .getElementById(
-                    "a" + i
-                )
+                .getElementById("a"+i)
                 .value
                 .trim();
 
@@ -2105,21 +1563,17 @@ function validateStep(){
 }
 
 
-/* ================================
+/* ==========================
    NEXT
-================================ */
+========================== */
 
 function nextStep(){
 
-    if(
-        !validateStep()
-    )
+    if(!validateStep())
         return;
 
 
-    if(
-        currentStep < 5
-    ){
+    if(currentStep < 5){
 
         currentStep++;
 
@@ -2130,15 +1584,13 @@ function nextStep(){
 }
 
 
-/* ================================
+/* ==========================
    PREVIOUS
-================================ */
+========================== */
 
 function prevStep(){
 
-    if(
-        currentStep > 1
-    ){
+    if(currentStep > 1){
 
         currentStep--;
 
@@ -2149,37 +1601,32 @@ function prevStep(){
 }
 
 
-/* ================================
+/* ==========================
    SHOW STEP
-================================ */
+========================== */
 
 function showStep(){
 
     document
-        .querySelectorAll(".step")
-        .forEach(step =>
-            step.classList.remove("active")
-        );
+    .querySelectorAll(".step")
+    .forEach(step =>
+        step.classList.remove("active")
+    );
 
 
     document
-        .getElementById(
-            "step" + currentStep
-        )
-        .classList.add("active");
+    .getElementById(
+        "step"+currentStep
+    )
+    .classList.add("active");
 
 
-    for(
-        let i = 1;
-        i <= 5;
-        i++
-    ){
+    for(let i=1;i<=5;i++){
 
         const progress =
             document.getElementById(
-                "progress" + i
+                "progress"+i
             );
-
 
         progress.classList.remove(
             "active",
@@ -2187,23 +1634,17 @@ function showStep(){
         );
 
 
-        if(
-            i < currentStep
-        )
+        if(i < currentStep)
             progress.classList.add("done");
 
 
-        if(
-            i === currentStep
-        )
+        if(i === currentStep)
             progress.classList.add("active");
 
     }
 
 
-    if(
-        currentStep === 5
-    )
+    if(currentStep === 5)
         updatePreview();
 
 
@@ -2215,9 +1656,9 @@ function showStep(){
 }
 
 
-/* ================================
+/* ==========================
    PREVIEW
-================================ */
+========================== */
 
 function updatePreview(){
 
@@ -2227,13 +1668,11 @@ function updatePreview(){
         .value
         .trim();
 
-
     const recipient =
         document
         .getElementById("recipientName")
         .value
         .trim();
-
 
     const message =
         document
@@ -2243,8 +1682,8 @@ function updatePreview(){
 
 
     document
-        .getElementById("previewTitle")
-        .textContent =
+    .getElementById("previewTitle")
+    .textContent =
         "A Special " +
         selectedOccasion +
         " Wish for " +
@@ -2253,8 +1692,8 @@ function updatePreview(){
 
 
     document
-        .getElementById("previewFrom")
-        .textContent =
+    .getElementById("previewFrom")
+    .textContent =
         "Created with " +
         selectedTemplate +
         " • From " +
@@ -2262,22 +1701,20 @@ function updatePreview(){
 
 
     document
-        .getElementById("previewMessage")
-        .textContent =
+    .getElementById("previewMessage")
+    .textContent =
         message;
 
 }
 
 
-/* ================================
-   CREATE WISH — FIXED
-================================ */
+/* ==========================
+   CREATE WISH
+========================== */
 
 async function createWish(){
 
-    if(
-        !validateStep()
-    )
+    if(!validateStep())
         return;
 
 
@@ -2290,14 +1727,11 @@ async function createWish(){
     result.style.display =
         "block";
 
-
     result.style.background =
         "#fff7e8";
 
-
     result.style.color =
         "#8a5a00";
-
 
     result.textContent =
         "⏳ Creating your Wish...";
@@ -2305,10 +1739,9 @@ async function createWish(){
 
     try{
 
-
-        /* ================================
-           GET FORM DATA
-        ================================= */
+        /* ======================
+           CREATE WISH
+        ====================== */
 
         const sender =
             document
@@ -2316,13 +1749,11 @@ async function createWish(){
             .value
             .trim();
 
-
         const recipient =
             document
             .getElementById("recipientName")
             .value
             .trim();
-
 
         const message =
             document
@@ -2331,119 +1762,72 @@ async function createWish(){
             .trim();
 
 
-        /* ================================
-           CREATE WISH
-        ================================= */
-
-        const {
-            data: wish,
-            error: wishError
-        } = await supabaseClient
-
+        const { data: wish, error: wishError } =
+            await supabaseClient
             .from("wishes")
-
             .insert({
 
-                sender_name:
-                    sender,
+                sender_name:sender,
 
-                recipient_name:
-                    recipient,
+                recipient_name:recipient,
 
-                occasion:
-                    selectedOccasion,
+                occasion:selectedOccasion,
 
-                template:
-                    selectedTemplate,
+                template:selectedTemplate,
 
-                message:
-                    message,
+                message:message,
 
-                photo_url:
-                    photoData || null,
+                photo_url:photoData || null,
 
-                user_type:
-                    "free",
+                user_type:"free",
 
-                score:
-                    0,
+                score:0,
 
-                unlocked:
-                    false,
+                unlocked:false,
 
                 expires_at:
                     new Date(
                         Date.now() +
-                        30 *
-                        24 *
-                        60 *
-                        60 *
-                        1000
+                        30 * 24 * 60 * 60 * 1000
                     ).toISOString()
 
             })
-
             .select()
-
             .single();
 
 
-        if(wishError){
-
-            console.error(
-                "WISH INSERT ERROR:",
-                wishError
-            );
-
+        if(wishError)
             throw wishError;
 
-        }
 
-
-        /* ================================
-           CREATE 3 QUESTIONS
-           
-           IMPORTANT:
-           Supabase columns are:
-           
-           wish_id
-           question
-           correct_answer
-           question_number
-        ================================= */
+        /* ======================
+           CREATE QUESTIONS
+        ====================== */
 
         const questionRows = [];
 
 
-        for(
-            let i = 1;
-            i <= 3;
-            i++
-        ){
+        for(let i=1;i<=3;i++){
 
             questionRows.push({
 
-                wish_id:
-                    wish.id,
+                wish_id:wish.id,
+
+                question_number:i,
 
                 question:
                     document
-                    .getElementById(
-                        "q" + i
-                    )
+                    .getElementById("q"+i)
                     .value
                     .trim(),
 
                 correct_answer:
                     document
-                    .getElementById(
-                        "a" + i
-                    )
+                    .getElementById("a"+i)
                     .value
                     .trim(),
 
-                question_number:
-                    i
+                hint:null
 
             });
 
@@ -2451,71 +1835,35 @@ async function createWish(){
 
 
         const {
-            data: insertedQuestions,
-            error: questionError
-        } = await supabaseClient
-
+            error:questionError
+        } =
+            await supabaseClient
             .from("wish_questions")
-
-            .insert(
-                questionRows
-            )
-
-            .select();
+            .insert(questionRows);
 
 
         if(questionError){
 
-            console.error(
-                "QUESTION INSERT ERROR:",
-                questionError
-            );
-
-
-            /* Delete Wish if question insert fails */
-
             await supabaseClient
-                .from("wishes")
-                .delete()
-                .eq(
-                    "id",
-                    wish.id
-                );
-
+            .from("wishes")
+            .delete()
+            .eq("id",wish.id);
 
             throw questionError;
 
         }
 
 
-        console.log(
-            "Wish created:",
-            wish
-        );
-
-
-        console.log(
-            "Questions created:",
-            insertedQuestions
-        );
-
-
-        /* ================================
-           CREATE PERSONALIZED NAME
-           LINK
-        ================================= */
+        /* ======================
+           PERSONALIZED LINK
+        ====================== */
 
         const cleanName =
             recipient
             .toLowerCase()
             .trim()
-            .replace(
-                /[^a-z0-9]+/g,
-                "-"
-            )
-            .replace(
-                /^-+|-+$/g,
-                "");
+            .replace(/[^a-z0-9]+/g,"-")
+            .replace(/^-+|-+$/g,"");
 
 
         const resultUrl =
@@ -2526,22 +1874,17 @@ async function createWish(){
                 "wish-result.html"
             ) +
             "?name=" +
-            encodeURIComponent(
-                cleanName
-            ) +
+            encodeURIComponent(cleanName) +
             "&id=" +
-            encodeURIComponent(
-                wish.id
-            );
+            encodeURIComponent(wish.id);
 
 
-        /* ================================
+        /* ======================
            SUCCESS
-        ================================= */
+        ====================== */
 
         result.style.background =
             "#effff5";
-
 
         result.style.color =
             "#177245";
@@ -2549,26 +1892,23 @@ async function createWish(){
 
         result.innerHTML = `
 
-            🎉
-            <strong>
-                Your Wish has been created!
+            🎉 <strong>
+            Your Wish has been created!
             </strong>
 
             <br><br>
 
             Your personalized Wish link for
-
             <strong>
-                ${escapeHtml(recipient)}
+            ${escapeHtml(recipient)}
             </strong>
-
             is ready.
 
             <br><br>
 
             <input
                 id="createdLink"
-                value="${resultUrl}"
+                value="${escapeHtml(resultUrl)}"
                 readonly
                 style="
                     width:100%;
@@ -2579,7 +1919,6 @@ async function createWish(){
                     background:white;
                 "
             >
-
 
             <button
                 onclick="copyCreatedLink()"
@@ -2596,12 +1935,10 @@ async function createWish(){
                 📋 Copy Wish Link
             </button>
 
-
             <br><br>
 
-
             <a
-                href="${resultUrl}"
+                href="${escapeHtml(resultUrl)}"
                 style="
                     display:block;
                     text-align:center;
@@ -2609,7 +1946,7 @@ async function createWish(){
                     font-weight:900;
                 "
             >
-                🔗 Open My Wish
+                🔗 Open ${escapeHtml(recipient)}'s Wish
             </a>
 
         `;
@@ -2626,23 +1963,21 @@ async function createWish(){
         result.style.background =
             "#fff0f0";
 
-
         result.style.color =
             "#a12626";
 
 
         result.innerHTML = `
 
-            ❌
-            <strong>
-                Could not create the Wish.
+            ❌ <strong>
+            Could not create the Wish.
             </strong>
 
             <br><br>
 
             ${escapeHtml(
                 error.message ||
-                "Please check your Supabase table permissions."
+                "Unknown Supabase error"
             )}
 
         `;
@@ -2652,30 +1987,26 @@ async function createWish(){
 }
 
 
-/* ================================
-   HTML SAFE TEXT
-================================ */
+/* ==========================
+   ESCAPE HTML
+========================== */
 
 function escapeHtml(text){
 
     const div =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     div.textContent =
-        text;
-
+        String(text);
 
     return div.innerHTML;
 
 }
 
 
-/* ================================
+/* ==========================
    COPY LINK
-================================ */
+========================== */
 
 async function copyCreatedLink(){
 
@@ -2688,24 +2019,17 @@ async function copyCreatedLink(){
     try{
 
         await navigator.clipboard
-            .writeText(
-                input.value
-            );
-
+        .writeText(input.value);
 
         alert(
             "✅ Wish link copied!"
         );
 
-
     }catch(error){
 
         input.select();
 
-        document.execCommand(
-            "copy"
-        );
-
+        document.execCommand("copy");
 
         alert(
             "✅ Wish link copied!"
@@ -2716,40 +2040,35 @@ async function copyCreatedLink(){
 }
 
 
-/* ================================
+/* ==========================
    URL OCCASION
-================================ */
+========================== */
 
 const params =
     new URLSearchParams(
         window.location.search
     );
 
-
 const urlOccasion =
-    params.get(
-        "occasion"
-    );
+    params.get("occasion");
 
 
 if(urlOccasion){
 
     document
-        .querySelectorAll(".occasion")
-        .forEach(card => {
+    .querySelectorAll(".occasion")
+    .forEach(card => {
 
-            if(
-                card.dataset.occasion ===
-                urlOccasion
-            ){
+        if(
+            card.dataset.occasion ===
+            urlOccasion
+        ){
 
-                selectOccasion(
-                    card
-                );
+            selectOccasion(card);
 
-            }
+        }
 
-        });
+    });
 
 }
 
