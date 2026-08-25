@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>WishNow — Create Your Wish ❤️</title>
 
-<meta name="description"
-content="Create a beautiful personalized WishNow surprise with a private WishLock challenge.">
+<meta
+name="description"
+content="Create a beautiful personalized WishNow surprise with a private WishLock challenge."
+>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -41,9 +46,7 @@ a{
     text-decoration:none;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* NAVBAR */
 
 .navbar{
     position:sticky;
@@ -77,9 +80,7 @@ a{
     font-weight:700;
 }
 
-/* =========================
-   PAGE HEADER
-========================= */
+/* HEADER */
 
 .page-header{
     text-align:center;
@@ -111,9 +112,7 @@ a{
     line-height:1.7;
 }
 
-/* =========================
-   PROGRESS
-========================= */
+/* PROGRESS */
 
 .progress-wrap{
     width:min(900px,90%);
@@ -142,7 +141,6 @@ a{
     border-radius:50%;
     background:#eee7f0;
     color:#8b7c90;
-    transition:.3s;
 }
 
 .progress-item.active .progress-circle,
@@ -155,9 +153,7 @@ a{
     color:#8d3bd4;
 }
 
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 .creator{
     width:min(1000px,92%);
@@ -211,9 +207,7 @@ a{
     line-height:1.6;
 }
 
-/* =========================
-   OCCASIONS
-========================= */
+/* OCCASION */
 
 .occasion-grid{
     display:grid;
@@ -254,9 +248,7 @@ a{
     font-size:13px;
 }
 
-/* =========================
-   TEMPLATES
-========================= */
+/* TEMPLATE */
 
 .template-grid{
     display:grid;
@@ -335,9 +327,7 @@ a{
     font-size:13px;
 }
 
-/* =========================
-   FORM
-========================= */
+/* FORM */
 
 .form-grid{
     display:grid;
@@ -371,15 +361,15 @@ a{
     color:#2a1930;
 }
 
+.field textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
 .field input:focus,
 .field textarea:focus{
     border-color:#d83d88;
     box-shadow:0 0 0 3px rgba(216,61,136,.08);
-}
-
-.field textarea{
-    min-height:150px;
-    resize:vertical;
 }
 
 .photo-box{
@@ -403,15 +393,14 @@ a{
     object-fit:cover;
 }
 
-/* =========================
-   QUESTIONS
-========================= */
+/* QUESTIONS */
 
 .lock-intro{
     padding:18px;
     border-radius:18px;
     background:linear-gradient(135deg,#fff4f8,#f4efff);
     margin-bottom:25px;
+    line-height:1.6;
 }
 
 .lock-intro strong{
@@ -455,10 +444,6 @@ a{
     outline:none;
 }
 
-.question-card input:focus{
-    border-color:#c43c83;
-}
-
 .hint{
     color:#918295;
     font-size:12px;
@@ -480,9 +465,7 @@ a{
     font-weight:800;
 }
 
-/* =========================
-   PREVIEW
-========================= */
+/* PREVIEW */
 
 .preview-box{
     overflow:hidden;
@@ -519,9 +502,7 @@ a{
     line-height:1.7;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+/* BUTTONS */
 
 .navigation{
     display:flex;
@@ -545,11 +526,6 @@ a{
 .btn-primary{
     background:linear-gradient(135deg,#ff4d91,#8d3bd4);
     color:#fff;
-    box-shadow:0 10px 25px rgba(141,59,212,.18);
-}
-
-.btn-primary:hover{
-    transform:translateY(-2px);
 }
 
 .btn-success{
@@ -559,10 +535,6 @@ a{
     padding:16px;
 }
 
-/* =========================
-   RESULT
-========================= */
-
 #resultMessage{
     display:none;
     margin-top:18px;
@@ -571,11 +543,8 @@ a{
     background:#effff5;
     color:#177245;
     font-weight:800;
+    line-height:1.6;
 }
-
-/* =========================
-   FOOTER
-========================= */
 
 footer{
     margin-top:70px;
@@ -585,9 +554,7 @@ footer{
     font-size:13px;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:720px){
 
@@ -597,11 +564,6 @@ footer{
 
     .logo{
         font-size:21px;
-    }
-
-    .back-btn{
-        padding:8px 12px;
-        font-size:12px;
     }
 
     .page-header{
@@ -619,10 +581,6 @@ footer{
 
     .occasion-grid{
         grid-template-columns:1fr 1fr;
-    }
-
-    .occasion{
-        padding:16px;
     }
 
     .template-grid{
@@ -669,12 +627,14 @@ footer{
     .step-title h2{
         font-size:25px;
     }
-
-    .lock-rules{
-        grid-template-columns:1fr 1fr;
-    }
 }
+
 </style>
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
 
 <body>
@@ -713,659 +673,408 @@ footer{
 
 <div class="progress-wrap">
 
-    <div class="progress">
+<div class="progress">
 
-        <div class="progress-item active" id="progress1">
-            <div class="progress-circle">1</div>
-            Occasion
-        </div>
+<div class="progress-item active" id="progress1">
+<div class="progress-circle">1</div>
+Occasion
+</div>
 
-        <div class="progress-item" id="progress2">
-            <div class="progress-circle">2</div>
-            Template
-        </div>
+<div class="progress-item" id="progress2">
+<div class="progress-circle">2</div>
+Template
+</div>
 
-        <div class="progress-item" id="progress3">
-            <div class="progress-circle">3</div>
-            Your Wish
-        </div>
+<div class="progress-item" id="progress3">
+<div class="progress-circle">3</div>
+Your Wish
+</div>
 
-        <div class="progress-item" id="progress4">
-            <div class="progress-circle">4</div>
-            WishLock
-        </div>
+<div class="progress-item" id="progress4">
+<div class="progress-circle">4</div>
+WishLock
+</div>
 
-        <div class="progress-item" id="progress5">
-            <div class="progress-circle">5</div>
-            Preview
-        </div>
+<div class="progress-item" id="progress5">
+<div class="progress-circle">5</div>
+Preview
+</div>
 
-    </div>
-
+</div>
 </div>
 
 
 <main class="creator">
 
-<!-- =========================
-     STEP 1
-========================= -->
+
+<!-- STEP 1 -->
 
 <section class="step active" id="step1">
 
 <div class="card">
 
-    <div class="step-title">
+<div class="step-title">
+<small>STEP 1</small>
+<h2>Choose an Occasion</h2>
+<p>Your occasion decides which templates and suggestions you will see.</p>
+</div>
 
-        <small>STEP 1</small>
+<div class="occasion-grid">
 
-        <h2>
-            Choose an Occasion
-        </h2>
+<div class="occasion" data-occasion="Birthday" onclick="selectOccasion(this)">
+<div class="occasion-icon">🎂</div>
+<h3>Birthday</h3>
+<p>Make their birthday unforgettable.</p>
+</div>
 
-        <p>
-            Your occasion decides which templates
-            and suggestions you will see.
-        </p>
+<div class="occasion" data-occasion="Anniversary" onclick="selectOccasion(this)">
+<div class="occasion-icon">💍</div>
+<h3>Anniversary</h3>
+<p>Celebrate beautiful memories.</p>
+</div>
 
-    </div>
+<div class="occasion" data-occasion="Raksha Bandhan" onclick="selectOccasion(this)">
+<div class="occasion-icon">🪢</div>
+<h3>Raksha Bandhan</h3>
+<p>Celebrate the sibling bond.</p>
+</div>
 
+<div class="occasion" data-occasion="Durga Puja" onclick="selectOccasion(this)">
+<div class="occasion-icon">🪔</div>
+<h3>Durga Puja</h3>
+<p>Share festive happiness.</p>
+</div>
 
-    <div class="occasion-grid">
+<div class="occasion" data-occasion="Diwali" onclick="selectOccasion(this)">
+<div class="occasion-icon">✨</div>
+<h3>Diwali</h3>
+<p>Spread light and happiness.</p>
+</div>
 
-        <div class="occasion"
-             data-occasion="Birthday"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">🎂</div>
-            <h3>Birthday</h3>
-            <p>Make their birthday unforgettable.</p>
-        </div>
+<div class="occasion" data-occasion="Eid" onclick="selectOccasion(this)">
+<div class="occasion-icon">🌙</div>
+<h3>Eid</h3>
+<p>Send warm festive wishes.</p>
+</div>
 
-        <div class="occasion"
-             data-occasion="Anniversary"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">💍</div>
-            <h3>Anniversary</h3>
-            <p>Celebrate beautiful memories.</p>
-        </div>
+<div class="occasion" data-occasion="Christmas" onclick="selectOccasion(this)">
+<div class="occasion-icon">🎄</div>
+<h3>Christmas</h3>
+<p>Share festive joy.</p>
+</div>
 
-        <div class="occasion"
-             data-occasion="Raksha Bandhan"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">🪢</div>
-            <h3>Raksha Bandhan</h3>
-            <p>Celebrate the sibling bond.</p>
-        </div>
+<div class="occasion" data-occasion="Friendship Day" onclick="selectOccasion(this)">
+<div class="occasion-icon">🤝</div>
+<h3>Friendship Day</h3>
+<p>Celebrate true friendship.</p>
+</div>
 
-        <div class="occasion"
-             data-occasion="Durga Puja"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">🪔</div>
-            <h3>Durga Puja</h3>
-            <p>Share festive happiness.</p>
-        </div>
+<div class="occasion" data-occasion="Valentine's Day" onclick="selectOccasion(this)">
+<div class="occasion-icon">❤️</div>
+<h3>Valentine's Day</h3>
+<p>Share a heartfelt wish.</p>
+</div>
 
-        <div class="occasion"
-             data-occasion="Diwali"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">✨</div>
-            <h3>Diwali</h3>
-            <p>Spread light and happiness.</p>
-        </div>
+</div>
 
-        <div class="occasion"
-             data-occasion="Eid"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">🌙</div>
-            <h3>Eid</h3>
-            <p>Send warm festive wishes.</p>
-        </div>
+<div class="navigation">
 
-        <div class="occasion"
-             data-occasion="Christmas"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">🎄</div>
-            <h3>Christmas</h3>
-            <p>Share festive joy.</p>
-        </div>
+<div></div>
 
-        <div class="occasion"
-             data-occasion="Friendship Day"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">🤝</div>
-            <h3>Friendship Day</h3>
-            <p>Celebrate true friendship.</p>
-        </div>
+<button class="btn btn-primary" onclick="nextStep()">
+Continue →
+</button>
 
-        <div class="occasion"
-             data-occasion="Valentine's Day"
-             onclick="selectOccasion(this)">
-            <div class="occasion-icon">❤️</div>
-            <h3>Valentine's Day</h3>
-            <p>Share a heartfelt wish.</p>
-        </div>
-
-    </div>
-
-
-    <div class="navigation">
-
-        <div></div>
-
-        <button class="btn btn-primary"
-                onclick="nextStep()">
-            Continue →
-        </button>
-
-    </div>
+</div>
 
 </div>
 
 </section>
 
 
-<!-- =========================
-     STEP 2
-========================= -->
+<!-- STEP 2 -->
 
 <section class="step" id="step2">
 
 <div class="card">
 
-    <div class="step-title">
+<div class="step-title">
+<small>STEP 2</small>
+<h2>Pick Your Template 🎨</h2>
+<p id="templateDescription">
+Choose the design that feels right.
+</p>
+</div>
 
-        <small>STEP 2</small>
+<div class="template-grid">
 
-        <h2>
-            Pick Your Template 🎨
-        </h2>
+<div class="template" onclick="selectTemplate(this,'From The Heart')">
+<div class="template-preview t1">
+<h3>❤️ From The Heart</h3>
+</div>
+<div class="template-info">
+<h3>From The Heart</h3>
+<p>Warm & elegant</p>
+</div>
+</div>
 
-        <p id="templateDescription">
-            Choose the design that feels right.
-        </p>
+<div class="template" onclick="selectTemplate(this,'Rose & Memories')">
+<div class="template-preview t2">
+<h3>🌹 Rose & Memories</h3>
+</div>
+<div class="template-info">
+<h3>Rose & Memories</h3>
+<p>Soft & premium</p>
+</div>
+</div>
 
-    </div>
+<div class="template" onclick="selectTemplate(this,'Love Note')">
+<div class="template-preview t3">
+<h3>💌 Love Note</h3>
+</div>
+<div class="template-info">
+<h3>Love Note</h3>
+<p>Sweet & personal</p>
+</div>
+</div>
 
+<div class="template" onclick="selectTemplate(this,'Forever Moment')">
+<div class="template-preview t4">
+<h3>✨ Forever Moment</h3>
+</div>
+<div class="template-info">
+<h3>Forever Moment</h3>
+<p>Modern & clean</p>
+</div>
+</div>
 
-    <div class="template-grid">
+</div>
 
-        <div class="template"
-             onclick="selectTemplate(this,'From The Heart')">
+<div class="navigation">
 
-            <div class="template-preview t1">
-                <h3>❤️ From The Heart</h3>
-            </div>
+<button class="btn btn-secondary" onclick="prevStep()">
+← Back
+</button>
 
-            <div class="template-info">
-                <h3>From The Heart</h3>
-                <p>Warm & elegant</p>
-            </div>
+<button class="btn btn-primary" onclick="nextStep()">
+Continue →
+</button>
 
-        </div>
-
-
-        <div class="template"
-             onclick="selectTemplate(this,'Rose & Memories')">
-
-            <div class="template-preview t2">
-                <h3>🌹 Rose & Memories</h3>
-            </div>
-
-            <div class="template-info">
-                <h3>Rose & Memories</h3>
-                <p>Soft & premium</p>
-            </div>
-
-        </div>
-
-
-        <div class="template"
-             onclick="selectTemplate(this,'Love Note')">
-
-            <div class="template-preview t3">
-                <h3>💌 Love Note</h3>
-            </div>
-
-            <div class="template-info">
-                <h3>Love Note</h3>
-                <p>Sweet & personal</p>
-            </div>
-
-        </div>
-
-
-        <div class="template"
-             onclick="selectTemplate(this,'Forever Moment')">
-
-            <div class="template-preview t4">
-                <h3>✨ Forever Moment</h3>
-            </div>
-
-            <div class="template-info">
-                <h3>Forever Moment</h3>
-                <p>Modern & clean</p>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="navigation">
-
-        <button class="btn btn-secondary"
-                onclick="prevStep()">
-            ← Back
-        </button>
-
-        <button class="btn btn-primary"
-                onclick="nextStep()">
-            Continue →
-        </button>
-
-    </div>
+</div>
 
 </div>
 
 </section>
 
 
-<!-- =========================
-     STEP 3
-========================= -->
+<!-- STEP 3 -->
 
 <section class="step" id="step3">
 
 <div class="card">
 
-    <div class="step-title">
+<div class="step-title">
 
-        <small>STEP 3</small>
+<small>STEP 3</small>
 
-        <h2>
-            Add Your Wish ✍️
-        </h2>
+<h2>Add Your Wish ✍️</h2>
 
-        <p>
-            Photo is optional. Your words are what make
-            the surprise special.
-        </p>
+<p>
+Photo is optional. Your words are what make the surprise special.
+</p>
 
-    </div>
+</div>
 
+<div class="form-grid">
 
-    <div class="form-grid">
+<div class="field">
 
-        <div class="field">
+<label>Your Name</label>
 
-            <label>Your Name</label>
+<input
+id="senderName"
+type="text"
+placeholder="Enter your name"
+>
 
-            <input
-                id="senderName"
-                type="text"
-                placeholder="Enter your name">
+</div>
 
-        </div>
+<div class="field">
 
+<label>Recipient Name</label>
 
-        <div class="field">
+<input
+id="recipientName"
+type="text"
+placeholder="Who are you wishing?"
+>
 
-            <label>Recipient Name</label>
+</div>
 
-            <input
-                id="recipientName"
-                type="text"
-                placeholder="Who are you wishing?">
+<div class="field full">
 
-        </div>
+<label>Your Wish</label>
 
+<textarea
+id="wishMessage"
+placeholder="Write your heartfelt message here..."
+></textarea>
 
-        <div class="field full">
+</div>
 
-            <label>Your Wish</label>
+<div class="field full">
 
-            <textarea
-                id="wishMessage"
-                placeholder="Write your heartfelt message here..."></textarea>
+<label>📸 Add a Photo (Optional)</label>
 
-        </div>
+<div class="photo-box">
 
+<div>
+You can create a beautiful wish without uploading a photo.
+</div>
 
-        <div class="field full">
+<input
+type="file"
+id="photoInput"
+accept="image/*"
+onchange="previewPhoto(event)"
+>
 
-            <label>📸 Add a Photo (Optional)</label>
+<img
+id="photoPreview"
+class="photo-preview"
+alt="Selected photo"
+>
 
-            <div class="photo-box">
+</div>
 
-                <div>
-                    You can create a beautiful wish
-                    without uploading a photo.
-                </div>
+</div>
 
-                <input
-                    type="file"
-                    id="photoInput"
-                    accept="image/*"
-                    onchange="previewPhoto(event)">
+</div>
 
-                <img
-                    id="photoPreview"
-                    class="photo-preview"
-                    alt="Selected photo">
+<div class="navigation">
 
-            </div>
+<button class="btn btn-secondary" onclick="prevStep()">
+← Back
+</button>
 
-        </div>
+<button class="btn btn-primary" onclick="nextStep()">
+Add WishLock →
+</button>
 
-    </div>
-
-
-    <div class="navigation">
-
-        <button class="btn btn-secondary"
-                onclick="prevStep()">
-            ← Back
-        </button>
-
-        <button class="btn btn-primary"
-                onclick="nextStep()">
-            Add WishLock →
-        </button>
-
-    </div>
+</div>
 
 </div>
 
 </section>
 
 
-<!-- =========================
-     STEP 4
-========================= -->
+<!-- STEP 4 -->
 
 <section class="step" id="step4">
 
 <div class="card">
 
-    <div class="step-title">
+<div class="step-title">
 
-        <small>STEP 4</small>
+<small>STEP 4</small>
 
-        <h2>
-            🔐 Add Your WishLock Challenge
-        </h2>
+<h2>🔐 Add Your WishLock Challenge</h2>
 
-        <p>
-            Your recipient must answer these questions
-            before your surprise can be unlocked.
-        </p>
+<p>
+Your recipient must answer these questions before your surprise can be unlocked.
+</p>
 
-    </div>
+</div>
 
+<div class="lock-intro">
 
-    <div class="lock-intro">
+<strong>How it works:</strong>
 
-        <strong>How it works:</strong>
+Every correct answer gives <strong>20 marks</strong>.
 
-        Every correct answer gives
-        <strong>20 marks</strong>.
+The recipient needs <strong>60/100</strong> to unlock the Wish.
 
-        The recipient needs
-        <strong>60/100</strong>
-        to unlock the Wish.
-    </div>
+</div>
 
 
-    <!-- QUESTION 1 -->
+<div id="questionsContainer"></div>
 
-    <div class="question-card">
 
-        <div class="question-top">
+<div class="lock-rules">
 
-            <div class="question-number">
-                QUESTION 1
-            </div>
+<div class="rule">❓ 5 Questions</div>
+<div class="rule">⭐ 20 Marks Each</div>
+<div class="rule">🏆 Pass: 60</div>
+<div class="rule">🔓 60+ Unlocks</div>
 
-            <div class="mark">
-                +20 MARKS
-            </div>
+</div>
 
-        </div>
+<div class="navigation">
 
-        <input
-            id="q1"
-            type="text"
-            placeholder="Write your question">
+<button class="btn btn-secondary" onclick="prevStep()">
+← Back
+</button>
 
-        <input
-            id="a1"
-            type="text"
-            placeholder="Correct answer">
+<button class="btn btn-primary" onclick="nextStep()">
+Preview My Wish →
+</button>
 
-        <div class="hint">
-            💡 The answer stays hidden from the recipient.
-        </div>
-
-    </div>
-
-
-    <!-- QUESTION 2 -->
-
-    <div class="question-card">
-
-        <div class="question-top">
-
-            <div class="question-number">
-                QUESTION 2
-            </div>
-
-            <div class="mark">
-                +20 MARKS
-            </div>
-
-        </div>
-
-        <input
-            id="q2"
-            type="text"
-            placeholder="Write your question">
-
-        <input
-            id="a2"
-            type="text"
-            placeholder="Correct answer">
-
-    </div>
-
-
-    <!-- QUESTION 3 -->
-
-    <div class="question-card">
-
-        <div class="question-top">
-
-            <div class="question-number">
-                QUESTION 3
-            </div>
-
-            <div class="mark">
-                +20 MARKS
-            </div>
-
-        </div>
-
-        <input
-            id="q3"
-            type="text"
-            placeholder="Write your question">
-
-        <input
-            id="a3"
-            type="text"
-            placeholder="Correct answer">
-
-    </div>
-
-
-    <!-- QUESTION 4 -->
-
-    <div class="question-card">
-
-        <div class="question-top">
-
-            <div class="question-number">
-                QUESTION 4
-            </div>
-
-            <div class="mark">
-                +20 MARKS
-            </div>
-
-        </div>
-
-        <input
-            id="q4"
-            type="text"
-            placeholder="Write your question">
-
-        <input
-            id="a4"
-            type="text"
-            placeholder="Correct answer">
-
-    </div>
-
-
-    <!-- QUESTION 5 -->
-
-    <div class="question-card">
-
-        <div class="question-top">
-
-            <div class="question-number">
-                QUESTION 5
-            </div>
-
-            <div class="mark">
-                +20 MARKS
-            </div>
-
-        </div>
-
-        <input
-            id="q5"
-            type="text"
-            placeholder="Write your question">
-
-        <input
-            id="a5"
-            type="text"
-            placeholder="Correct answer">
-
-    </div>
-
-
-    <div class="lock-rules">
-
-        <div class="rule">
-            ❓ 5 Questions
-        </div>
-
-        <div class="rule">
-            ⭐ 20 Marks Each
-        </div>
-
-        <div class="rule">
-            🏆 Pass: 60
-        </div>
-
-        <div class="rule">
-            🔓 60+ Unlocks
-        </div>
-
-    </div>
-
-
-    <div class="navigation">
-
-        <button class="btn btn-secondary"
-                onclick="prevStep()">
-            ← Back
-        </button>
-
-        <button class="btn btn-primary"
-                onclick="nextStep()">
-            Preview My Wish →
-        </button>
-
-    </div>
+</div>
 
 </div>
 
 </section>
 
 
-<!-- =========================
-     STEP 5
-========================= -->
+<!-- STEP 5 -->
 
 <section class="step" id="step5">
 
 <div class="card">
 
-    <div class="step-title">
+<div class="step-title">
 
-        <small>STEP 5</small>
+<small>STEP 5</small>
 
-        <h2>
-            Your Wish Is Ready 🎁
-        </h2>
+<h2>Your Wish Is Ready 🎁</h2>
 
-        <p>
-            Check everything before creating your surprise.
-        </p>
+<p>
+Check everything before creating your surprise.
+</p>
 
-    </div>
+</div>
 
+<div class="preview-box">
 
-    <div class="preview-box">
+<div class="preview-icon">💌</div>
 
-        <div class="preview-icon">
-            💌
-        </div>
+<h2 id="previewTitle">
+A Special Wish ❤️
+</h2>
 
-        <h2 id="previewTitle">
-            A Special Wish ❤️
-        </h2>
+<p id="previewFrom">
+From someone special
+</p>
 
-        <p id="previewFrom">
-            From someone special
-        </p>
+<div class="preview-message" id="previewMessage">
+Your beautiful message will appear here.
+</div>
 
-        <div class="preview-message"
-             id="previewMessage">
-            Your beautiful message will appear here.
-        </div>
+</div>
 
-    </div>
+<div id="resultMessage"></div>
 
+<div class="navigation">
 
-    <div id="resultMessage"></div>
+<button class="btn btn-secondary" onclick="prevStep()">
+← Edit
+</button>
 
+<button class="btn btn-success" onclick="createWish()">
+❤️ Create & Share My Wish
+</button>
 
-    <div class="navigation">
-
-        <button class="btn btn-secondary"
-                onclick="prevStep()">
-            ← Edit
-        </button>
-
-        <button class="btn btn-success"
-                onclick="createWish()">
-            ❤️ Create & Share My Wish
-        </button>
-
-    </div>
+</div>
 
 </div>
 
@@ -1375,78 +1084,144 @@ footer{
 
 
 <footer>
-    © 2026 WishNow — Make Every Moment Special. 🎁
+© 2026 WishNow — Make Every Moment Special. 🎁
 </footer>
 
 
 <script>
 
-/* =========================
-   DATA
-========================= */
+/* =====================================================
+   SUPABASE CONFIG
+   ===================================================== */
+
+const SUPABASE_URL =
+"YOUR_SUPABASE_URL";
+
+const SUPABASE_KEY =
+"YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* DATA */
 
 let currentStep = 1;
-
 let selectedOccasion = "";
-
 let selectedTemplate = "";
-
 let photoData = "";
 
 
-/* =========================
-   OCCASION
-========================= */
+/* QUESTIONS */
+
+const questionsContainer =
+document.getElementById("questionsContainer");
+
+for(let i=1;i<=5;i++){
+
+    questionsContainer.innerHTML += `
+
+    <div class="question-card">
+
+        <div class="question-top">
+
+            <div class="question-number">
+                QUESTION ${i}
+            </div>
+
+            <div class="mark">
+                +20 MARKS
+            </div>
+
+        </div>
+
+        <input
+            id="q${i}"
+            type="text"
+            placeholder="Write your question"
+        >
+
+        <input
+            id="a${i}"
+            type="text"
+            placeholder="Correct answer"
+        >
+
+        ${
+            i === 1
+            ?
+            `<div class="hint">
+                💡 The answer stays hidden from the recipient.
+            </div>`
+            :
+            ""
+        }
+
+    </div>
+
+    `;
+
+}
+
+
+/* OCCASION */
 
 function selectOccasion(element){
 
     document
-        .querySelectorAll(".occasion")
-        .forEach(item => {
-            item.classList.remove("selected");
-        });
+    .querySelectorAll(".occasion")
+    .forEach(item =>
+        item.classList.remove("selected")
+    );
 
     element.classList.add("selected");
 
     selectedOccasion =
         element.dataset.occasion;
 
-    document.getElementById("templateDescription").textContent =
+    document.getElementById(
+        "templateDescription"
+    ).textContent =
         selectedOccasion +
         " templates are ready for your special wish.";
-
 }
 
 
-/* =========================
-   TEMPLATE
-========================= */
+/* TEMPLATE */
 
 function selectTemplate(element,name){
 
     document
-        .querySelectorAll(".template")
-        .forEach(item => {
-            item.classList.remove("selected");
-        });
+    .querySelectorAll(".template")
+    .forEach(item =>
+        item.classList.remove("selected")
+    );
 
     element.classList.add("selected");
 
     selectedTemplate = name;
-
 }
 
 
-/* =========================
-   PHOTO
-========================= */
+/* PHOTO */
 
 function previewPhoto(event){
 
     const file =
         event.target.files[0];
 
-    if(!file){
+    if(!file) return;
+
+    if(file.size > 2 * 1024 * 1024){
+
+        alert(
+            "📸 Please choose an image smaller than 2MB."
+        );
+
+        event.target.value = "";
         return;
     }
 
@@ -1454,32 +1229,25 @@ function previewPhoto(event){
         new FileReader();
 
     reader.onload =
-        function(e){
+    function(e){
 
-            photoData =
-                e.target.result;
+        photoData = e.target.result;
 
-            const preview =
-                document.getElementById(
-                    "photoPreview"
-                );
+        const preview =
+            document.getElementById(
+                "photoPreview"
+            );
 
-            preview.src =
-                photoData;
+        preview.src = photoData;
 
-            preview.style.display =
-                "block";
-
-        };
+        preview.style.display = "block";
+    };
 
     reader.readAsDataURL(file);
-
 }
 
 
-/* =========================
-   STEP VALIDATION
-========================= */
+/* VALIDATION */
 
 function validateStep(){
 
@@ -1493,7 +1261,6 @@ function validateStep(){
 
             return false;
         }
-
     }
 
 
@@ -1507,7 +1274,6 @@ function validateStep(){
 
             return false;
         }
-
     }
 
 
@@ -1528,9 +1294,7 @@ function validateStep(){
                 "wishMessage"
             ).value.trim();
 
-        if(!sender ||
-           !recipient ||
-           !message){
+        if(!sender || !recipient || !message){
 
             alert(
                 "✍️ Please complete your name, recipient name and wish."
@@ -1538,7 +1302,6 @@ function validateStep(){
 
             return false;
         }
-
     }
 
 
@@ -1564,40 +1327,29 @@ function validateStep(){
 
                 return false;
             }
-
         }
-
     }
 
     return true;
-
 }
 
 
-/* =========================
-   NEXT
-========================= */
+/* NEXT */
 
 function nextStep(){
 
-    if(!validateStep()){
-        return;
-    }
+    if(!validateStep()) return;
 
     if(currentStep < 5){
 
         currentStep++;
 
         showStep();
-
     }
-
 }
 
 
-/* =========================
-   PREVIOUS
-========================= */
+/* PREVIOUS */
 
 function prevStep(){
 
@@ -1606,29 +1358,25 @@ function prevStep(){
         currentStep--;
 
         showStep();
-
     }
-
 }
 
 
-/* =========================
-   SHOW STEP
-========================= */
+/* SHOW STEP */
 
 function showStep(){
 
     document
-        .querySelectorAll(".step")
-        .forEach(step => {
-            step.classList.remove("active");
-        });
+    .querySelectorAll(".step")
+    .forEach(step =>
+        step.classList.remove("active")
+    );
 
     document
-        .getElementById(
-            "step"+currentStep
-        )
-        .classList.add("active");
+    .getElementById(
+        "step"+currentStep
+    )
+    .classList.add("active");
 
 
     for(let i=1;i<=5;i++){
@@ -1643,34 +1391,27 @@ function showStep(){
             "done"
         );
 
-        if(i < currentStep){
+        if(i < currentStep)
             progress.classList.add("done");
-        }
 
-        if(i === currentStep){
+        if(i === currentStep)
             progress.classList.add("active");
-        }
-
     }
 
 
     if(currentStep === 5){
 
         updatePreview();
-
     }
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
-
 }
 
 
-/* =========================
-   PREVIEW
-========================= */
+/* PREVIEW */
 
 function updatePreview(){
 
@@ -1713,106 +1454,268 @@ function updatePreview(){
         "previewMessage"
     ).textContent =
         message;
-
 }
 
 
-/* =========================
+/* =====================================================
    CREATE WISH
-========================= */
+   ===================================================== */
 
-function createWish(){
+async function createWish(){
 
-    if(!validateStep()){
-        return;
+    if(!validateStep()) return;
+
+
+    const result =
+        document.getElementById(
+            "resultMessage"
+        );
+
+    result.style.display = "block";
+
+    result.style.background = "#fff7e8";
+    result.style.color = "#8a5a00";
+
+    result.textContent =
+        "⏳ Creating your Wish...";
+
+
+    try{
+
+        /*
+         * Insert main Wish
+         */
+
+        const { data: wish, error: wishError } =
+            await supabaseClient
+            .from("wishes")
+            .insert({
+
+                sender_name:
+                    document.getElementById(
+                        "senderName"
+                    ).value.trim(),
+
+                recipient_name:
+                    document.getElementById(
+                        "recipientName"
+                    ).value.trim(),
+
+                occasion:
+                    selectedOccasion,
+
+                template:
+                    selectedTemplate,
+
+                message:
+                    document.getElementById(
+                        "wishMessage"
+                    ).value.trim(),
+
+                photo_url:
+                    photoData || null,
+
+                user_type:
+                    "free",
+
+                score:
+                    0,
+
+                unlocked:
+                    false,
+
+                expires_at:
+                    new Date(
+                        Date.now() +
+                        30 * 24 * 60 * 60 * 1000
+                    ).toISOString()
+
+            })
+            .select()
+            .single();
+
+
+        if(wishError){
+
+            throw wishError;
+        }
+
+
+        /*
+         * Insert questions
+         */
+
+        const questionRows = [];
+
+        for(let i=1;i<=5;i++){
+
+            questionRows.push({
+
+                wish_id:
+                    wish.id,
+
+                question:
+                    document.getElementById(
+                        "q"+i
+                    ).value.trim(),
+
+                answer:
+                    document.getElementById(
+                        "a"+i
+                    ).value.trim(),
+
+                question_no:
+                    i
+            });
+        }
+
+
+        const { error: questionError } =
+            await supabaseClient
+            .from("wish_questions")
+            .insert(questionRows);
+
+
+        if(questionError){
+
+            /*
+             * If questions fail,
+             * remove the Wish again.
+             */
+
+            await supabaseClient
+            .from("wishes")
+            .delete()
+            .eq("id",wish.id);
+
+            throw questionError;
+        }
+
+
+        /*
+         * SUCCESS
+         */
+
+        const resultUrl =
+            window.location.origin +
+            window.location.pathname
+            .replace(
+                "wish.html",
+                "wish-result.html"
+            ) +
+            "?id=" +
+            encodeURIComponent(
+                wish.id
+            );
+
+
+        result.style.background =
+            "#effff5";
+
+        result.style.color =
+            "#177245";
+
+        result.innerHTML =
+            `
+            🎉 <strong>Your Wish has been created!</strong>
+            <br><br>
+            Your private WishLock link is ready.
+            <br><br>
+
+            <input
+                id="createdLink"
+                value="${resultUrl}"
+                readonly
+                style="
+                    width:100%;
+                    padding:12px;
+                    border:1px solid #ccebd8;
+                    border-radius:12px;
+                    margin-bottom:10px;
+                    background:white;
+                "
+            >
+
+            <button
+                onclick="copyCreatedLink()"
+                style="
+                    width:100%;
+                    border:0;
+                    padding:13px;
+                    border-radius:25px;
+                    background:#177245;
+                    color:white;
+                    font-weight:900;
+                "
+            >
+                📋 Copy Wish Link
+            </button>
+
+            <br><br>
+
+            <a
+                href="${resultUrl}"
+                style="
+                    display:block;
+                    text-align:center;
+                    color:#7337c8;
+                    font-weight:900;
+                "
+            >
+                🔗 Open My Wish
+            </a>
+            `;
+
+
+    }catch(error){
+
+        console.error(error);
+
+        result.style.background =
+            "#fff0f0";
+
+        result.style.color =
+            "#a12626";
+
+        result.textContent =
+            "❌ Could not create the Wish. Please check your Supabase settings and table permissions.";
     }
-
-
-    const wishData = {
-
-        occasion:
-            selectedOccasion,
-
-        template:
-            selectedTemplate,
-
-        sender:
-            document.getElementById(
-                "senderName"
-            ).value.trim(),
-
-        recipient:
-            document.getElementById(
-                "recipientName"
-            ).value.trim(),
-
-        message:
-            document.getElementById(
-                "wishMessage"
-            ).value.trim(),
-
-        photo:
-            photoData,
-
-        questions:[
-            {
-                q:document.getElementById("q1").value.trim(),
-                a:document.getElementById("a1").value.trim()
-            },
-            {
-                q:document.getElementById("q2").value.trim(),
-                a:document.getElementById("a2").value.trim()
-            },
-            {
-                q:document.getElementById("q3").value.trim(),
-                a:document.getElementById("a3").value.trim()
-            },
-            {
-                q:document.getElementById("q4").value.trim(),
-                a:document.getElementById("a4").value.trim()
-            },
-            {
-                q:document.getElementById("q5").value.trim(),
-                a:document.getElementById("a5").value.trim()
-            }
-        ],
-
-        created:
-            new Date().toISOString()
-
-    };
-
-
-    /*
-       Demo/local version:
-       Data is stored in this browser.
-
-       Later we can connect this to a backend/database
-       so the recipient can open a real shareable link.
-    */
-
-    localStorage.setItem(
-        "wishNowCurrentWish",
-        JSON.stringify(wishData)
-    );
-
-
-    document.getElementById(
-        "resultMessage"
-    ).style.display = "block";
-
-
-    document.getElementById(
-        "resultMessage"
-    ).textContent =
-        "🎉 Your Wish has been prepared! The next step is connecting the secure share link to wish-result.html.";
-
 }
 
 
-/* =========================
-   URL OCCASION
-========================= */
+/* COPY CREATED LINK */
+
+async function copyCreatedLink(){
+
+    const input =
+        document.getElementById(
+            "createdLink"
+        );
+
+    try{
+
+        await navigator.clipboard.writeText(
+            input.value
+        );
+
+        alert(
+            "✅ Wish link copied!"
+        );
+
+    }catch(error){
+
+        input.select();
+
+        document.execCommand("copy");
+
+        alert(
+            "✅ Wish link copied!"
+        );
+    }
+}
+
+
+/* URL OCCASION */
 
 const params =
     new URLSearchParams(
@@ -1822,15 +1725,11 @@ const params =
 const urlOccasion =
     params.get("occasion");
 
-
 if(urlOccasion){
 
-    const occasionCards =
-        document.querySelectorAll(
-            ".occasion"
-        );
-
-    occasionCards.forEach(card => {
+    document
+    .querySelectorAll(".occasion")
+    .forEach(card => {
 
         if(
             card.dataset.occasion ===
@@ -1838,11 +1737,8 @@ if(urlOccasion){
         ){
 
             selectOccasion(card);
-
         }
-
     });
-
 }
 
 </script>
