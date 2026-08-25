@@ -1,13 +1,20 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>WishNow — Make Every Moment Special</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<meta name="description"
-content="WishNow — Create beautiful personalized wishes for every special moment.">
+<title>WishNow ✨ — Make Every Moment Special</title>
+
+<meta
+  name="description"
+  content="Create beautiful personalized wishes for birthdays, anniversaries, festivals and every special moment."
+>
 
 <style>
 
@@ -27,7 +34,7 @@ html{
 
 body{
   font-family:Inter,Arial,sans-serif;
-  background:#fff8fc;
+  background:#fff9fc;
   color:#24172b;
   overflow-x:hidden;
 }
@@ -51,814 +58,206 @@ a{
 ========================= */
 
 .navbar{
+
   position:absolute;
+
   top:0;
   left:0;
+
   width:100%;
+
   z-index:100;
 
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   padding:20px 5%;
+
   color:#fff;
+
 }
 
 .logo{
+
   font-size:27px;
+
   font-weight:900;
+
   letter-spacing:-1px;
+
 }
 
 .logo span{
+
   color:#ffd166;
+
 }
+
 
 .nav-right{
+
   display:flex;
+
   align-items:center;
-  gap:10px;
+
+  gap:9px;
+
 }
 
+
 .nav-link{
+
   color:#fff;
+
   padding:10px 15px;
+
   border-radius:25px;
+
   transition:.25s;
+
 }
 
 .nav-link:hover{
-  background:rgba(255,255,255,.15);
+
+  background:rgba(255,255,255,.14);
+
 }
 
+
 .nav-btn{
-  border:1px solid rgba(255,255,255,.5);
-  background:rgba(255,255,255,.12);
+
+  border:1px solid rgba(255,255,255,.45);
+
+  background:rgba(255,255,255,.13);
+
   color:#fff;
+
   padding:10px 18px;
+
   border-radius:30px;
+
   backdrop-filter:blur(12px);
+
   transition:.25s;
+
 }
 
 .nav-btn:hover{
+
   background:#fff;
-  color:#24172b;
+
+  color:#28132f;
+
+  transform:translateY(-2px);
+
 }
 
 
 /* =========================
-   DROPDOWN
+   NAV DROPDOWN
 ========================= */
 
 .dropdown{
+
   position:relative;
+
 }
+
 
 .dropdown-btn{
-  border:0;
-  background:rgba(255,255,255,.12);
+
+  border:1px solid rgba(255,255,255,.25);
+
+  background:rgba(255,255,255,.10);
+
   color:#fff;
-  padding:10px 16px;
+
+  padding:10px 15px;
+
   border-radius:25px;
-  cursor:pointer;
+
+  backdrop-filter:blur(10px);
+
 }
 
+
 .dropdown-menu{
+
   position:absolute;
+
   top:52px;
+
   right:0;
 
-  width:230px;
+  width:240px;
 
   padding:10px;
 
-  background:rgba(35,14,45,.96);
-  border:1px solid rgba(255,255,255,.15);
   border-radius:18px;
 
-  box-shadow:0 20px 45px rgba(0,0,0,.3);
+  background:rgba(31,12,40,.97);
+
+  border:1px solid rgba(255,255,255,.14);
+
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
 
   opacity:0;
+
   visibility:hidden;
+
   transform:translateY(-8px);
 
   transition:.25s;
+
 }
+
 
 .dropdown.open .dropdown-menu{
+
   opacity:1;
+
   visibility:visible;
+
   transform:translateY(0);
+
 }
 
+
 .dropdown-menu button{
+
   width:100%;
+
   border:0;
+
   background:transparent;
+
   color:#fff;
 
   text-align:left;
 
   padding:11px 13px;
-  border-radius:12px;
+
+  border-radius:11px;
+
 }
+
 
 .dropdown-menu button:hover{
+
   background:rgba(255,255,255,.12);
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  position:relative;
-  min-height:680px;
-  overflow:hidden;
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #321045,
-      #9d2d79
-    );
-}
-
-.slide{
-  position:absolute;
-  inset:0;
-
-  opacity:0;
-  visibility:hidden;
-
-  background-size:cover;
-  background-position:center;
-
-  transition:
-    opacity 1s ease,
-    visibility 1s ease;
-}
-
-.slide.active{
-  opacity:1;
-  visibility:visible;
-}
-
-.slide::before{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(25,8,35,.86),
-      rgba(45,14,63,.58),
-      rgba(20,5,30,.18)
-    );
-}
-
-.slide-content{
-  position:absolute;
-  z-index:5;
-
-  left:7%;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  width:min(680px,85%);
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-
-  padding:8px 15px;
-  margin-bottom:18px;
-
-  border:1px solid rgba(255,255,255,.4);
-  border-radius:30px;
-
-  background:rgba(255,255,255,.13);
-  backdrop-filter:blur(10px);
-
-  font-size:14px;
-}
-
-.slide-content h1{
-  font-size:clamp(40px,6vw,74px);
-  line-height:1.02;
-  letter-spacing:-2px;
-  margin-bottom:18px;
-}
-
-.slide-content p{
-  max-width:600px;
-
-  color:rgba(255,255,255,.88);
-
-  font-size:18px;
-  line-height:1.65;
-
-  margin-bottom:27px;
-}
-
-.hero-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-
-  padding:14px 23px;
-
-  border:0;
-  border-radius:30px;
-
-  background:#fff;
-  color:#29152f;
-
-  font-weight:800;
-
-  transition:.25s;
-}
-
-.hero-btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 30px rgba(0,0,0,.25);
-}
-
-
-/* =========================
-   HERO IMAGES
-========================= */
-
-.slide:nth-child(1){
-  background-image:url(
-    "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1900&q=85"
-  );
-}
-
-.slide:nth-child(2){
-  background-image:url(
-    "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1900&q=85"
-  );
-}
-
-.slide:nth-child(3){
-  background-image:url(
-    "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1900&q=85"
-  );
-}
-
-.slide:nth-child(4){
-  background-image:url(
-    "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1900&q=85"
-  );
-
-
-/* =========================
-   FLOATING PHOTOS
-========================= */
-
-.memory-orbit{
-  position:absolute;
-  z-index:7;
-
-  right:5%;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  width:360px;
-  height:360px;
-
-  pointer-events:none;
-}
-
-.memory-photo{
-  position:absolute;
-
-  width:78px;
-  height:78px;
-
-  padding:5px;
-
-  background:#fff;
-
-  border-radius:17px;
-
-  box-shadow:0 15px 35px rgba(0,0,0,.28);
-
-  animation:floatPhoto 5s ease-in-out infinite;
-}
-
-.memory-photo img{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  border-radius:12px;
-}
-
-.photo1{
-  top:5px;
-  left:130px;
-  transform:rotate(-8deg);
-}
-
-.photo2{
-  top:90px;
-  right:0;
-  transform:rotate(8deg);
-  animation-delay:1s;
-}
-
-.photo3{
-  bottom:5px;
-  right:50px;
-  transform:rotate(-7deg);
-  animation-delay:2s;
-}
-
-.photo4{
-  bottom:20px;
-  left:25px;
-  transform:rotate(8deg);
-  animation-delay:3s;
-}
-
-.photo5{
-  top:140px;
-  left:0;
-  transform:rotate(-10deg);
-  animation-delay:4s;
-}
-
-@keyframes floatPhoto{
-
-  0%,100%{
-    translate:0 0;
-  }
-
-  50%{
-    translate:0 -10px;
-  }
 
 }
 
 
 /* =========================
-   DOTS
+   MOBILE BUTTON
 ========================= */
 
-.slider-controls{
-  position:absolute;
-  z-index:20;
+.mobile-menu{
 
-  bottom:30px;
-  left:7%;
-
-  display:flex;
-  gap:9px;
-}
-
-.dot{
-  width:9px;
-  height:9px;
-
-  border:0;
-  border-radius:20px;
-
-  background:rgba(255,255,255,.5);
-
-  transition:.3s;
-}
-
-.dot.active{
-  width:30px;
-  background:#fff;
-}
-
-
-/* =========================
-   QUICK ACTIONS
-========================= */
-
-.quick-section{
-  width:min(1100px,90%);
-  margin:-45px auto 0;
-
-  position:relative;
-  z-index:30;
-}
-
-.quick-box{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-
-  padding:18px;
-
-  background:#fff;
-
-  border-radius:25px;
-
-  box-shadow:
-    0 20px 55px rgba(60,20,70,.14);
-}
-
-.quick-card{
-  border:1px solid #f1e4ef;
-  background:#fff;
-
-  padding:20px;
-
-  border-radius:18px;
-
-  transition:.25s;
-}
-
-.quick-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 30px rgba(60,20,70,.08);
-}
-
-.quick-icon{
-  font-size:28px;
-  margin-bottom:8px;
-}
-
-.quick-card h3{
-  font-size:17px;
-  margin-bottom:5px;
-}
-
-.quick-card p{
-  color:#8b7a8e;
-  font-size:13px;
-}
-
-
-/* =========================
-   COLLAPSIBLE SECTIONS
-========================= */
-
-.compact-section{
-  width:min(1100px,90%);
-  margin:auto;
-
-  padding:60px 0 15px;
-}
-
-.section-title{
-  text-align:center;
-  margin-bottom:25px;
-}
-
-.section-title .mini{
-  color:#d83b83;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.section-title h2{
-  font-size:clamp(28px,4vw,43px);
-  margin-top:8px;
-}
-
-.section-title p{
-  color:#806f83;
-  margin-top:7px;
-}
-
-.accordion{
-  border:1px solid #eee0ed;
-  border-radius:22px;
-  overflow:hidden;
-  background:#fff;
-
-  box-shadow:0 12px 35px rgba(55,20,65,.06);
-}
-
-.accordion-item + .accordion-item{
-  border-top:1px solid #eee0ed;
-}
-
-.accordion-header{
-  width:100%;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:20px 23px;
-
-  border:0;
-
-  background:#fff;
-  color:#24172b;
-
-  text-align:left;
-
-  font-weight:800;
-  font-size:17px;
-}
-
-.accordion-header span:last-child{
-  font-size:22px;
-  color:#d83b83;
-}
-
-.accordion-content{
-  display:none;
-  padding:0 23px 23px;
-
-  color:#806f83;
-  line-height:1.6;
-}
-
-.accordion-item.open .accordion-content{
-  display:block;
-}
-
-.accordion-item.open .accordion-header{
-  color:#d83b83;
-}
-
-
-/* =========================
-   OCCASION GRID
-========================= */
-
-.occasion-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.occasion{
-  padding:18px;
-
-  background:#fff;
-
-  border:1px solid #f0e4ef;
-  border-radius:18px;
-
-  transition:.25s;
-}
-
-.occasion:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 30px rgba(55,20,65,.08);
-}
-
-.occasion-icon{
-  font-size:26px;
-  margin-bottom:8px;
-}
-
-.occasion h3{
-  font-size:16px;
-  margin-bottom:4px;
-}
-
-.occasion p{
-  color:#8b7a8e;
-  font-size:13px;
-}
-
-
-/* =========================
-   GIFT
-========================= */
-
-.gift-inner{
-  display:grid;
-  grid-template-columns:1fr .7fr;
-  gap:25px;
-  align-items:center;
-
-  padding:28px;
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #351449,
-      #7d2c73
-    );
-
-  color:#fff;
-}
-
-.gift-inner h2{
-  font-size:clamp(28px,4vw,45px);
-  line-height:1.05;
-  margin-bottom:12px;
-}
-
-.gift-inner p{
-  color:rgba(255,255,255,.82);
-  line-height:1.6;
-  margin-bottom:18px;
-}
-
-.white-btn{
-  border:0;
-  padding:11px 20px;
-
-  background:#fff;
-  color:#4a1b58;
-
-  border-radius:25px;
-
-  font-weight:800;
-}
-
-.gift-visual{
-  display:flex;
-  justify-content:center;
-}
-
-.gift-box{
-  width:170px;
-  height:115px;
-
-  position:relative;
-
-  border-radius:15px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff6ca8,
-      #ffb36b
-    );
-
-  box-shadow:0 20px 35px rgba(0,0,0,.25);
-
-  transform:rotate(-6deg);
-}
-
-.gift-box::before{
-  content:"";
-
-  position:absolute;
-
-  left:50%;
-  top:0;
-
-  width:25px;
-  height:100%;
-
-  transform:translateX(-50%);
-
-  background:#ffe08a;
-}
-
-.gift-box::after{
-  content:"🎀";
-
-  position:absolute;
-
-  left:50%;
-  top:-38px;
-
-  transform:translateX(-50%);
-
-  font-size:52px;
-}
-
-
-/* =========================
-   PREMIUM
-========================= */
-
-.premium-box{
-  padding:28px;
-
-  border-radius:25px;
-
-  background:#17101b;
-  color:#fff;
-}
-
-.premium-box h2{
-  font-size:clamp(28px,4vw,45px);
-  margin-bottom:12px;
-}
-
-.premium-box p{
-  color:#cfc5d2;
-  line-height:1.6;
-  margin-bottom:20px;
-}
-
-.premium-list{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-
-  margin-bottom:20px;
-}
-
-.premium-list div{
-  padding:10px;
-
-  border-radius:12px;
-
-  background:rgba(255,255,255,.06);
-
-  color:#e8dfea;
-
-  font-size:14px;
-}
-
-
-/* =========================
-   CREATE CTA
-========================= */
-
-.create{
-  width:min(1100px,90%);
-  margin:45px auto 60px;
-
-  text-align:center;
-
-  padding:45px 20px;
-
-  border-radius:27px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff4d91,
-      #8f39d9
-    );
-
-  color:#fff;
-
-  box-shadow:0 20px 55px rgba(175,40,130,.18);
-}
-
-.create h2{
-  font-size:clamp(28px,4vw,45px);
-  margin-bottom:10px;
-}
-
-.create p{
-  max-width:600px;
-  margin:0 auto 20px;
-
-  color:rgba(255,255,255,.87);
-  line-height:1.6;
-}
-
-.create-btn{
-  border:0;
-
-  padding:13px 25px;
-
-  background:#fff;
-  color:#4b195d;
-
-  border-radius:28px;
-
-  font-weight:900;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  padding:25px 20px;
-
-  text-align:center;
-
-  background:#100b13;
-
-  color:#897d8d;
-
-  font-size:13px;
-}
-
-
-/* =========================
-   MOBILE NAV
-========================= */
-
-.mobile-menu-btn{
   display:none;
 
   border:1px solid rgba(255,255,255,.4);
@@ -872,6 +271,1144 @@ footer{
   border-radius:12px;
 
   font-size:20px;
+
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+  position:relative;
+
+  min-height:720px;
+
+  overflow:hidden;
+
+  color:#fff;
+
+  background:#35144e;
+
+}
+
+
+.slide{
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:0;
+
+  visibility:hidden;
+
+  background-size:cover;
+
+  background-position:center;
+
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
+
+}
+
+
+.slide.active{
+
+  opacity:1;
+
+  visibility:visible;
+
+}
+
+
+.slide::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(20,5,30,.88),
+      rgba(48,13,65,.58),
+      rgba(20,5,30,.18)
+    );
+
+}
+
+
+.slide-content{
+
+  position:absolute;
+
+  z-index:5;
+
+  left:7%;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  width:min(680px,84%);
+
+}
+
+
+.badge{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:8px 15px;
+
+  margin-bottom:18px;
+
+  border:1px solid rgba(255,255,255,.4);
+
+  border-radius:30px;
+
+  background:rgba(255,255,255,.13);
+
+  backdrop-filter:blur(10px);
+
+  font-size:14px;
+
+}
+
+
+.slide-content h1{
+
+  font-size:clamp(42px,6vw,76px);
+
+  line-height:1.02;
+
+  letter-spacing:-2px;
+
+  margin-bottom:20px;
+
+}
+
+
+.slide-content p{
+
+  max-width:610px;
+
+  color:rgba(255,255,255,.88);
+
+  font-size:18px;
+
+  line-height:1.65;
+
+  margin-bottom:28px;
+
+}
+
+
+.hero-btn{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:14px 24px;
+
+  border:0;
+
+  border-radius:30px;
+
+  background:#fff;
+
+  color:#29152f;
+
+  font-weight:900;
+
+  transition:.25s;
+
+}
+
+
+.hero-btn:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+
+/* =========================
+   HERO BACKGROUNDS
+========================= */
+
+.slide:nth-child(1){
+
+  background-image:
+  url(
+    "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1900&q=85"
+  );
+
+}
+
+.slide:nth-child(2){
+
+  background-image:
+  url(
+    "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1900&q=85"
+  );
+
+}
+
+.slide:nth-child(3){
+
+  background-image:
+  url(
+    "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1900&q=85"
+  );
+
+}
+
+.slide:nth-child(4){
+
+  background-image:
+  url(
+    "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1900&q=85"
+  );
+
+}
+
+
+/* =========================
+   FLOATING PHOTOS
+========================= */
+
+.memory-orbit{
+
+  position:absolute;
+
+  z-index:7;
+
+  right:5%;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  width:390px;
+
+  height:390px;
+
+  pointer-events:none;
+
+}
+
+
+.memory-photo{
+
+  position:absolute;
+
+  width:84px;
+
+  height:84px;
+
+  padding:5px;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.3);
+
+  animation:
+    floating 5s ease-in-out infinite;
+
+}
+
+
+.memory-photo img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  border-radius:13px;
+
+}
+
+
+.photo1{
+
+  top:5px;
+
+  left:140px;
+
+  transform:rotate(-8deg);
+
+}
+
+
+.photo2{
+
+  top:95px;
+
+  right:0;
+
+  transform:rotate(8deg);
+
+  animation-delay:1s;
+
+}
+
+
+.photo3{
+
+  bottom:8px;
+
+  right:50px;
+
+  transform:rotate(-7deg);
+
+  animation-delay:2s;
+
+}
+
+
+.photo4{
+
+  bottom:25px;
+
+  left:30px;
+
+  transform:rotate(8deg);
+
+  animation-delay:3s;
+
+}
+
+
+.photo5{
+
+  top:150px;
+
+  left:0;
+
+  transform:rotate(-10deg);
+
+  animation-delay:4s;
+
+}
+
+
+@keyframes floating{
+
+  0%,100%{
+
+    translate:0 0;
+
+  }
+
+  50%{
+
+    translate:0 -10px;
+
+  }
+
+}
+
+
+/* =========================
+   DOTS
+========================= */
+
+.slider-controls{
+
+  position:absolute;
+
+  z-index:20;
+
+  bottom:32px;
+
+  left:7%;
+
+  display:flex;
+
+  gap:9px;
+
+}
+
+
+.dot{
+
+  width:9px;
+
+  height:9px;
+
+  border:0;
+
+  border-radius:20px;
+
+  background:rgba(255,255,255,.5);
+
+}
+
+
+.dot.active{
+
+  width:30px;
+
+  background:#fff;
+
+}
+
+
+/* =========================
+   WELCOME BAR
+========================= */
+
+.welcome{
+
+  width:min(1100px,90%);
+
+  margin:-45px auto 0;
+
+  position:relative;
+
+  z-index:30;
+
+}
+
+
+.welcome-box{
+
+  display:grid;
+
+  grid-template-columns:1.5fr 1fr 1fr;
+
+  gap:12px;
+
+  padding:18px;
+
+  border-radius:25px;
+
+  background:#fff;
+
+  box-shadow:
+    0 22px 55px rgba(60,20,70,.13);
+
+}
+
+
+.welcome-main{
+
+  padding:20px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff1f7,
+      #f8edff
+    );
+
+}
+
+
+.welcome-main h2{
+
+  font-size:23px;
+
+  margin-bottom:7px;
+
+}
+
+
+.welcome-main p{
+
+  color:#806f83;
+
+  font-size:14px;
+
+  line-height:1.5;
+
+}
+
+
+.welcome-card{
+
+  padding:20px;
+
+  border:1px solid #f0e4ef;
+
+  border-radius:18px;
+
+  transition:.25s;
+
+}
+
+
+.welcome-card:hover{
+
+  transform:translateY(-4px);
+
+}
+
+
+.welcome-card .icon{
+
+  font-size:27px;
+
+  margin-bottom:8px;
+
+}
+
+
+.welcome-card h3{
+
+  font-size:16px;
+
+  margin-bottom:4px;
+
+}
+
+
+.welcome-card p{
+
+  color:#8b7a8e;
+
+  font-size:13px;
+
+}
+
+
+/* =========================
+   COMPACT CONTENT
+========================= */
+
+.content{
+
+  width:min(1100px,90%);
+
+  margin:auto;
+
+  padding:60px 0;
+
+}
+
+
+.heading{
+
+  text-align:center;
+
+  margin-bottom:25px;
+
+}
+
+
+.heading .mini{
+
+  color:#d83b83;
+
+  font-size:12px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+
+}
+
+
+.heading h2{
+
+  font-size:clamp(29px,4vw,44px);
+
+  margin-top:8px;
+
+}
+
+
+.heading p{
+
+  color:#806f83;
+
+  margin-top:7px;
+
+}
+
+
+/* =========================
+   FEATURE PANEL
+========================= */
+
+.feature-panel{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr 1fr;
+
+  gap:14px;
+
+}
+
+
+.feature{
+
+  position:relative;
+
+  overflow:hidden;
+
+  min-height:180px;
+
+  padding:24px;
+
+  border-radius:22px;
+
+  color:#fff;
+
+  transition:.3s;
+
+}
+
+
+.feature:hover{
+
+  transform:translateY(-5px);
+
+}
+
+
+.feature:nth-child(1){
+
+  background:
+    linear-gradient(
+      135deg,
+      #7d2c73,
+      #d83b83
+    );
+
+}
+
+
+.feature:nth-child(2){
+
+  background:
+    linear-gradient(
+      135deg,
+      #351449,
+      #7138a8
+    );
+
+}
+
+
+.feature:nth-child(3){
+
+  background:
+    linear-gradient(
+      135deg,
+      #b73876,
+      #ff7a67
+    );
+
+}
+
+
+.feature-icon{
+
+  font-size:30px;
+
+  margin-bottom:12px;
+
+}
+
+
+.feature h3{
+
+  font-size:21px;
+
+  margin-bottom:7px;
+
+}
+
+
+.feature p{
+
+  color:rgba(255,255,255,.83);
+
+  font-size:14px;
+
+  line-height:1.5;
+
+}
+
+
+.feature button{
+
+  margin-top:15px;
+
+  border:0;
+
+  padding:9px 15px;
+
+  border-radius:20px;
+
+  background:#fff;
+
+  color:#4a1b58;
+
+  font-weight:800;
+
+}
+
+
+/* =========================
+   ACCORDION
+========================= */
+
+.accordion{
+
+  margin-top:35px;
+
+  border:1px solid #eee0ed;
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  background:#fff;
+
+}
+
+
+.accordion-item + .accordion-item{
+
+  border-top:1px solid #eee0ed;
+
+}
+
+
+.accordion-head{
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:20px 23px;
+
+  border:0;
+
+  background:#fff;
+
+  color:#24172b;
+
+  text-align:left;
+
+  font-weight:800;
+
+  font-size:17px;
+
+}
+
+
+.accordion-head span:last-child{
+
+  color:#d83b83;
+
+  font-size:22px;
+
+}
+
+
+.accordion-body{
+
+  display:none;
+
+  padding:0 23px 23px;
+
+}
+
+
+.accordion-item.open .accordion-body{
+
+  display:block;
+
+}
+
+
+/* =========================
+   OCCASIONS
+========================= */
+
+.occasion-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:12px;
+
+}
+
+
+.occasion{
+
+  padding:17px;
+
+  border:1px solid #f0e4ef;
+
+  border-radius:17px;
+
+  transition:.25s;
+
+}
+
+
+.occasion:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(50,20,60,.08);
+
+}
+
+
+.occasion-icon{
+
+  font-size:26px;
+
+  margin-bottom:7px;
+
+}
+
+
+.occasion h3{
+
+  font-size:16px;
+
+  margin-bottom:4px;
+
+}
+
+
+.occasion p{
+
+  color:#8b7a8e;
+
+  font-size:13px;
+
+}
+
+
+/* =========================
+   GIFT PANEL
+========================= */
+
+.gift-panel{
+
+  display:grid;
+
+  grid-template-columns:1.2fr .8fr;
+
+  align-items:center;
+
+  gap:30px;
+
+  padding:30px;
+
+  border-radius:25px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #351449,
+      #8c307a
+    );
+
+}
+
+
+.gift-panel h2{
+
+  font-size:clamp(28px,4vw,46px);
+
+  line-height:1.05;
+
+  margin-bottom:12px;
+
+}
+
+
+.gift-panel p{
+
+  color:rgba(255,255,255,.82);
+
+  line-height:1.6;
+
+  margin-bottom:20px;
+
+}
+
+
+.white-btn{
+
+  border:0;
+
+  padding:12px 20px;
+
+  border-radius:25px;
+
+  background:#fff;
+
+  color:#4a1b58;
+
+  font-weight:900;
+
+}
+
+
+.gift-box{
+
+  width:180px;
+
+  height:125px;
+
+  margin:auto;
+
+  position:relative;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff6ca8,
+      #ffb36b
+    );
+
+  box-shadow:
+    0 25px 45px rgba(0,0,0,.25);
+
+  transform:rotate(-6deg);
+
+}
+
+
+.gift-box::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+
+  top:0;
+
+  width:26px;
+
+  height:100%;
+
+  transform:translateX(-50%);
+
+  background:#ffe08a;
+
+}
+
+
+.gift-box::after{
+
+  content:"🎀";
+
+  position:absolute;
+
+  left:50%;
+
+  top:-42px;
+
+  transform:translateX(-50%);
+
+  font-size:55px;
+
+}
+
+
+/* =========================
+   PREMIUM
+========================= */
+
+.premium-panel{
+
+  padding:30px;
+
+  border-radius:25px;
+
+  background:#17101b;
+
+  color:#fff;
+
+}
+
+
+.premium-panel h2{
+
+  font-size:clamp(28px,4vw,45px);
+
+  margin-bottom:10px;
+
+}
+
+
+.premium-panel p{
+
+  max-width:700px;
+
+  color:#cfc5d2;
+
+  line-height:1.6;
+
+  margin-bottom:20px;
+
+}
+
+
+.premium-list{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:9px;
+
+  margin-bottom:20px;
+
+}
+
+
+.premium-list div{
+
+  padding:11px;
+
+  border-radius:12px;
+
+  background:rgba(255,255,255,.06);
+
+  color:#e8dfea;
+
+  font-size:13px;
+
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+
+  width:min(1100px,90%);
+
+  margin:0 auto 65px;
+
+  padding:55px 25px;
+
+  text-align:center;
+
+  border-radius:28px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff4d91,
+      #8f39d9
+    );
+
+  box-shadow:
+    0 25px 65px rgba(175,40,130,.2);
+
+}
+
+
+.cta h2{
+
+  font-size:clamp(30px,4vw,48px);
+
+  margin-bottom:12px;
+
+}
+
+
+.cta p{
+
+  max-width:650px;
+
+  margin:
+    0 auto 23px;
+
+  color:rgba(255,255,255,.86);
+
+  line-height:1.6;
+
+}
+
+
+.cta-btn{
+
+  border:0;
+
+  padding:14px 27px;
+
+  border-radius:30px;
+
+  background:#fff;
+
+  color:#4b195d;
+
+  font-weight:900;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+  padding:28px 20px;
+
+  text-align:center;
+
+  background:#100b13;
+
+  color:#897d8d;
+
+  font-size:13px;
+
 }
 
 
@@ -879,23 +1416,43 @@ footer{
    TABLET
 ========================= */
 
-@media(max-width:900px){
+@media(max-width:950px){
 
   .memory-orbit{
+
     right:0;
+
     transform:
       translateY(-50%)
-      scale(.75);
+      scale(.78);
 
-    opacity:.7;
+    opacity:.75;
+
   }
 
   .slide-content{
-    width:65%;
+
+    width:63%;
+
   }
 
-  .occasion-grid{
-    grid-template-columns:repeat(2,1fr);
+  .welcome-box{
+
+    grid-template-columns:1fr 1fr;
+
+  }
+
+  .welcome-main{
+
+    grid-column:1/-1;
+
+  }
+
+  .premium-list{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
   }
 
 }
@@ -908,26 +1465,34 @@ footer{
 @media(max-width:700px){
 
   .navbar{
+
     padding:15px 5%;
+
   }
 
   .logo{
+
     font-size:23px;
+
   }
 
-  .mobile-menu-btn{
+  .mobile-menu{
+
     display:block;
+
   }
 
   .nav-right{
+
     display:none;
 
     position:absolute;
 
     top:65px;
+
     right:5%;
 
-    width:220px;
+    width:235px;
 
     padding:12px;
 
@@ -935,131 +1500,214 @@ footer{
 
     background:rgba(30,10,40,.97);
 
-    box-shadow:0 15px 35px rgba(0,0,0,.25);
+    box-shadow:
+      0 18px 40px rgba(0,0,0,.3);
+
+    flex-direction:column;
+
+    align-items:stretch;
+
   }
 
-  .nav-right.mobile-open{
+  .nav-right.show{
+
     display:flex;
-    flex-direction:column;
-    align-items:stretch;
+
   }
 
   .nav-link,
   .dropdown-btn,
   .nav-btn{
+
     width:100%;
+
     text-align:center;
+
   }
 
   .dropdown-menu{
+
     position:static;
+
     width:100%;
+
     margin-top:7px;
+
     display:none;
+
   }
 
   .dropdown.open .dropdown-menu{
+
     display:block;
+
   }
 
   .hero{
-    min-height:650px;
+
+    min-height:670px;
+
   }
 
   .memory-orbit{
+
     top:115px;
+
     left:50%;
+
     right:auto;
 
     transform:
       translateX(-50%)
-      scale(.45);
+      scale(.46);
 
     opacity:.9;
+
   }
 
   .slide-content{
+
     left:5%;
-    top:56%;
+
+    top:57%;
 
     width:90%;
 
     text-align:center;
+
   }
 
   .slide-content h1{
+
     font-size:37px;
+
   }
 
   .slide-content p{
+
     font-size:14px;
+
   }
 
   .slider-controls{
+
     left:50%;
+
     transform:translateX(-50%);
-    bottom:23px;
+
+    bottom:24px;
+
   }
 
-  .quick-section{
+  .welcome{
+
     margin-top:-30px;
+
   }
 
-  .quick-box{
+  .welcome-box{
+
     grid-template-columns:1fr;
+
   }
 
-  .compact-section{
-    padding-top:45px;
+  .welcome-main{
+
+    grid-column:auto;
+
+  }
+
+  .content{
+
+    padding:48px 0;
+
+  }
+
+  .feature-panel{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .feature{
+
+    min-height:155px;
+
   }
 
   .occasion-grid{
+
     grid-template-columns:1fr 1fr;
+
   }
 
-  .gift-inner{
+  .gift-panel{
+
     grid-template-columns:1fr;
+
     text-align:center;
+
   }
 
   .premium-list{
-    grid-template-columns:1fr;
+
+    grid-template-columns:1fr 1fr;
+
   }
 
 }
 
 
 /* =========================
-   SMALL PHONE
+   SMALL PHONES
 ========================= */
 
 @media(max-width:430px){
 
   .hero{
-    min-height:630px;
+
+    min-height:650px;
+
   }
 
   .memory-orbit{
+
     top:105px;
+
     transform:
       translateX(-50%)
       scale(.38);
+
   }
 
   .slide-content{
-    top:57%;
+
+    top:58%;
+
   }
 
   .slide-content h1{
+
     font-size:32px;
+
   }
 
   .occasion-grid{
+
     grid-template-columns:1fr;
+
   }
 
-  .quick-card{
-    padding:16px;
+  .premium-list{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .cta{
+
+    padding:45px 20px;
+
   }
 
 }
@@ -1071,11 +1719,16 @@ footer{
 
 button:focus-visible,
 a:focus-visible{
-  outline:3px solid #ffd166;
+
+  outline:
+    3px solid #ffd166;
+
   outline-offset:3px;
+
 }
 
 </style>
+
 </head>
 
 
@@ -1088,24 +1741,35 @@ a:focus-visible{
 
 <nav class="navbar">
 
+
   <div class="logo">
+
     Wish<span>Now</span> ✨
+
   </div>
 
+
   <button
-    class="mobile-menu-btn"
-    onclick="toggleMobileMenu()"
-    aria-label="Open menu">
+    class="mobile-menu"
+    onclick="toggleMobileMenu()">
+
     ☰
+
   </button>
 
-  <div class="nav-right" id="navRight">
+
+  <div
+    class="nav-right"
+    id="navRight">
+
 
     <a
       href="#home"
       class="nav-link"
       onclick="closeMobileMenu()">
-      Home
+
+      🏠 Home
+
     </a>
 
 
@@ -1114,45 +1778,83 @@ a:focus-visible{
       <button
         class="dropdown-btn"
         onclick="toggleDropdown(this)">
-        Explore ▾
+
+        🎉 Occasions ▾
+
       </button>
+
 
       <div class="dropdown-menu">
 
-        <button onclick="openWish('Birthday')">
+        <button
+          onclick="openWish('Birthday')">
+
           🎂 Birthday
+
         </button>
 
-        <button onclick="openWish('Anniversary')">
+
+        <button
+          onclick="openWish('Anniversary')">
+
           💍 Anniversary
+
         </button>
 
-        <button onclick="openWish('Raksha Bandhan')">
+
+        <button
+          onclick="openWish('Raksha Bandhan')">
+
           🪢 Raksha Bandhan
+
         </button>
 
-        <button onclick="openWish('Durga Puja')">
+
+        <button
+          onclick="openWish('Durga Puja')">
+
           🪔 Durga Puja
+
         </button>
 
-        <button onclick="openWish('Diwali')">
+
+        <button
+          onclick="openWish('Diwali')">
+
           ✨ Diwali
+
         </button>
 
-        <button onclick="openWish('Eid')">
+
+        <button
+          onclick="openWish('Eid')">
+
           🌙 Eid
+
         </button>
 
-        <button onclick="openWish('Christmas')">
+
+        <button
+          onclick="openWish('Christmas')">
+
           🎄 Christmas
+
         </button>
 
-        <button onclick="openWish('Friendship Day')">
+
+        <button
+          onclick="openWish('Friendship Day')">
+
           🤝 Friendship Day
+
         </button>
 
-        <button onclick="openWish('Valentines Day')">
+
+        <button
+          onclick="openWish('Valentines Day')">
+
           ❤️ Valentine's Day
+
         </button>
 
       </div>
@@ -1165,21 +1867,35 @@ a:focus-visible{
       <button
         class="dropdown-btn"
         onclick="toggleDropdown(this)">
-        More ▾
+
+        ✨ More ▾
+
       </button>
+
 
       <div class="dropdown-menu">
 
-        <button onclick="toggleAccordion('gifts')">
+        <button
+          onclick="openSection('gifts')">
+
           🎁 Gift Cards
+
         </button>
 
-        <button onclick="toggleAccordion('premium')">
+
+        <button
+          onclick="openSection('premium')">
+
           💎 Premium
+
         </button>
 
-        <button onclick="scrollToCreate()">
-          ✨ Create Wish
+
+        <button
+          onclick="scrollToCreate()">
+
+          💖 Create Your Wish
+
         </button>
 
       </div>
@@ -1190,8 +1906,11 @@ a:focus-visible{
     <button
       class="nav-btn"
       onclick="openWish()">
-      Create a Wish
+
+      💖 Create a Wish
+
     </button>
+
 
   </div>
 
@@ -1212,22 +1931,33 @@ a:focus-visible{
     <div class="slide-content">
 
       <div class="badge">
+
         🎂 Birthday Moments
+
       </div>
 
+
       <h1>
+
         Make Every Birthday Feel Extraordinary
+
       </h1>
 
+
       <p>
+
         Create a beautiful personalized wish and turn
         an ordinary message into a memory they will love.
+
       </p>
+
 
       <button
         class="hero-btn"
         onclick="openWish('Birthday')">
-        Create Birthday Wish →
+
+        💖 Create Birthday Wish →
+
       </button>
 
     </div>
@@ -1240,22 +1970,33 @@ a:focus-visible{
     <div class="slide-content">
 
       <div class="badge">
+
         💍 Beautiful Memories
+
       </div>
 
+
       <h1>
+
         Turn Special Moments Into Memories
+
       </h1>
 
+
       <p>
+
         Celebrate love, friendship and the moments
         you never want to forget.
+
       </p>
+
 
       <button
         class="hero-btn"
         onclick="openWish('Anniversary')">
-        Create Something Special →
+
+        💖 Create Something Special →
+
       </button>
 
     </div>
@@ -1268,22 +2009,33 @@ a:focus-visible{
     <div class="slide-content">
 
       <div class="badge">
+
         🎉 Festivals & Celebrations
+
       </div>
 
+
       <h1>
+
         Share Happiness With Everyone
+
       </h1>
 
+
       <p>
+
         Create beautiful wishes for festivals,
         family celebrations and every meaningful occasion.
+
       </p>
+
 
       <button
         class="hero-btn"
-        onclick="toggleAccordion('occasions')">
-        Explore Occasions →
+        onclick="openSection('occasions')">
+
+        🎉 Explore Occasions →
+
       </button>
 
     </div>
@@ -1296,22 +2048,33 @@ a:focus-visible{
     <div class="slide-content">
 
       <div class="badge">
-        🎥 Premium Experience
+
+        💎 Premium Experience
+
       </div>
 
+
       <h1>
+
         Say More Than Just Happy Birthday
+
       </h1>
 
+
       <p>
+
         Discover premium templates, personalized
         video wishes and exclusive experiences.
+
       </p>
+
 
       <button
         class="hero-btn"
-        onclick="toggleAccordion('premium')">
-        Discover Premium →
+        onclick="openSection('premium')">
+
+        💎 Discover Premium →
+
       </button>
 
     </div>
@@ -1323,34 +2086,49 @@ a:focus-visible{
 
   <div class="memory-orbit">
 
+
     <div class="memory-photo photo1">
+
       <img
         src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=300&q=80"
         alt="Birthday celebration">
+
     </div>
 
+
     <div class="memory-photo photo2">
+
       <img
         src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=300&q=80"
         alt="Beautiful memories">
+
     </div>
 
+
     <div class="memory-photo photo3">
+
       <img
         src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=300&q=80"
         alt="Celebration">
+
     </div>
 
+
     <div class="memory-photo photo4">
+
       <img
         src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=300&q=80"
         alt="Festival celebration">
+
     </div>
 
+
     <div class="memory-photo photo5">
+
       <img
         src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=300&q=80"
         alt="Special moment">
+
     </div>
 
   </div>
@@ -1360,29 +2138,30 @@ a:focus-visible{
 
   <div class="slider-controls">
 
+
     <button
       class="dot active"
-      onclick="showSlide(0)"
-      aria-label="Slide 1">
+      onclick="showSlide(0)">
     </button>
+
 
     <button
       class="dot"
-      onclick="showSlide(1)"
-      aria-label="Slide 2">
+      onclick="showSlide(1)">
     </button>
+
 
     <button
       class="dot"
-      onclick="showSlide(2)"
-      aria-label="Slide 3">
+      onclick="showSlide(2)">
     </button>
+
 
     <button
       class="dot"
-      onclick="showSlide(3)"
-      aria-label="Slide 4">
+      onclick="showSlide(3)">
     </button>
+
 
   </div>
 
@@ -1390,62 +2169,71 @@ a:focus-visible{
 
 
 <!-- =========================
-     QUICK ACTIONS
+     WELCOME BAR
 ========================= -->
 
-<section class="quick-section">
+<section class="welcome">
 
-  <div class="quick-box">
 
-    <div
-      class="quick-card"
-      onclick="openWish('Birthday')">
+  <div class="welcome-box">
 
-      <div class="quick-icon">🎂</div>
 
-      <h3>
-        Birthday Wishes
-      </h3>
+    <div class="welcome-main">
+
+      <h2>
+
+        ✨ Make Someone Smile Today
+
+      </h2>
+
 
       <p>
-        Create a beautiful birthday message.
+
+        Choose a special occasion and create
+        a beautiful personalized wish in seconds.
+
       </p>
 
     </div>
 
 
     <div
-      class="quick-card"
+      class="welcome-card"
+      onclick="openWish('Birthday')">
+
+      <div class="icon">
+        🎂
+      </div>
+
+      <h3>
+        Birthday
+      </h3>
+
+      <p>
+        Create a memorable birthday wish.
+      </p>
+
+    </div>
+
+
+    <div
+      class="welcome-card"
       onclick="openWish('Anniversary')">
 
-      <div class="quick-icon">💍</div>
+      <div class="icon">
+        💍
+      </div>
 
       <h3>
         Anniversary
       </h3>
 
       <p>
-        Celebrate a beautiful relationship.
+        Celebrate beautiful memories.
       </p>
 
     </div>
 
-
-    <div
-      class="quick-card"
-      onclick="scrollToCreate()">
-
-      <div class="quick-icon">✨</div>
-
-      <h3>
-        Create Your Wish
-      </h3>
-
-      <p>
-        Make your own personalized wish.
-      </p>
-
-    </div>
 
   </div>
 
@@ -1453,37 +2241,127 @@ a:focus-visible{
 
 
 <!-- =========================
-     OCCASIONS
+     FEATURES
 ========================= -->
 
-<section
-  class="compact-section"
-  id="occasions">
+<section class="content">
 
-  <div class="section-title">
+
+  <div class="heading">
 
     <span class="mini">
-      Popular occasions
+      Why WishNow
     </span>
 
+
     <h2>
-      Celebrate Every Special Moment
+      Make Every Moment Special
     </h2>
 
+
     <p>
-      Open the section to explore occasions.
+      Everything you need to create a memorable wish.
     </p>
 
   </div>
 
 
-  <div class="accordion">
+  <div class="feature-panel">
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        ✨
+      </div>
+
+      <h3>
+        Create Beautiful Wishes
+      </h3>
+
+      <p>
+        Personalize your message and make
+        someone feel truly special.
+      </p>
+
+      <button
+        onclick="openWish()">
+
+        Create Wish →
+
+      </button>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        🎉
+      </div>
+
+      <h3>
+        Every Occasion
+      </h3>
+
+      <p>
+        Birthday, anniversary, festivals,
+        friendship and more.
+      </p>
+
+      <button
+        onclick="openSection('occasions')">
+
+        View Occasions →
+
+      </button>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        🎁
+      </div>
+
+      <h3>
+        Gifts & Memories
+      </h3>
+
+      <p>
+        Discover gifts and create memories
+        that last longer.
+      </p>
+
+      <button
+        onclick="openSection('gifts')">
+
+        Explore Gifts →
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =========================
+       OCCASIONS ACCORDION
+  ========================= -->
+
+  <div
+    class="accordion"
+    id="occasions">
+
 
     <div class="accordion-item">
 
+
       <button
-        class="accordion-header"
-        onclick="toggleItem(this)">
+        class="accordion-head"
+        onclick="toggleAccordion(this)">
 
         <span>
           🎉 Explore All Occasions
@@ -1496,17 +2374,23 @@ a:focus-visible{
       </button>
 
 
-      <div class="accordion-content">
+      <div class="accordion-body">
+
 
         <div class="occasion-grid">
+
 
           <div
             class="occasion"
             onclick="openWish('Birthday')">
 
-            <div class="occasion-icon">🎂</div>
+            <div class="occasion-icon">
+              🎂
+            </div>
 
-            <h3>Birthday</h3>
+            <h3>
+              Birthday
+            </h3>
 
             <p>
               Make someone's birthday memorable.
@@ -1519,9 +2403,13 @@ a:focus-visible{
             class="occasion"
             onclick="openWish('Anniversary')">
 
-            <div class="occasion-icon">💍</div>
+            <div class="occasion-icon">
+              💍
+            </div>
 
-            <h3>Anniversary</h3>
+            <h3>
+              Anniversary
+            </h3>
 
             <p>
               Celebrate love and memories.
@@ -1534,9 +2422,13 @@ a:focus-visible{
             class="occasion"
             onclick="openWish('Raksha Bandhan')">
 
-            <div class="occasion-icon">🪢</div>
+            <div class="occasion-icon">
+              🪢
+            </div>
 
-            <h3>Raksha Bandhan</h3>
+            <h3>
+              Raksha Bandhan
+            </h3>
 
             <p>
               Celebrate sibling love.
@@ -1549,9 +2441,13 @@ a:focus-visible{
             class="occasion"
             onclick="openWish('Durga Puja')">
 
-            <div class="occasion-icon">🪔</div>
+            <div class="occasion-icon">
+              🪔
+            </div>
 
-            <h3>Durga Puja</h3>
+            <h3>
+              Durga Puja
+            </h3>
 
             <p>
               Share festive happiness.
@@ -1564,9 +2460,13 @@ a:focus-visible{
             class="occasion"
             onclick="openWish('Diwali')">
 
-            <div class="occasion-icon">✨</div>
+            <div class="occasion-icon">
+              ✨
+            </div>
 
-            <h3>Diwali</h3>
+            <h3>
+              Diwali
+            </h3>
 
             <p>
               Spread light and happiness.
@@ -1579,9 +2479,13 @@ a:focus-visible{
             class="occasion"
             onclick="openWish('Eid')">
 
-            <div class="occasion-icon">🌙</div>
+            <div class="occasion-icon">
+              🌙
+            </div>
 
-            <h3>Eid</h3>
+            <h3>
+              Eid
+            </h3>
 
             <p>
               Send beautiful wishes.
@@ -1594,9 +2498,13 @@ a:focus-visible{
             class="occasion"
             onclick="openWish('Christmas')">
 
-            <div class="occasion-icon">🎄</div>
+            <div class="occasion-icon">
+              🎄
+            </div>
 
-            <h3>Christmas</h3>
+            <h3>
+              Christmas
+            </h3>
 
             <p>
               Share festive joy.
@@ -1609,9 +2517,13 @@ a:focus-visible{
             class="occasion"
             onclick="openWish('Friendship Day')">
 
-            <div class="occasion-icon">🤝</div>
+            <div class="occasion-icon">
+              🤝
+            </div>
 
-            <h3>Friendship Day</h3>
+            <h3>
+              Friendship Day
+            </h3>
 
             <p>
               Celebrate true friendship.
@@ -1624,9 +2536,13 @@ a:focus-visible{
             class="occasion"
             onclick="openWish('Valentines Day')">
 
-            <div class="occasion-icon">❤️</div>
+            <div class="occasion-icon">
+              ❤️
+            </div>
 
-            <h3>Valentine's Day</h3>
+            <h3>
+              Valentine's Day
+            </h3>
 
             <p>
               Share a heartfelt wish.
@@ -1634,6 +2550,7 @@ a:focus-visible{
 
           </div>
 
+
         </div>
 
       </div>
@@ -1642,40 +2559,25 @@ a:focus-visible{
 
   </div>
 
-</section>
 
+  <!-- =========================
+       GIFTS
+  ========================= -->
 
-<!-- =========================
-     GIFTS
-========================= -->
+  <div
+    class="accordion"
+    id="gifts">
 
-<section
-  class="compact-section"
-  id="gifts">
-
-  <div class="section-title">
-
-    <span class="mini">
-      WishNow Gifts
-    </span>
-
-    <h2>
-      Give Someone a Moment They'll Remember
-    </h2>
-
-  </div>
-
-
-  <div class="accordion">
 
     <div class="accordion-item">
 
+
       <button
-        class="accordion-header"
-        onclick="toggleItem(this)">
+        class="accordion-head"
+        onclick="toggleAccordion(this)">
 
         <span>
-          🎁 Explore WishNow Gift Cards
+          🎁 WishNow Gift Cards
         </span>
 
         <span>
@@ -1685,35 +2587,42 @@ a:focus-visible{
       </button>
 
 
-      <div class="accordion-content">
+      <div class="accordion-body">
 
-        <div class="gift-inner">
+
+        <div class="gift-panel">
+
 
           <div>
 
             <h2>
-              A Gift Made For Special Moments
+              Give a Moment They'll Remember
             </h2>
+
 
             <p>
               Give someone a beautiful WishNow gift card
               and make their special day even more meaningful.
             </p>
 
+
             <button
               class="white-btn"
               onclick="openGiftCard()">
+
               Explore Gift Cards →
+
             </button>
 
           </div>
 
 
-          <div class="gift-visual">
+          <div>
 
             <div class="gift-box"></div>
 
           </div>
+
 
         </div>
 
@@ -1723,40 +2632,25 @@ a:focus-visible{
 
   </div>
 
-</section>
 
+  <!-- =========================
+       PREMIUM
+  ========================= -->
 
-<!-- =========================
-     PREMIUM
-========================= -->
+  <div
+    class="accordion"
+    id="premium">
 
-<section
-  class="compact-section"
-  id="premium">
-
-  <div class="section-title">
-
-    <span class="mini">
-      WishNow Premium
-    </span>
-
-    <h2>
-      More Than a Wish
-    </h2>
-
-  </div>
-
-
-  <div class="accordion">
 
     <div class="accordion-item">
 
+
       <button
-        class="accordion-header"
-        onclick="toggleItem(this)">
+        class="accordion-head"
+        onclick="toggleAccordion(this)">
 
         <span>
-          💎 Discover Premium Features
+          💎 WishNow Premium
         </span>
 
         <span>
@@ -1766,38 +2660,68 @@ a:focus-visible{
       </button>
 
 
-      <div class="accordion-content">
+      <div class="accordion-body">
 
-        <div class="premium-box">
+
+        <div class="premium-panel">
+
 
           <h2>
-            Your Own WishNow Experience
+            More Than a Wish. Your Own Experience.
           </h2>
 
+
           <p>
+
             Premium members will get their own profile,
             saved wishes, gift tracking, exclusive discounts,
             premium templates and more.
+
           </p>
 
 
           <div class="premium-list">
 
-            <div>💎 Premium Profile</div>
 
-            <div>🎁 My Gifts</div>
+            <div>
+              💎 Premium Profile
+            </div>
 
-            <div>📦 Gift Tracking</div>
 
-            <div>❤️ Saved Wishes</div>
+            <div>
+              🎁 My Gifts
+            </div>
 
-            <div>📅 Occasion Reminders</div>
 
-            <div>🎟️ Exclusive Discounts</div>
+            <div>
+              📦 Gift Tracking
+            </div>
 
-            <div>🎬 Premium Video Wishes</div>
 
-            <div>⭐ Favourite Gifts</div>
+            <div>
+              ❤️ Saved Wishes
+            </div>
+
+
+            <div>
+              📅 Occasion Reminders
+            </div>
+
+
+            <div>
+              🎟️ Exclusive Discounts
+            </div>
+
+
+            <div>
+              🎬 Premium Video Wishes
+            </div>
+
+
+            <div>
+              ⭐ Favourite Gifts
+            </div>
+
 
           </div>
 
@@ -1805,8 +2729,11 @@ a:focus-visible{
           <button
             class="white-btn"
             onclick="premiumInfo()">
-            Discover Premium →
+
+            💎 Discover Premium →
+
           </button>
+
 
         </div>
 
@@ -1820,29 +2747,37 @@ a:focus-visible{
 
 
 <!-- =========================
-     CREATE WISH
+     CTA
 ========================= -->
 
 <section
-  class="create"
+  class="cta"
   id="create">
 
+
   <h2>
-    Your Moment. Your Words. Your Wish. ✨
+
+    Your Moment. Your Words. Your Wish. 💖
+
   </h2>
 
+
   <p>
+
     Choose an occasion, add your message and create
     something special in just a few steps.
+
   </p>
 
+
   <button
-    class="create-btn"
+    class="cta-btn"
     onclick="openWish()">
 
-    ✨ Create Your Wish
+    💖 Create Your Wish
 
   </button>
+
 
 </section>
 
@@ -1876,14 +2811,21 @@ const dots =
 function showSlide(index){
 
   slides.forEach(slide => {
+
     slide.classList.remove("active");
+
   });
+
 
   dots.forEach(dot => {
+
     dot.classList.remove("active");
+
   });
 
+
   slides[index].classList.add("active");
+
   dots[index].classList.add("active");
 
   currentSlide = index;
@@ -1896,7 +2838,9 @@ function nextSlide(){
   currentSlide++;
 
   if(currentSlide >= slides.length){
+
     currentSlide = 0;
+
   }
 
   showSlide(currentSlide);
@@ -1908,10 +2852,12 @@ setInterval(nextSlide,5000);
 
 
 /* =========================
-   WISH CREATOR
+   OPEN WISH
 ========================= */
 
 function openWish(occasion){
+
+  closeMobileMenu();
 
   if(occasion){
 
@@ -1943,85 +2889,112 @@ function toggleDropdown(button){
     .forEach(item => {
 
       if(item !== dropdown){
+
         item.classList.remove("open");
+
       }
 
     });
+
 
   dropdown.classList.toggle("open");
 
 }
 
 
-document.addEventListener("click",function(event){
+document.addEventListener(
+  "click",
+  function(event){
 
-  if(!event.target.closest(".dropdown")){
+    if(!event.target.closest(".dropdown")){
 
-    document
-      .querySelectorAll(".dropdown")
-      .forEach(item => {
-        item.classList.remove("open");
-      });
+      document
+        .querySelectorAll(".dropdown")
+        .forEach(item => {
+
+          item.classList.remove("open");
+
+        });
+
+    }
 
   }
-
-});
+);
 
 
 /* =========================
    ACCORDION
 ========================= */
 
-function toggleItem(button){
+function toggleAccordion(button){
 
   const item =
     button.parentElement;
 
-  const wasOpen =
+  const icon =
+    button.querySelector(
+      "span:last-child"
+    );
+
+  const isOpen =
     item.classList.contains("open");
+
 
   item.classList.toggle("open");
 
-  const icon =
-    button.querySelector("span:last-child");
 
   if(icon){
+
     icon.textContent =
-      wasOpen ? "+" : "−";
+      isOpen ? "+" : "−";
+
   }
 
 }
 
 
 /* =========================
-   OPEN SPECIFIC ACCORDION
+   OPEN SECTION
 ========================= */
 
-function toggleAccordion(id){
+function openSection(id){
+
+  closeMobileMenu();
 
   const section =
     document.getElementById(id);
 
   if(!section){
+
     return;
+
   }
 
+
   section.scrollIntoView({
+
     behavior:"smooth",
+
     block:"center"
+
   });
 
-  const item =
-    section.querySelector(".accordion-item");
 
-  if(item){
+  const item =
+    section.querySelector(
+      ".accordion-item"
+    );
+
+
+  if(item &&
+     !item.classList.contains("open")){
 
     const button =
-      item.querySelector(".accordion-header");
+      item.querySelector(
+        ".accordion-head"
+      );
 
-    if(!item.classList.contains("open")){
-      toggleItem(button);
-    }
+    toggleAccordion(button);
 
   }
 
@@ -2029,10 +3002,12 @@ function toggleAccordion(id){
 
 
 /* =========================
-   CREATE SECTION
+   CREATE
 ========================= */
 
 function scrollToCreate(){
+
+  closeMobileMenu();
 
   const section =
     document.getElementById("create");
@@ -2040,12 +3015,12 @@ function scrollToCreate(){
   if(section){
 
     section.scrollIntoView({
+
       behavior:"smooth"
+
     });
 
   }
-
-  closeMobileMenu();
 
 }
 
@@ -2057,8 +3032,11 @@ function scrollToCreate(){
 function openGiftCard(){
 
   alert(
+
     "🎁 WishNow Gift Card\n\n" +
-    "Gift Card system will be connected in the next step."
+
+    "Gift Card system will be connected soon."
+
   );
 
 }
@@ -2070,7 +3048,13 @@ function openGiftCard(){
 
 function premiumInfo(){
 
-  toggleAccordion("premium");
+  alert(
+
+    "💎 WishNow Premium\n\n" +
+
+    "Premium subscription system will be connected soon."
+
+  );
 
 }
 
@@ -2081,37 +3065,31 @@ function premiumInfo(){
 
 function toggleMobileMenu(){
 
-  const nav =
+  const menu =
     document.getElementById("navRight");
 
-  nav.classList.toggle("mobile-open");
+  menu.classList.toggle("show");
 
 }
 
 
 function closeMobileMenu(){
 
-  const nav =
+  const menu =
     document.getElementById("navRight");
 
-  if(nav){
-    nav.classList.remove("mobile-open");
+  if(menu){
+
+    menu.classList.remove("show");
+
   }
 
 }
 
-
-/* =========================
-   CLOSE MOBILE MENU
-========================= */
-
-document.querySelectorAll(".nav-right a").forEach(link => {
-
-  link.addEventListener("click",closeMobileMenu);
-
-});
-
 </script>
 
+
 </body>
+
 </html>
+```
