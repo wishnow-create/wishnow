@@ -64,8 +64,29 @@ a{
 
 .nav-actions{
   display:flex;
-  gap:10px;
+  gap:8px;
   align-items:center;
+}
+
+/* NEW RIGHT NAVIGATION */
+
+.nav-link{
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+
+  padding:9px 14px;
+  border-radius:25px;
+
+  cursor:pointer;
+  backdrop-filter:blur(12px);
+
+  transition:.25s;
+}
+
+.nav-link:hover{
+  background:#fff;
+  color:#24172b;
 }
 
 .nav-btn{
@@ -911,6 +932,11 @@ footer{
   .premium-inner{
     grid-template-columns:1fr;
   }
+
+  .nav-link{
+    padding:8px 11px;
+    font-size:13px;
+  }
 }
 
 @media(max-width:720px){
@@ -921,6 +947,18 @@ footer{
 
   .logo{
     font-size:23px;
+  }
+
+  .nav-actions{
+    gap:5px;
+  }
+
+  .nav-link{
+    display:none;
+  }
+
+  .nav-link.mobile-visible{
+    display:block;
   }
 
   .nav-btn{
@@ -1061,9 +1099,33 @@ footer{
   </div>
 
   <div class="nav-actions">
+
+    <!-- NEW RIGHT CORNER OPTIONS -->
+
+    <a href="#" class="nav-link">
+      Home
+    </a>
+
+    <a href="#occasions" class="nav-link">
+      Occasions
+    </a>
+
+    <a href="#gifts" class="nav-link">
+      Gifts
+    </a>
+
+    <a href="#premium" class="nav-link">
+      Premium
+    </a>
+
+    <button class="nav-link" onclick="premiumLogin()">
+      Login
+    </button>
+
     <button class="nav-btn" onclick="createWish()">
       Create a Wish
     </button>
+
   </div>
 
 </nav>
@@ -1384,7 +1446,7 @@ footer{
      GIFTS + DISCOUNT
 ========================= -->
 
-<section class="section">
+<section class="section" id="gifts">
 
   <div class="section-heading">
 
@@ -1743,6 +1805,20 @@ function premiumInfo(){
   alert(
     "💎 WishNow Premium\n\n" +
     "Premium subscription and login will be connected in Step 6."
+  );
+
+}
+
+
+/* =========================
+   PREMIUM LOGIN
+========================= */
+
+function premiumLogin(){
+
+  alert(
+    "💎 Premium Login\n\n" +
+    "Only WishNow Premium subscribers will be able to login and access their personal profile."
   );
 
 }
