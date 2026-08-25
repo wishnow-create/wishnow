@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>WishNow — Your Special Wish ❤️</title>
@@ -25,14 +24,12 @@ body{
     background:
         radial-gradient(circle at top,#fff0f7,#faf7fc 50%,#f3ecf8);
     color:#29172f;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     padding:25px;
 }
 
 .container{
     width:min(760px,100%);
+    margin:auto;
 }
 
 .logo{
@@ -80,9 +77,7 @@ body{
     padding:30px;
 }
 
-/* =========================
-   LOCK SCREEN
-========================= */
+/* LOCK */
 
 .lock-box{
     padding:25px;
@@ -145,9 +140,7 @@ body{
     line-height:1.6;
 }
 
-/* =========================
-   SECRET WISH
-========================= */
+/* SECRET WISH */
 
 .secret-wish{
     display:none;
@@ -183,6 +176,35 @@ body{
     font-size:18px;
 }
 
+/* ACTION BUTTONS */
+
+.action-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:20px;
+}
+
+.action-btn{
+    border:0;
+    padding:15px;
+    border-radius:28px;
+    font-weight:900;
+    text-decoration:none;
+    text-align:center;
+    display:block;
+}
+
+.home-btn{
+    background:#eee8f0;
+    color:#4c3155;
+}
+
+.create-btn{
+    background:linear-gradient(135deg,#ff4d91,#8d3bd4);
+    color:#fff;
+}
+
 .footer{
     text-align:center;
     margin-top:20px;
@@ -212,12 +234,14 @@ body{
         border-radius:23px;
     }
 
+    .action-buttons{
+        grid-template-columns:1fr;
+    }
 }
 
 </style>
 
 </head>
-
 
 <body>
 
@@ -227,14 +251,13 @@ body{
     Wish<span>Now</span> ✨
 </div>
 
-
 <div class="card">
 
     <!-- HEADER -->
 
     <div class="header">
 
-        <div class="icon">🔐</div>
+        <div class="icon" id="headerIcon">🔐</div>
 
         <h1 id="wishTitle">
             A Secret Wish ❤️
@@ -265,12 +288,13 @@ body{
                 Someone has created a special surprise for you.
                 Answer these 3 questions correctly to unlock it.
                 <br><br>
-                You need <strong>40 out of 60 marks</strong>
-                to reveal the Wish.
+
+                You need
+                <strong>40 out of 60 marks</strong>
+                to unlock the Wish.
             </p>
 
             <div id="questionsContainer"></div>
-
 
             <button
                 id="unlockButton"
@@ -279,7 +303,6 @@ body{
             >
                 🔓 Unlock My Wish
             </button>
-
 
             <div
                 id="result"
@@ -291,7 +314,6 @@ body{
 
         <!-- =========================
              SECRET WISH
-             HIDDEN UNTIL PASS
         ========================== -->
 
         <div
@@ -303,26 +325,43 @@ body{
                 🎉 Congratulations! Your Wish is unlocked! 💌
             </div>
 
-
             <img
                 id="wishPhoto"
                 class="photo"
                 alt="Wish photo"
             >
 
-
             <div
                 id="wishMessage"
                 class="message"
             ></div>
 
-        </div>
 
+            <!-- ACTION BUTTONS -->
+
+            <div class="action-buttons">
+
+                <a
+                    href="index.html"
+                    class="action-btn home-btn"
+                >
+                    🏠 Home
+                </a>
+
+                <a
+                    href="wish.html"
+                    class="action-btn create-btn"
+                >
+                    ✨ Create Your Own Wish
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
 
 </div>
-
 
 <div class="footer">
     © 2026 WishNow — Make Every Moment Special. 🎁
@@ -351,7 +390,7 @@ supabase.createClient(
 
 
 /* ================================
-   URL DATA
+   URL
 ================================ */
 
 const params =
@@ -380,6 +419,7 @@ async function loadWish(){
     const lockBox =
         document.getElementById("lockBox");
 
+
     if(!wishId){
 
         document.getElementById("wishTitle")
@@ -400,7 +440,10 @@ async function loadWish(){
 
         /* GET WISH */
 
-        const { data: wish, error: wishError } =
+        const {
+            data: wish,
+            error: wishError
+        } =
             await supabaseClient
             .from("wishes")
             .select("*")
@@ -428,7 +471,7 @@ async function loadWish(){
 
 
         /* =========================
-           EXPIRY CHECK
+           EXPIRY
         ========================= */
 
         if(
@@ -451,8 +494,19 @@ async function loadWish(){
 
 
         /* =========================
-           HEADER ONLY
-           DO NOT SHOW MESSAGE/PHOTO
+           ALREADY UNLOCKED
+        ========================= */
+
+        if(wish.unlocked === true){
+
+            showSecretWish();
+
+            return;
+        }
+
+
+        /* =========================
+           LOCKED HEADER
         ========================= */
 
         document.getElementById("wishTitle")
@@ -468,7 +522,7 @@ async function loadWish(){
 
 
         /* =========================
-           GET QUESTIONS
+           QUESTIONS
         ========================= */
 
         const {
@@ -511,7 +565,7 @@ async function loadWish(){
 
 
 /* ================================
-   RENDER QUESTIONS
+   QUESTIONS
 ================================ */
 
 function renderQuestions(){
@@ -655,11 +709,11 @@ async function checkAnswers(){
             <br>
             You scored ${score}/60.
             <br><br>
-            🔓 Unlocking your special Wish...
+            🔓 Your Wish is unlocking...
         `;
 
 
-        /* SAVE UNLOCK */
+        /* UPDATE DATABASE */
 
         const {
             error:updateError
@@ -686,8 +740,6 @@ async function checkAnswers(){
             return;
         }
 
-
-        /* SHOW SECRET WISH */
 
         setTimeout(
             showSecretWish,
@@ -733,15 +785,7 @@ function showSecretWish(){
         return;
 
 
-    const secretWish =
-        document.getElementById(
-            "secretWish"
-        );
-
-
-    /* =========================
-       MESSAGE
-    ========================= */
+    /* MESSAGE */
 
     document.getElementById(
         "wishMessage"
@@ -749,9 +793,7 @@ function showSecretWish(){
         wishData.message || "";
 
 
-    /* =========================
-       PHOTO
-    ========================= */
+    /* PHOTO */
 
     const photo =
         document.getElementById(
@@ -775,11 +817,11 @@ function showSecretWish(){
     }
 
 
-    /* =========================
-       SHOW WISH
-    ========================= */
+    /* SHOW */
 
-    secretWish.style.display =
+    document.getElementById(
+        "secretWish"
+    ).style.display =
         "block";
 
 
@@ -790,10 +832,10 @@ function showSecretWish(){
     ).classList.add("hidden");
 
 
-    /* CHANGE HEADER */
+    /* HEADER */
 
-    document.querySelector(
-        ".header .icon"
+    document.getElementById(
+        "headerIcon"
     ).textContent =
         "💌";
 
@@ -816,24 +858,11 @@ function showSecretWish(){
         " • " +
         wishData.template;
 
-
-    /* SCROLL TO WISH */
-
-    setTimeout(
-        ()=>{
-            secretWish.scrollIntoView({
-                behavior:"smooth",
-                block:"start"
-            });
-        },
-        100
-    );
-
 }
 
 
 /* ================================
-   HTML ESCAPE
+   ESCAPE
 ================================ */
 
 function escapeHtml(text){
@@ -857,4 +886,5 @@ loadWish();
 </script>
 
 </body>
+
 </html>
