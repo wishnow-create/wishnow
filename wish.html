@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,15 @@ content="Create a beautiful personalized WishNow surprise with a private WishLoc
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-html{scroll-behavior:smooth}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     font-family:Inter,Arial,sans-serif;
@@ -23,9 +30,17 @@ body{
     overflow-x:hidden;
 }
 
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none}
+button,input,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+}
 
 .navbar{
     position:sticky;
@@ -35,7 +50,7 @@ a{text-decoration:none}
     align-items:center;
     justify-content:space-between;
     padding:17px 6%;
-    background:rgba(255,255,255,.9);
+    background:rgba(255,255,255,.88);
     backdrop-filter:blur(18px);
     border-bottom:1px solid #eee3f0;
 }
@@ -46,7 +61,9 @@ a{text-decoration:none}
     color:#351449;
 }
 
-.logo span{color:#e83f91}
+.logo span{
+    color:#e83f91;
+}
 
 .back-btn{
     padding:9px 17px;
@@ -122,7 +139,9 @@ a{text-decoration:none}
     color:#fff;
 }
 
-.progress-item.active{color:#8d3bd4}
+.progress-item.active{
+    color:#8d3bd4;
+}
 
 .creator{
     width:min(1000px,92%);
@@ -134,11 +153,19 @@ a{text-decoration:none}
     animation:fadeUp .35s ease;
 }
 
-.step.active{display:block}
+.step.active{
+    display:block;
+}
 
 @keyframes fadeUp{
-    from{opacity:0;transform:translateY(12px)}
-    to{opacity:1;transform:translateY(0)}
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .card{
@@ -149,7 +176,9 @@ a{text-decoration:none}
     box-shadow:0 18px 50px rgba(57,20,70,.07);
 }
 
-.step-title{margin-bottom:25px}
+.step-title{
+    margin-bottom:25px;
+}
 
 .step-title small{
     color:#d63b83;
@@ -219,7 +248,9 @@ a{text-decoration:none}
     transition:.25s;
 }
 
-.template:hover{transform:translateY(-4px)}
+.template:hover{
+    transform:translateY(-4px);
+}
 
 .template.selected{
     border-color:#d83d88;
@@ -238,16 +269,42 @@ a{text-decoration:none}
     overflow:hidden;
 }
 
-.t1{background:linear-gradient(135deg,#ff4d91,#8e3bd4)}
-.t2{background:linear-gradient(135deg,#b85c78,#43204f)}
-.t3{background:linear-gradient(135deg,#e85b86,#ffb36b)}
-.t4{background:linear-gradient(135deg,#30204d,#a13c91)}
+.template-preview::after{
+    content:"✨";
+    position:absolute;
+    right:15px;
+    bottom:5px;
+    font-size:80px;
+    opacity:.12;
+}
 
-.template-preview h3{font-size:28px}
+.t1{
+    background:linear-gradient(135deg,#ff4d91,#8e3bd4);
+}
 
-.template-info{padding:17px}
+.t2{
+    background:linear-gradient(135deg,#b85c78,#43204f);
+}
 
-.template-info h3{margin-bottom:4px}
+.t3{
+    background:linear-gradient(135deg,#e85b86,#ffb36b);
+}
+
+.t4{
+    background:linear-gradient(135deg,#30204d,#a13c91);
+}
+
+.template-preview h3{
+    font-size:28px;
+}
+
+.template-info{
+    padding:17px;
+}
+
+.template-info h3{
+    margin-bottom:4px;
+}
 
 .template-info p{
     color:#8b7b90;
@@ -260,9 +317,13 @@ a{text-decoration:none}
     gap:18px;
 }
 
-.field{margin-bottom:20px}
+.field{
+    margin-bottom:20px;
+}
 
-.field.full{grid-column:1/-1}
+.field.full{
+    grid-column:1/-1;
+}
 
 .field label{
     display:block;
@@ -301,7 +362,9 @@ a{text-decoration:none}
     background:#fcf9fd;
 }
 
-.photo-box input{margin-top:12px}
+.photo-box input{
+    margin-top:12px;
+}
 
 .photo-preview{
     max-width:180px;
@@ -320,7 +383,9 @@ a{text-decoration:none}
     line-height:1.6;
 }
 
-.lock-intro strong{color:#b22c70}
+.lock-intro strong{
+    color:#b22c70;
+}
 
 .question-card{
     padding:22px;
@@ -337,7 +402,9 @@ a{text-decoration:none}
     margin-bottom:15px;
 }
 
-.question-number{font-weight:900}
+.question-number{
+    font-weight:900;
+}
 
 .mark{
     padding:5px 10px;
@@ -463,39 +530,65 @@ footer{
 
 @media(max-width:720px){
 
-    .navbar{padding:14px 5%}
+    .navbar{
+        padding:14px 5%;
+    }
 
-    .logo{font-size:21px}
+    .logo{
+        font-size:21px;
+    }
 
-    .page-header{margin-top:35px}
+    .page-header{
+        margin-top:35px;
+    }
 
-    .page-header h1{font-size:34px}
+    .page-header h1{
+        font-size:34px;
+    }
 
     .card{
         padding:22px;
         border-radius:23px;
     }
 
-    .occasion-grid{grid-template-columns:1fr 1fr}
+    .occasion-grid{
+        grid-template-columns:1fr 1fr;
+    }
 
-    .template-grid{grid-template-columns:1fr}
+    .template-grid{
+        grid-template-columns:1fr;
+    }
 
-    .form-grid{grid-template-columns:1fr}
+    .form-grid{
+        grid-template-columns:1fr;
+    }
 
-    .field.full{grid-column:auto}
+    .field.full{
+        grid-column:auto;
+    }
 
-    .lock-rules{grid-template-columns:1fr 1fr}
+    .lock-rules{
+        grid-template-columns:1fr 1fr;
+    }
 
-    .navigation{flex-direction:column-reverse}
+    .navigation{
+        flex-direction:column-reverse;
+    }
 
-    .navigation .btn{width:100%}
+    .navigation .btn{
+        width:100%;
+    }
 }
 
 @media(max-width:420px){
 
-    .occasion-grid{grid-template-columns:1fr}
+    .occasion-grid{
+        grid-template-columns:1fr;
+    }
 
-    .progress-item{font-size:10px}
+    .progress-item{
+        font-size:10px;
+    }
 
     .progress-circle{
         width:32px;
@@ -503,7 +596,9 @@ footer{
         font-size:12px;
     }
 
-    .step-title h2{font-size:25px}
+    .step-title h2{
+        font-size:25px;
+    }
 }
 </style>
 </head>
@@ -511,9 +606,17 @@ footer{
 <body>
 
 <nav class="navbar">
-    <div class="logo">Wish<span>Now</span> ✨</div>
-    <a class="back-btn" href="index.html">← Home</a>
+
+    <div class="logo">
+        Wish<span>Now</span> ✨
+    </div>
+
+    <a class="back-btn" href="index.html">
+        ← Home
+    </a>
+
 </nav>
+
 
 <header class="page-header">
 
@@ -521,7 +624,9 @@ footer{
         ✨ WISHNOW CREATOR
     </div>
 
-    <h1>Create a Wish They'll Remember ❤️</h1>
+    <h1>
+        Create a Wish They'll Remember ❤️
+    </h1>
 
     <p>
         Choose an occasion, select a beautiful template,
@@ -530,6 +635,7 @@ footer{
     </p>
 
 </header>
+
 
 <div class="progress-wrap">
 
@@ -563,7 +669,9 @@ Preview
 </div>
 </div>
 
+
 <main class="creator">
+
 
 <!-- STEP 1 -->
 
@@ -574,8 +682,11 @@ Preview
 <div class="step-title">
 <small>STEP 1</small>
 <h2>Choose an Occasion</h2>
-<p>Your occasion decides which templates and suggestions you will see.</p>
+<p>
+Your occasion decides which templates and suggestions you will see.
+</p>
 </div>
+
 
 <div class="occasion-grid">
 
@@ -635,11 +746,14 @@ Preview
 
 </div>
 
+
 <div class="navigation">
 <div></div>
+
 <button class="btn btn-primary" onclick="nextStep()">
 Continue →
 </button>
+
 </div>
 
 </div>
@@ -653,12 +767,19 @@ Continue →
 <div class="card">
 
 <div class="step-title">
+
 <small>STEP 2</small>
-<h2>Pick Your Template 🎨</h2>
+
+<h2>
+Pick Your Template 🎨
+</h2>
+
 <p id="templateDescription">
 Choose the design that feels right.
 </p>
+
 </div>
+
 
 <div class="template-grid">
 
@@ -723,15 +844,14 @@ onclick="selectTemplate(this,'Forever Moment')">
 
 </div>
 
+
 <div class="navigation">
 
-<button class="btn btn-secondary"
-onclick="prevStep()">
+<button class="btn btn-secondary" onclick="prevStep()">
 ← Back
 </button>
 
-<button class="btn btn-primary"
-onclick="nextStep()">
+<button class="btn btn-primary" onclick="nextStep()">
 Continue →
 </button>
 
@@ -748,18 +868,28 @@ Continue →
 <div class="card">
 
 <div class="step-title">
+
 <small>STEP 3</small>
-<h2>Add Your Wish ✍️</h2>
+
+<h2>
+Add Your Wish ✍️
+</h2>
+
 <p>
 Photo is optional. Your words are what make the surprise special.
 </p>
+
 </div>
+
 
 <div class="form-grid">
 
+
 <div class="field">
 
-<label>Your Name</label>
+<label>
+Your Name
+</label>
 
 <input
 id="senderName"
@@ -772,7 +902,9 @@ placeholder="Enter your name"
 
 <div class="field">
 
-<label>Recipient Name</label>
+<label>
+Recipient Name
+</label>
 
 <input
 id="recipientName"
@@ -785,7 +917,9 @@ placeholder="Who are you wishing?"
 
 <div class="field full">
 
-<label>Your Wish</label>
+<label>
+Your Wish
+</label>
 
 <textarea
 id="wishMessage"
@@ -797,7 +931,9 @@ placeholder="Write your heartfelt message here..."
 
 <div class="field full">
 
-<label>📸 Add a Photo (Optional)</label>
+<label>
+📸 Add a Photo (Optional)
+</label>
 
 <div class="photo-box">
 
@@ -824,15 +960,20 @@ alt="Selected photo"
 
 </div>
 
+
 <div class="navigation">
 
-<button class="btn btn-secondary"
-onclick="prevStep()">
+<button
+class="btn btn-secondary"
+onclick="prevStep()"
+>
 ← Back
 </button>
 
-<button class="btn btn-primary"
-onclick="nextStep()">
+<button
+class="btn btn-primary"
+onclick="nextStep()"
+>
 Add WishLock →
 </button>
 
@@ -852,7 +993,9 @@ Add WishLock →
 
 <small>STEP 4</small>
 
-<h2>🔐 Add Your WishLock Challenge</h2>
+<h2>
+🔐 Add Your WishLock Challenge
+</h2>
 
 <p>
 Your recipient must answer these 3 questions before your surprise can be unlocked.
@@ -860,40 +1003,58 @@ Your recipient must answer these 3 questions before your surprise can be unlocke
 
 </div>
 
+
 <div class="lock-intro">
 
 <strong>How it works:</strong>
 
-Every correct answer gives <strong>20 marks</strong>.
+Every correct answer gives
+<strong>20 marks</strong>.
 
-The recipient needs <strong>40/60</strong>
+The recipient needs
+<strong>40/60</strong>
 to unlock the Wish.
 
 </div>
 
+
 <div id="questionsContainer"></div>
+
 
 <div class="lock-rules">
 
-<div class="rule">❓ 3 Questions</div>
+<div class="rule">
+❓ 3 Questions
+</div>
 
-<div class="rule">⭐ 20 Marks Each</div>
+<div class="rule">
+⭐ 20 Marks Each
+</div>
 
-<div class="rule">🏆 Pass: 40</div>
+<div class="rule">
+🏆 Pass: 40
+</div>
 
-<div class="rule">🔓 40+ Unlocks</div>
+<div class="rule">
+🔓 40+ Unlocks
+</div>
 
 </div>
 
+
 <div class="navigation">
 
-<button class="btn btn-secondary"
-onclick="prevStep()">
+<button
+class="btn btn-secondary"
+onclick="prevStep()"
+>
 ← Back
 </button>
 
-<button class="btn btn-primary"
-onclick="nextStep()">
+<button
+class="btn btn-primary"
+onclick="nextStep()"
+>
 Preview My Wish →
 </button>
 
@@ -913,7 +1074,9 @@ Preview My Wish →
 
 <small>STEP 5</small>
 
-<h2>Your Wish Is Ready 🎁</h2>
+<h2>
+Your Wish Is Ready 🎁
+</h2>
 
 <p>
 Check everything before creating your surprise.
@@ -921,9 +1084,12 @@ Check everything before creating your surprise.
 
 </div>
 
+
 <div class="preview-box">
 
-<div class="preview-icon">💌</div>
+<div class="preview-icon">
+💌
+</div>
 
 <h2 id="previewTitle">
 A Special Wish ❤️
@@ -942,7 +1108,9 @@ Your beautiful message will appear here.
 
 </div>
 
+
 <div id="resultMessage"></div>
+
 
 <div class="navigation">
 
@@ -966,6 +1134,7 @@ onclick="createWish()"
 </section>
 
 </main>
+
 
 <footer>
 © 2026 WishNow — Make Every Moment Special. 🎁
@@ -996,61 +1165,64 @@ supabase.createClient(
 ========================================= */
 
 let currentStep = 1;
+
 let selectedOccasion = "";
+
 let selectedTemplate = "";
+
 let photoData = "";
 
 
 /* =========================================
-   CREATE 3 QUESTIONS
+   CREATE EXACTLY 3 QUESTIONS
 ========================================= */
 
 const questionsContainer =
 document.getElementById("questionsContainer");
 
+
 for(let i = 1; i <= 3; i++){
 
     questionsContainer.innerHTML += `
 
-        <div class="question-card">
+    <div class="question-card">
 
-            <div class="question-top">
+        <div class="question-top">
 
-                <div class="question-number">
-                    QUESTION ${i}
-                </div>
-
-                <div class="mark">
-                    +20 MARKS
-                </div>
-
+            <div class="question-number">
+                QUESTION ${i}
             </div>
 
-            <input
-                id="q${i}"
-                type="text"
-                placeholder="Write your question"
-            >
-
-            <input
-                id="a${i}"
-                type="text"
-                placeholder="Correct answer"
-            >
-
-            ${
-                i === 1
-                ?
-                `
-                <div class="hint">
-                    💡 The correct answer stays hidden from the recipient.
-                </div>
-                `
-                :
-                ""
-            }
+            <div class="mark">
+                +20 MARKS
+            </div>
 
         </div>
+
+        <input
+            id="q${i}"
+            type="text"
+            placeholder="Write your question"
+        >
+
+        <input
+            id="a${i}"
+            type="text"
+            placeholder="Correct answer"
+        >
+
+        ${
+            i === 1
+            ?
+            `<div class="hint">
+                💡 The correct answer stays hidden from the recipient.
+            </div>`
+            :
+            ""
+        }
+
+    </div>
+
     `;
 }
 
@@ -1105,7 +1277,9 @@ function previewPhoto(event){
     const file =
         event.target.files[0];
 
-    if(!file) return;
+    if(!file)
+        return;
+
 
     if(file.size > 2 * 1024 * 1024){
 
@@ -1118,11 +1292,12 @@ function previewPhoto(event){
         return;
     }
 
+
     const reader =
         new FileReader();
 
-    reader.onload =
-    function(e){
+
+    reader.onload = function(e){
 
         photoData =
             e.target.result;
@@ -1139,6 +1314,7 @@ function previewPhoto(event){
             "block";
     };
 
+
     reader.readAsDataURL(file);
 }
 
@@ -1149,54 +1325,54 @@ function previewPhoto(event){
 
 function validateStep(){
 
-    if(
-        currentStep === 1 &&
-        !selectedOccasion
-    ){
+    if(currentStep === 1){
 
-        alert(
-            "🎯 Please choose an occasion first."
-        );
+        if(!selectedOccasion){
 
-        return false;
+            alert(
+                "🎯 Please choose an occasion first."
+            );
+
+            return false;
+        }
     }
 
 
-    if(
-        currentStep === 2 &&
-        !selectedTemplate
-    ){
+    if(currentStep === 2){
 
-        alert(
-            "🎨 Please choose a template first."
-        );
+        if(!selectedTemplate){
 
-        return false;
+            alert(
+                "🎨 Please choose a template first."
+            );
+
+            return false;
+        }
     }
 
 
     if(currentStep === 3){
 
         const sender =
-            document.getElementById(
-                "senderName"
-            ).value.trim();
+            document
+            .getElementById("senderName")
+            .value
+            .trim();
 
         const recipient =
-            document.getElementById(
-                "recipientName"
-            ).value.trim();
+            document
+            .getElementById("recipientName")
+            .value
+            .trim();
 
         const message =
-            document.getElementById(
-                "wishMessage"
-            ).value.trim();
+            document
+            .getElementById("wishMessage")
+            .value
+            .trim();
 
-        if(
-            !sender ||
-            !recipient ||
-            !message
-        ){
+
+        if(!sender || !recipient || !message){
 
             alert(
                 "✍️ Please complete your name, recipient name and wish."
@@ -1212,14 +1388,17 @@ function validateStep(){
         for(let i = 1; i <= 3; i++){
 
             const question =
-                document.getElementById(
-                    "q" + i
-                ).value.trim();
+                document
+                .getElementById("q" + i)
+                .value
+                .trim();
 
             const answer =
-                document.getElementById(
-                    "a" + i
-                ).value.trim();
+                document
+                .getElementById("a" + i)
+                .value
+                .trim();
+
 
             if(!question || !answer){
 
@@ -1231,6 +1410,7 @@ function validateStep(){
             }
         }
     }
+
 
     return true;
 }
@@ -1244,6 +1424,7 @@ function nextStep(){
 
     if(!validateStep())
         return;
+
 
     if(currentStep < 5){
 
@@ -1275,14 +1456,16 @@ function prevStep(){
 
 function showStep(){
 
-    document.querySelectorAll(".step")
+    document
+    .querySelectorAll(".step")
     .forEach(step =>
         step.classList.remove("active")
     );
 
-    document.getElementById(
-        "step" + currentStep
-    ).classList.add("active");
+
+    document
+    .getElementById("step" + currentStep)
+    .classList.add("active");
 
 
     for(let i = 1; i <= 5; i++){
@@ -1297,8 +1480,10 @@ function showStep(){
             "done"
         );
 
+
         if(i < currentStep)
             progress.classList.add("done");
+
 
         if(i === currentStep)
             progress.classList.add("active");
@@ -1323,19 +1508,22 @@ function showStep(){
 function updatePreview(){
 
     const sender =
-        document.getElementById(
-            "senderName"
-        ).value.trim();
+        document
+        .getElementById("senderName")
+        .value
+        .trim();
 
     const recipient =
-        document.getElementById(
-            "recipientName"
-        ).value.trim();
+        document
+        .getElementById("recipientName")
+        .value
+        .trim();
 
     const message =
-        document.getElementById(
-            "wishMessage"
-        ).value.trim();
+        document
+        .getElementById("wishMessage")
+        .value
+        .trim();
 
 
     document.getElementById(
@@ -1379,6 +1567,7 @@ async function createWish(){
             "resultMessage"
         );
 
+
     result.style.display =
         "block";
 
@@ -1395,62 +1584,82 @@ async function createWish(){
     try{
 
         /* ---------------------------------
-           INSERT WISH
+           1. GET FORM DATA
         --------------------------------- */
 
         const sender =
-            document.getElementById(
-                "senderName"
-            ).value.trim();
+            document
+            .getElementById("senderName")
+            .value
+            .trim();
 
         const recipient =
-            document.getElementById(
-                "recipientName"
-            ).value.trim();
+            document
+            .getElementById("recipientName")
+            .value
+            .trim();
 
         const message =
-            document.getElementById(
-                "wishMessage"
-            ).value.trim();
+            document
+            .getElementById("wishMessage")
+            .value
+            .trim();
 
 
-        const { data: wish, error: wishError } =
-            await supabaseClient
-            .from("wishes")
-            .insert({
+        /* ---------------------------------
+           2. INSERT WISH
+        --------------------------------- */
 
-                sender_name: sender,
+        const {
+            data: wish,
+            error: wishError
+        } =
+        await supabaseClient
+        .from("wishes")
+        .insert({
 
-                recipient_name: recipient,
+            sender_name: sender,
 
-                occasion: selectedOccasion,
+            recipient_name: recipient,
 
-                template: selectedTemplate,
+            occasion: selectedOccasion,
 
-                message: message,
+            template: selectedTemplate,
 
-                photo_url:
-                    photoData || null,
+            message: message,
 
-                user_type: "free",
+            photo_url:
+                photoData || null,
 
-                score: 0,
+            user_type: "free",
 
-                unlocked: false,
+            score: 0,
 
-                expires_at:
-                    new Date(
-                        Date.now() +
-                        30 * 24 * 60 * 60 * 1000
-                    ).toISOString()
+            unlocked: false,
 
-            })
-            .select()
-            .single();
+            expires_at:
+                new Date(
+                    Date.now() +
+                    30 * 24 * 60 * 60 * 1000
+                ).toISOString()
+
+        })
+        .select()
+        .single();
 
 
-        if(wishError)
-            throw wishError;
+        if(wishError){
+
+            console.error(
+                "WISH INSERT ERROR:",
+                wishError
+            );
+
+            throw new Error(
+                "WISH ERROR: " +
+                wishError.message
+            );
+        }
 
 
         if(!wish || !wish.id){
@@ -1462,7 +1671,13 @@ async function createWish(){
 
 
         /* ---------------------------------
-           INSERT QUESTIONS
+           3. INSERT EXACTLY 3 QUESTIONS
+           
+           IMPORTANT:
+           Your Supabase columns are:
+           question_number
+           question
+           correct_answer
         --------------------------------- */
 
         const questionRows = [];
@@ -1474,17 +1689,19 @@ async function createWish(){
 
                 wish_id: wish.id,
 
+                question_number: i,
+
                 question:
-                    document.getElementById(
-                        "q" + i
-                    ).value.trim(),
+                    document
+                    .getElementById("q" + i)
+                    .value
+                    .trim(),
 
                 correct_answer:
-                    document.getElementById(
-                        "a" + i
-                    ).value.trim(),
-
-                question_number: i
+                    document
+                    .getElementById("a" + i)
+                    .value
+                    .trim()
 
             });
         }
@@ -1493,26 +1710,36 @@ async function createWish(){
         const {
             error: questionError
         } =
-            await supabaseClient
-            .from("wish_questions")
-            .insert(questionRows);
+        await supabaseClient
+        .from("wish_questions")
+        .insert(questionRows);
 
 
         if(questionError){
 
-            /* Remove wish if question insert fails */
+            console.error(
+                "QUESTION INSERT ERROR:",
+                questionError
+            );
+
+
+            /* Delete the Wish if questions fail */
 
             await supabaseClient
-                .from("wishes")
-                .delete()
-                .eq("id",wish.id);
+            .from("wishes")
+            .delete()
+            .eq("id",wish.id);
 
-            throw questionError;
+
+            throw new Error(
+                "QUESTION ERROR: " +
+                questionError.message
+            );
         }
 
 
         /* ---------------------------------
-           PERSONALIZED LINK
+           4. PERSONALIZED NAME LINK
         --------------------------------- */
 
         const cleanName =
@@ -1526,10 +1753,10 @@ async function createWish(){
         const resultUrl =
             window.location.origin +
             window.location.pathname
-                .replace(
-                    "wish.html",
-                    "wish-result.html"
-                ) +
+            .replace(
+                "wish.html",
+                "wish-result.html"
+            ) +
             "?name=" +
             encodeURIComponent(cleanName) +
             "&id=" +
@@ -1537,7 +1764,7 @@ async function createWish(){
 
 
         /* ---------------------------------
-           SUCCESS
+           5. SHOW RESULT
         --------------------------------- */
 
         result.style.background =
@@ -1549,9 +1776,7 @@ async function createWish(){
 
         result.innerHTML = `
 
-            🎉 <strong>
-            Your Wish has been created!
-            </strong>
+            🎉 <strong>Your Wish has been created!</strong>
 
             <br><br>
 
@@ -1595,7 +1820,7 @@ async function createWish(){
             <br><br>
 
             <a
-                href="${resultUrl}"
+                href="${escapeHtml(resultUrl)}"
                 style="
                     display:block;
                     text-align:center;
@@ -1624,20 +1849,16 @@ async function createWish(){
             "#a12626";
 
 
-        result.innerHTML = `
-            ❌ <strong>Could not create the Wish.</strong>
-            <br><br>
-            ${escapeHtml(
-                error.message ||
-                "Unknown error"
-            )}
-        `;
+        result.innerHTML =
+            "❌ <strong>Could not create the Wish.</strong>" +
+            "<br><br>" +
+            escapeHtml(error.message);
     }
 }
 
 
 /* =========================================
-   ESCAPE HTML
+   HTML SAFE
 ========================================= */
 
 function escapeHtml(text){
@@ -1646,7 +1867,7 @@ function escapeHtml(text){
         document.createElement("div");
 
     div.textContent =
-        String(text);
+        text;
 
     return div.innerHTML;
 }
@@ -1663,11 +1884,11 @@ async function copyCreatedLink(){
             "createdLink"
         );
 
+
     try{
 
-        await navigator.clipboard.writeText(
-            input.value
-        );
+        await navigator.clipboard
+        .writeText(input.value);
 
         alert(
             "✅ Wish link copied!"
@@ -1698,9 +1919,11 @@ const params =
 const urlOccasion =
     params.get("occasion");
 
+
 if(urlOccasion){
 
-    document.querySelectorAll(".occasion")
+    document
+    .querySelectorAll(".occasion")
     .forEach(card => {
 
         if(
@@ -1710,6 +1933,7 @@ if(urlOccasion){
 
             selectOccasion(card);
         }
+
     });
 }
 
