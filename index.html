@@ -64,29 +64,20 @@ a{
 
 .nav-actions{
   display:flex;
-  gap:8px;
+  gap:10px;
   align-items:center;
 }
 
-/* NEW RIGHT NAVIGATION */
-
 .nav-link{
-  border:1px solid rgba(255,255,255,.35);
-  background:rgba(255,255,255,.08);
   color:#fff;
-
-  padding:9px 14px;
-  border-radius:25px;
-
+  padding:10px 14px;
+  font-weight:700;
   cursor:pointer;
-  backdrop-filter:blur(12px);
-
   transition:.25s;
 }
 
 .nav-link:hover{
-  background:#fff;
-  color:#24172b;
+  color:#ffd166;
 }
 
 .nav-btn{
@@ -472,6 +463,8 @@ a{
   border-radius:25px;
 
   font-weight:800;
+  border:0;
+  cursor:pointer;
 }
 
 /* =========================
@@ -787,6 +780,8 @@ a{
   font-weight:900;
 
   transition:.25s;
+  border:0;
+  cursor:pointer;
 }
 
 .create-btn:hover{
@@ -859,6 +854,8 @@ a{
   color:#27132d;
 
   font-weight:900;
+  border:0;
+  cursor:pointer;
 }
 
 .premium-card{
@@ -934,8 +931,7 @@ footer{
   }
 
   .nav-link{
-    padding:8px 11px;
-    font-size:13px;
+    display:none;
   }
 }
 
@@ -947,18 +943,6 @@ footer{
 
   .logo{
     font-size:23px;
-  }
-
-  .nav-actions{
-    gap:5px;
-  }
-
-  .nav-link{
-    display:none;
-  }
-
-  .nav-link.mobile-visible{
-    display:block;
   }
 
   .nav-btn{
@@ -1100,25 +1084,19 @@ footer{
 
   <div class="nav-actions">
 
-    <!-- NEW RIGHT CORNER OPTIONS -->
-
-    <a href="#" class="nav-link">
-      Home
-    </a>
-
-    <a href="#occasions" class="nav-link">
+    <a class="nav-link" href="#occasions">
       Occasions
     </a>
 
-    <a href="#gifts" class="nav-link">
+    <a class="nav-link" href="#gifts">
       Gifts
     </a>
 
-    <a href="#premium" class="nav-link">
+    <a class="nav-link" href="#premium">
       Premium
     </a>
 
-    <button class="nav-link" onclick="premiumLogin()">
+    <button class="nav-btn" onclick="login()">
       Login
     </button>
 
@@ -1224,7 +1202,7 @@ footer{
         video wishes and exclusive experiences.
       </p>
 
-      <button class="hero-btn" onclick="document.getElementById('premium').scrollIntoView()">
+      <button class="hero-btn" onclick="document.getElementById('premium').scrollIntoView({behavior:'smooth'})">
         Discover Premium →
       </button>
 
@@ -1233,7 +1211,7 @@ footer{
   </div>
 
 
-  <!-- SMALL FLOATING PHOTOS -->
+  <!-- FLOATING PHOTOS -->
 
   <div class="memory-orbit">
 
@@ -1709,7 +1687,12 @@ let currentSlide = 0;
 const slides = document.querySelectorAll(".slide");
 const dots = document.querySelectorAll(".dot");
 
+
 function showSlide(index){
+
+  if(!slides.length){
+    return;
+  }
 
   slides.forEach(slide => {
     slide.classList.remove("active");
@@ -1720,10 +1703,14 @@ function showSlide(index){
   });
 
   slides[index].classList.add("active");
-  dots[index].classList.add("active");
+
+  if(dots[index]){
+    dots[index].classList.add("active");
+  }
 
   currentSlide = index;
 }
+
 
 function nextSlide(){
 
@@ -1736,6 +1723,7 @@ function nextSlide(){
   showSlide(currentSlide);
 }
 
+
 setInterval(nextSlide,5000);
 
 
@@ -1746,31 +1734,46 @@ setInterval(nextSlide,5000);
 function createWish(occasion){
 
   if(occasion){
+
     window.location.href =
-      "wish.html?occasion=" + encodeURIComponent(occasion);
+      "wish.html?occasion=" +
+      encodeURIComponent(occasion);
+
   }else{
-    window.location.href = "wish.html";
+
+    window.location.href =
+      "wish.html";
+
   }
 
 }
 
-  if(occasion){
 
-    alert(
-      "✨ " +
-      occasion +
-      " Wish Creator\n\n" +
-      "Step 2 — Wish Creator will be connected next!"
-    );
+/* =========================
+   LOGIN
+========================= */
 
-  }else{
+function login(){
 
-    alert(
-      "✨ Wish Creator\n\n" +
-      "Step 2 will add the full Wish Creator here!"
-    );
+  alert(
+    "💎 WishNow Premium\n\n" +
+    "Login is available for Premium members.\n\n" +
+    "Please subscribe to Premium first."
+  );
 
-  }
+}
+
+
+/* =========================
+   PREMIUM
+========================= */
+
+function premiumInfo(){
+
+  document.getElementById("premium")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
 
 }
 
@@ -1782,8 +1785,8 @@ function createWish(occasion){
 function openGiftCard(){
 
   alert(
-    "🎁 Gift Card\n\n" +
-    "Gift Card system will be connected in Step 5."
+    "🎁 WishNow Gift Cards\n\n" +
+    "Gift Card shopping will be available soon."
   );
 
 }
@@ -1799,35 +1802,7 @@ function buyGift(product){
     "🎁 " +
     product +
     "\n\n" +
-    "Gift browsing and checkout will be connected in Step 5."
-  );
-
-}
-
-
-/* =========================
-   PREMIUM
-========================= */
-
-function premiumInfo(){
-
-  alert(
-    "💎 WishNow Premium\n\n" +
-    "Premium subscription and login will be connected in Step 6."
-  );
-
-}
-
-
-/* =========================
-   PREMIUM LOGIN
-========================= */
-
-function premiumLogin(){
-
-  alert(
-    "💎 Premium Login\n\n" +
-    "Only WishNow Premium subscribers will be able to login and access their personal profile."
+    "Gift browsing and checkout will be connected soon."
   );
 
 }
