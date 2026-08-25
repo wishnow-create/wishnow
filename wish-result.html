@@ -10,9 +10,7 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>
-WishNow — Your Special Wish ❤️
-</title>
+<title>WishNow — Your Special Wish ❤️</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -50,13 +48,14 @@ body{
     justify-content:center;
 
     padding:25px;
-
 }
 
 .container{
 
-    width:min(760px,100%);
-
+    width:min(
+        760px,
+        100%
+    );
 }
 
 .logo{
@@ -70,13 +69,10 @@ body{
     color:#351449;
 
     margin-bottom:20px;
-
 }
 
 .logo span{
-
     color:#e83f91;
-
 }
 
 .card{
@@ -92,7 +88,6 @@ body{
     box-shadow:
         0 25px 70px
         rgba(60,20,70,.12);
-
 }
 
 .header{
@@ -110,7 +105,6 @@ body{
             #8d3478,
             #e83f91
         );
-
 }
 
 .icon{
@@ -118,7 +112,6 @@ body{
     font-size:60px;
 
     margin-bottom:15px;
-
 }
 
 .header h1{
@@ -131,19 +124,14 @@ body{
         );
 
     margin-bottom:10px;
-
 }
 
 .header p{
-
     opacity:.9;
-
 }
 
 .content{
-
     padding:30px;
-
 }
 
 .photo{
@@ -159,7 +147,6 @@ body{
     margin-bottom:25px;
 
     display:none;
-
 }
 
 .message{
@@ -179,7 +166,6 @@ body{
     white-space:pre-wrap;
 
     margin-bottom:25px;
-
 }
 
 .lock-box{
@@ -194,13 +180,10 @@ body{
             #f7f0ff,
             #fff4f8
         );
-
 }
 
 .lock-box h2{
-
     margin-bottom:8px;
-
 }
 
 .lock-box p{
@@ -210,7 +193,6 @@ body{
     line-height:1.6;
 
     margin-bottom:20px;
-
 }
 
 .question{
@@ -224,7 +206,6 @@ body{
     margin-bottom:14px;
 
     border:1px solid #eadfea;
-
 }
 
 .question strong{
@@ -232,7 +213,6 @@ body{
     display:block;
 
     margin-bottom:10px;
-
 }
 
 .question input{
@@ -246,13 +226,11 @@ body{
     border-radius:12px;
 
     outline:none;
-
 }
 
 .question input:focus{
 
     border-color:#d83d88;
-
 }
 
 .unlock-btn{
@@ -277,7 +255,6 @@ body{
     font-weight:900;
 
     margin-top:10px;
-
 }
 
 .result{
@@ -293,7 +270,6 @@ body{
     font-weight:800;
 
     line-height:1.6;
-
 }
 
 .footer{
@@ -305,69 +281,79 @@ body{
     color:#8b7b90;
 
     font-size:13px;
-
 }
 
 .hidden{
+    display:none;
+}
+
+.success-wish{
 
     display:none;
 
+    padding:25px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff4f8,
+            #f4efff
+        );
+
+    border:1px solid #eadfea;
+
+    line-height:1.8;
+
+    margin-top:20px;
+
+    text-align:center;
+}
+
+.success-wish h2{
+
+    color:#7337c8;
+
+    margin-bottom:12px;
 }
 
 @media(max-width:600px){
 
     body{
-
         padding:15px;
-
     }
 
     .header{
-
         padding:40px 20px;
-
     }
 
     .content{
-
         padding:20px;
-
     }
 
     .card{
-
         border-radius:23px;
-
     }
-
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
-
 <div class="logo">
-
-Wish<span>Now</span> ✨
-
+    Wish<span>Now</span> ✨
 </div>
-
 
 <div class="card">
 
-
 <div class="header">
 
-<div class="icon">
-💌
-</div>
+<div class="icon">💌</div>
 
 <h1 id="wishTitle">
 A Special Wish ❤️
@@ -382,7 +368,6 @@ Someone created something special for you.
 
 <div class="content">
 
-
 <img
     id="wishPhoto"
     class="photo"
@@ -394,9 +379,7 @@ Someone created something special for you.
     id="wishMessage"
     class="message"
 >
-
 Loading your special wish...
-
 </div>
 
 
@@ -405,69 +388,70 @@ Loading your special wish...
     class="lock-box"
 >
 
-
-<h2>
-🔐 WishLock
-</h2>
-
+<h2>🔐 WishLock</h2>
 
 <p>
-
 Answer these 3 questions correctly.
 
 You need
 <strong>40 out of 60 marks</strong>
 to unlock your special wish.
-
 </p>
 
-
-<div
-    id="questionsContainer"
-></div>
-
+<div id="questionsContainer"></div>
 
 <button
     class="unlock-btn"
     onclick="checkAnswers()"
 >
-
 🔓 Unlock My Wish
-
 </button>
-
 
 <div
     id="result"
     class="result"
 ></div>
 
+</div>
+
+
+<div
+    id="successWish"
+    class="success-wish"
+>
+
+<h2>
+🎉 Wish Unlocked!
+</h2>
+
+<div>
+The special message above is now yours.
+❤️
+</div>
 
 </div>
 
 
 </div>
-
 
 </div>
 
 
 <div class="footer">
 
-© 2026 WishNow — Make Every Moment Special. 🎁
+© 2026 WishNow —
+Make Every Moment Special. 🎁
 
 </div>
-
 
 </div>
 
 
 <script>
 
-
-/* ==========================
+/* =========================================
    SUPABASE
-========================== */
+========================================= */
 
 const SUPABASE_URL =
 "https://izvlpqxsxjcvligkgduh.supabase.co";
@@ -482,36 +466,34 @@ supabase.createClient(
 );
 
 
-/* ==========================
+/* =========================================
    URL DATA
-========================== */
+========================================= */
 
 const params =
 new URLSearchParams(
     window.location.search
 );
 
-
 const wishId =
 params.get("id");
-
 
 const urlName =
 params.get("name");
 
 
-/* ==========================
+/* =========================================
    DATA
-========================== */
+========================================= */
 
 let wishData = null;
 
 let questionData = [];
 
 
-/* ==========================
+/* =========================================
    LOAD WISH
-========================== */
+========================================= */
 
 async function loadWish(){
 
@@ -526,36 +508,28 @@ async function loadWish(){
         messageBox.textContent =
             "❌ This Wish link is invalid.";
 
-
-        document
-        .getElementById("lockBox")
-        .classList.add("hidden");
-
+        document.getElementById(
+            "lockBox"
+        ).classList.add("hidden");
 
         return;
-
     }
 
 
     try{
 
-
-        /* ======================
-           GET WISH
-        ====================== */
+        /* ---------------------------------
+           LOAD WISH
+        --------------------------------- */
 
         const {
-            data:wish,
+            data: wish,
             error
         } =
             await supabaseClient
-
             .from("wishes")
-
             .select("*")
-
             .eq("id",wishId)
-
             .single();
 
 
@@ -569,16 +543,15 @@ async function loadWish(){
                 "❌ Wish not found.";
 
             return;
-
         }
 
 
         wishData = wish;
 
 
-        /* ======================
+        /* ---------------------------------
            EXPIRY
-        ====================== */
+        --------------------------------- */
 
         if(
             wish.expires_at &&
@@ -590,105 +563,48 @@ async function loadWish(){
             messageBox.textContent =
                 "⏰ This Wish link has expired.";
 
-
-            document
-            .getElementById("lockBox")
-            .classList.add("hidden");
-
+            document.getElementById(
+                "lockBox"
+            ).classList.add("hidden");
 
             return;
-
         }
 
 
-        /* ======================
+        /* ---------------------------------
+           ALREADY UNLOCKED
+        --------------------------------- */
+
+        if(wish.unlocked){
+
+            showWishData(wish);
+
+            await loadQuestions();
+
+            document.getElementById(
+                "lockBox"
+            ).classList.add("hidden");
+
+            document.getElementById(
+                "successWish"
+            ).style.display = "block";
+
+            return;
+        }
+
+
+        /* ---------------------------------
            SHOW WISH
-        ====================== */
+        --------------------------------- */
 
-        document
-        .getElementById("wishTitle")
-        .textContent =
-            "A Special " +
-            wish.occasion +
-            " Wish for " +
-            wish.recipient_name +
-            " ❤️";
+        showWishData(wish);
 
 
-        document
-        .getElementById("fromText")
-        .textContent =
-            "From " +
-            wish.sender_name +
-            " • " +
-            wish.template;
+        /* ---------------------------------
+           QUESTIONS
+        --------------------------------- */
 
-
-        messageBox.textContent =
-            wish.message;
-
-
-        /* ======================
-           PHOTO
-        ====================== */
-
-        if(wish.photo_url){
-
-            const photo =
-                document.getElementById(
-                    "wishPhoto"
-                );
-
-
-            photo.src =
-                wish.photo_url;
-
-
-            photo.style.display =
-                "block";
-
-        }
-
-
-        /* ======================
-           GET QUESTIONS
-        ====================== */
-
-        const {
-            data:questions,
-            error:qError
-        } =
-
-            await supabaseClient
-
-            .from("wish_questions")
-
-            .select(
-                "id,wish_id,question_number,question,correct_answer,hint"
-            )
-
-            .eq(
-                "wish_id",
-                wishId
-            )
-
-            .order(
-                "question_number",
-                {
-                    ascending:true
-                }
-            );
-
-
-        if(qError)
-            throw qError;
-
-
-        questionData =
-            questions || [];
-
-
-        renderQuestions();
+        await loadQuestions();
 
 
     }catch(error){
@@ -698,23 +614,97 @@ async function loadWish(){
             error
         );
 
-
         messageBox.textContent =
             "❌ Unable to load this Wish.";
 
-
-        document
-        .getElementById("lockBox")
-        .classList.add("hidden");
-
+        document.getElementById(
+            "lockBox"
+        ).classList.add("hidden");
     }
-
 }
 
 
-/* ==========================
-   SHOW QUESTIONS
-========================== */
+/* =========================================
+   SHOW WISH DATA
+========================================= */
+
+function showWishData(wish){
+
+    document.getElementById(
+        "wishTitle"
+    ).textContent =
+        "A Special " +
+        wish.occasion +
+        " Wish for " +
+        wish.recipient_name +
+        " ❤️";
+
+
+    document.getElementById(
+        "fromText"
+    ).textContent =
+        "From " +
+        wish.sender_name +
+        " • " +
+        wish.template;
+
+
+    document.getElementById(
+        "wishMessage"
+    ).textContent =
+        wish.message;
+
+
+    /* PHOTO */
+
+    if(wish.photo_url){
+
+        const photo =
+            document.getElementById(
+                "wishPhoto"
+            );
+
+        photo.src =
+            wish.photo_url;
+
+        photo.style.display =
+            "block";
+    }
+}
+
+
+/* =========================================
+   LOAD QUESTIONS
+========================================= */
+
+async function loadQuestions(){
+
+    const {
+        data: questions,
+        error
+    } =
+        await supabaseClient
+        .from("wish_questions")
+        .select("*")
+        .eq("wish_id",wishId)
+        .order("question_number");
+
+
+    if(error)
+        throw error;
+
+
+    questionData =
+        questions || [];
+
+
+    renderQuestions();
+}
+
+
+/* =========================================
+   RENDER QUESTIONS
+========================================= */
 
 function renderQuestions(){
 
@@ -727,101 +717,48 @@ function renderQuestions(){
     container.innerHTML = "";
 
 
-    if(!questionData.length){
-
-        container.innerHTML = `
-
-            <div
-                style="
-                    padding:15px;
-                    background:#fff0f0;
-                    border-radius:14px;
-                    color:#a12626;
-                "
-            >
-                ❌ No questions found.
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
     questionData.forEach(
-        (item,index)=>{
+        (item,index) => {
 
             container.innerHTML += `
 
                 <div class="question">
 
                     <strong>
-
-                        ${item.question_number}.
+                        ${index + 1}.
                         ${escapeHtml(
                             item.question
                         )}
-
                     </strong>
 
                     <input
-
                         id="answer${index}"
-
                         type="text"
-
                         placeholder="Your answer"
-
                         autocomplete="off"
-
                     >
-
-                    ${
-                        item.hint
-                        ?
-                        `
-                        <small
-                            style="
-                                display:block;
-                                margin-top:8px;
-                                color:#918295;
-                            "
-                        >
-                            💡
-                            ${escapeHtml(
-                                item.hint
-                            )}
-                        </small>
-                        `
-                        :
-                        ""
-                    }
 
                 </div>
 
             `;
-
         }
     );
-
 }
 
 
-/* ==========================
+/* =========================================
    CHECK ANSWERS
-========================== */
+========================================= */
 
 async function checkAnswers(){
 
-    if(!questionData.length){
+    if(questionData.length !== 3){
 
         alert(
-            "No WishLock questions were found."
+            "❌ This WishLock does not contain 3 questions."
         );
 
         return;
-
     }
 
 
@@ -829,16 +766,12 @@ async function checkAnswers(){
 
 
     questionData.forEach(
-        (item,index)=>{
+        (item,index) => {
 
             const input =
                 document.getElementById(
-                    "answer"+index
+                    "answer" + index
                 );
-
-
-            if(!input)
-                return;
 
 
             const userAnswer =
@@ -857,14 +790,11 @@ async function checkAnswers(){
 
             if(
                 userAnswer &&
-                userAnswer ===
-                correctAnswer
+                userAnswer === correctAnswer
             ){
 
                 score += 20;
-
             }
-
         }
     );
 
@@ -879,9 +809,9 @@ async function checkAnswers(){
         "block";
 
 
-    /* ======================
+    /* =====================================
        PASS
-    ====================== */
+    ===================================== */
 
     if(score >= 40){
 
@@ -894,8 +824,7 @@ async function checkAnswers(){
 
         result.innerHTML = `
 
-            🎉
-            <strong>
+            🎉 <strong>
             Congratulations!
             </strong>
 
@@ -906,55 +835,55 @@ async function checkAnswers(){
 
             <br><br>
 
-            🔓
-            Your Wish has been unlocked!
+            🔓 Your Wish has been unlocked!
 
         `;
 
 
-        document
-        .getElementById("lockBox")
-        .classList.add("hidden");
+        document.getElementById(
+            "lockBox"
+        ).classList.add("hidden");
 
 
-        /* ======================
-           UPDATE WISH
-        ====================== */
+        document.getElementById(
+            "successWish"
+        ).style.display = "block";
+
+
+        /* UPDATE DATABASE */
 
         const {
-            error:updateError
+            error
         } =
-
             await supabaseClient
-
             .from("wishes")
-
             .update({
 
-                score:score,
+                score: score,
 
-                unlocked:true
+                unlocked: true
 
             })
-
             .eq(
                 "id",
                 wishId
             );
 
 
-        if(updateError){
+        if(error){
 
             console.error(
                 "UPDATE ERROR:",
-                updateError
+                error
             );
-
         }
 
 
     }else{
 
+        /* =================================
+           FAIL
+        ================================= */
 
         result.style.background =
             "#fff7e8";
@@ -965,8 +894,7 @@ async function checkAnswers(){
 
         result.innerHTML = `
 
-            🔒
-            <strong>
+            🔒 <strong>
             Not unlocked yet.
             </strong>
 
@@ -978,24 +906,20 @@ async function checkAnswers(){
             <br><br>
 
             You need at least
-            <strong>
-            40/60
-            </strong>.
+            40/60.
 
-            <br>
+            <br><br>
 
-            Try again!
+            Try again! ❤️
 
         `;
-
     }
-
 }
 
 
-/* ==========================
+/* =========================================
    ESCAPE HTML
-========================== */
+========================================= */
 
 function escapeHtml(text){
 
@@ -1004,24 +928,20 @@ function escapeHtml(text){
             "div"
         );
 
-
     div.textContent =
         String(text);
 
-
     return div.innerHTML;
-
 }
 
 
-/* ==========================
+/* =========================================
    START
-========================== */
+========================================= */
 
 loadWish();
 
 </script>
 
 </body>
-
 </html>
