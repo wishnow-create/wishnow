@@ -1,288 +1,1045 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<title>WishNow — Create Your Wish ❤️</title>
 
-<title>WishNow — Your Special Wish ❤️</title>
+<meta name="description"
+content="Create a beautiful personalized WishNow surprise with a private WishLock challenge.">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+html{scroll-behavior:smooth}
 
 body{
-    min-height:100vh;
     font-family:Inter,Arial,sans-serif;
-    background:
-        radial-gradient(circle at top,#fff0f7,#faf7fc 50%,#f3ecf8);
-    color:#29172f;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:25px;
+    background:#faf7fc;
+    color:#24172b;
+    overflow-x:hidden;
 }
 
-.container{
-    width:min(760px,100%);
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none}
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:17px 6%;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid #eee3f0;
 }
 
 .logo{
-    text-align:center;
-    font-size:28px;
+    font-size:25px;
     font-weight:900;
     color:#351449;
-    margin-bottom:20px;
 }
 
-.logo span{
-    color:#e83f91;
+.logo span{color:#e83f91}
+
+.back-btn{
+    padding:9px 17px;
+    border:1px solid #eadbea;
+    border-radius:25px;
+    background:#fff;
+    color:#4b2855;
+    font-weight:700;
+}
+
+.page-header{
+    text-align:center;
+    width:min(850px,90%);
+    margin:55px auto 35px;
+}
+
+.creator-label{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:30px;
+    background:#fff0f7;
+    color:#d92f7c;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.8px;
+    margin-bottom:15px;
+}
+
+.page-header h1{
+    font-size:clamp(34px,5vw,58px);
+    line-height:1.05;
+    letter-spacing:-1.8px;
+    margin-bottom:15px;
+}
+
+.page-header p{
+    color:#806f83;
+    line-height:1.7;
+}
+
+.progress-wrap{
+    width:min(900px,90%);
+    margin:0 auto 30px;
+}
+
+.progress{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+}
+
+.progress-item{
+    text-align:center;
+    font-size:12px;
+    color:#a092a5;
+    font-weight:800;
+}
+
+.progress-circle{
+    width:38px;
+    height:38px;
+    margin:0 auto 7px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#eee7f0;
+    color:#8b7c90;
+}
+
+.progress-item.active .progress-circle,
+.progress-item.done .progress-circle{
+    background:linear-gradient(135deg,#ff4d91,#8d3bd4);
+    color:#fff;
+}
+
+.progress-item.active{color:#8d3bd4}
+
+.creator{
+    width:min(1000px,92%);
+    margin:auto;
+}
+
+.step{
+    display:none;
+    animation:fadeUp .35s ease;
+}
+
+.step.active{display:block}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(12px)
+    }
+    to{
+        opacity:1;
+        transform:translateY(0)
+    }
 }
 
 .card{
     background:#fff;
-    border:1px solid #eee1f0;
+    border:1px solid #eee3f0;
     border-radius:30px;
-    overflow:hidden;
-    box-shadow:0 25px 70px rgba(60,20,70,.12);
+    padding:35px;
+    box-shadow:0 18px 50px rgba(57,20,70,.07);
 }
 
-.header{
-    padding:50px 25px;
-    text-align:center;
-    color:#fff;
-    background:linear-gradient(135deg,#351449,#8d3478,#e83f91);
-}
+.step-title{margin-bottom:25px}
 
-.icon{
-    font-size:60px;
-    margin-bottom:15px;
-}
-
-.header h1{
-    font-size:clamp(30px,6vw,48px);
-    margin-bottom:10px;
-}
-
-.header p{
-    opacity:.9;
-}
-
-.content{
-    padding:30px;
-}
-
-.photo{
-    width:100%;
-    max-height:420px;
-    object-fit:cover;
-    border-radius:22px;
-    margin-bottom:25px;
-    display:none;
-}
-
-.message{
-    padding:25px;
-    border-radius:22px;
-    background:#fff6fa;
-    border:1px solid #f2dce8;
-    line-height:1.8;
-    font-size:17px;
-    white-space:pre-wrap;
-    margin-bottom:25px;
-}
-
-.lock-box{
-    padding:25px;
-    border-radius:22px;
-    background:linear-gradient(135deg,#f7f0ff,#fff4f8);
-}
-
-.lock-box h2{
-    margin-bottom:8px;
-}
-
-.lock-box p{
-    color:#77657d;
-    line-height:1.6;
-    margin-bottom:20px;
-}
-
-.question{
-    background:#fff;
-    padding:18px;
-    border-radius:17px;
-    margin-bottom:14px;
-    border:1px solid #eadfea;
-}
-
-.question strong{
-    display:block;
-    margin-bottom:10px;
-}
-
-.question input{
-    width:100%;
-    padding:12px;
-    border:1px solid #dfd2e3;
-    border-radius:12px;
-    outline:none;
-}
-
-.question input:focus{
-    border-color:#d83d88;
-}
-
-.unlock-btn{
-    width:100%;
-    border:0;
-    padding:15px;
-    border-radius:28px;
-    background:linear-gradient(135deg,#ff4d91,#8d3bd4);
-    color:#fff;
+.step-title small{
+    color:#d63b83;
     font-weight:900;
-    margin-top:10px;
 }
 
-.result{
-    display:none;
-    margin-top:20px;
-    padding:18px;
-    border-radius:17px;
-    font-weight:800;
+.step-title h2{
+    font-size:30px;
+    margin:7px 0;
+}
+
+.step-title p{
+    color:#85758a;
     line-height:1.6;
 }
 
-.footer{
+.occasion-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.occasion{
+    padding:20px;
+    border:2px solid #eee4ef;
+    border-radius:20px;
+    background:#fff;
+    transition:.25s;
+}
+
+.occasion:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(60,20,70,.08);
+}
+
+.occasion.selected{
+    border-color:#d83d88;
+    background:#fff5fa;
+}
+
+.occasion-icon{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.occasion h3{
+    font-size:17px;
+    margin-bottom:5px;
+}
+
+.occasion p{
+    color:#8d7d91;
+    font-size:13px;
+}
+
+.template-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.template{
+    overflow:hidden;
+    border:2px solid #eee4ef;
+    border-radius:24px;
+    background:#fff;
+    transition:.25s;
+}
+
+.template:hover{transform:translateY(-4px)}
+
+.template.selected{
+    border-color:#d83d88;
+    box-shadow:0 12px 35px rgba(216,61,136,.16);
+}
+
+.template-preview{
+    min-height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     text-align:center;
-    margin-top:20px;
+    padding:25px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+}
+
+.template-preview::after{
+    content:"✨";
+    position:absolute;
+    right:15px;
+    bottom:5px;
+    font-size:80px;
+    opacity:.12;
+}
+
+.t1{background:linear-gradient(135deg,#ff4d91,#8e3bd4)}
+.t2{background:linear-gradient(135deg,#b85c78,#43204f)}
+.t3{background:linear-gradient(135deg,#e85b86,#ffb36b)}
+.t4{background:linear-gradient(135deg,#30204d,#a13c91)}
+
+.template-preview h3{font-size:28px}
+
+.template-info{padding:17px}
+
+.template-info h3{margin-bottom:4px}
+
+.template-info p{
     color:#8b7b90;
     font-size:13px;
 }
 
-.hidden{
-    display:none;
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
 }
 
-@media(max-width:600px){
+.field{margin-bottom:20px}
 
-    body{
-        padding:15px;
-    }
+.field.full{grid-column:1/-1}
 
-    .header{
-        padding:40px 20px;
-    }
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:800;
+    font-size:14px;
+}
 
-    .content{
-        padding:20px;
-    }
+.field input,
+.field textarea{
+    width:100%;
+    border:1px solid #e4d9e6;
+    border-radius:15px;
+    padding:13px 15px;
+    outline:none;
+    background:#fff;
+    color:#2a1930;
+}
+
+.field textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus{
+    border-color:#d83d88;
+    box-shadow:0 0 0 3px rgba(216,61,136,.08);
+}
+
+.photo-box{
+    border:2px dashed #dfd1e2;
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    background:#fcf9fd;
+}
+
+.photo-box input{margin-top:12px}
+
+.photo-preview{
+    max-width:180px;
+    max-height:180px;
+    margin:15px auto 0;
+    border-radius:16px;
+    display:none;
+    object-fit:cover;
+}
+
+.lock-intro{
+    padding:18px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#fff4f8,#f4efff);
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+.lock-intro strong{color:#b22c70}
+
+.question-card{
+    padding:22px;
+    margin-bottom:15px;
+    border:1px solid #eee3ef;
+    border-radius:20px;
+    background:#fff;
+}
+
+.question-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.question-number{font-weight:900}
+
+.mark{
+    padding:5px 10px;
+    border-radius:15px;
+    background:#fff1c9;
+    color:#9a6b00;
+    font-size:12px;
+    font-weight:900;
+}
+
+.question-card input{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #e2d7e5;
+    border-radius:13px;
+    margin-bottom:10px;
+    outline:none;
+}
+
+.hint{
+    color:#918295;
+    font-size:12px;
+}
+
+.lock-rules{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:22px;
+}
+
+.rule{
+    padding:15px;
+    text-align:center;
+    border-radius:16px;
+    background:#faf7fc;
+    font-size:13px;
+    font-weight:800;
+}
+
+.preview-box{
+    overflow:hidden;
+    border-radius:26px;
+    background:linear-gradient(135deg,#351449,#8d3478);
+    color:#fff;
+    padding:45px 30px;
+    text-align:center;
+}
+
+.preview-box .preview-icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+.preview-box h2{
+    font-size:clamp(28px,5vw,46px);
+    margin-bottom:10px;
+}
+
+.preview-box p{
+    max-width:650px;
+    margin:0 auto;
+    line-height:1.7;
+    color:rgba(255,255,255,.86);
+}
+
+.preview-message{
+    margin:25px auto 0;
+    max-width:650px;
+    padding:22px;
+    border-radius:20px;
+    background:rgba(255,255,255,.1);
+    line-height:1.7;
+}
+
+.navigation{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:25px;
+}
+
+.btn{
+    border:0;
+    padding:13px 22px;
+    border-radius:28px;
+    font-weight:900;
+}
+
+.btn-secondary{
+    background:#eee8f0;
+    color:#4c3155;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#ff4d91,#8d3bd4);
+    color:#fff;
+}
+
+.btn-success{
+    background:linear-gradient(135deg,#e83f91,#7337c8);
+    color:#fff;
+    width:100%;
+    padding:16px;
+}
+
+#resultMessage{
+    display:none;
+    margin-top:18px;
+    padding:18px;
+    border-radius:18px;
+    font-weight:800;
+    line-height:1.6;
+}
+
+footer{
+    margin-top:70px;
+    padding:30px;
+    text-align:center;
+    color:#8a7c8f;
+    font-size:13px;
+}
+
+@media(max-width:720px){
+
+    .navbar{padding:14px 5%}
+
+    .logo{font-size:21px}
+
+    .page-header{margin-top:35px}
+
+    .page-header h1{font-size:34px}
 
     .card{
+        padding:22px;
         border-radius:23px;
+    }
+
+    .occasion-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .template-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .lock-rules{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .navigation{
+        flex-direction:column-reverse;
+    }
+
+    .navigation .btn{
+        width:100%;
     }
 }
 
-</style>
+@media(max-width:420px){
 
+    .occasion-grid{
+        grid-template-columns:1fr;
+    }
+
+    .progress-item{
+        font-size:10px;
+    }
+
+    .progress-circle{
+        width:32px;
+        height:32px;
+        font-size:12px;
+    }
+
+    .step-title h2{
+        font-size:25px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<div class="container">
+<nav class="navbar">
+    <div class="logo">Wish<span>Now</span> ✨</div>
+    <a class="back-btn" href="index.html">← Home</a>
+</nav>
 
-<div class="logo">
-    Wish<span>Now</span> ✨
+<header class="page-header">
+
+    <div class="creator-label">
+        ✨ WISHNOW CREATOR
+    </div>
+
+    <h1>Create a Wish They'll Remember ❤️</h1>
+
+    <p>
+        Choose an occasion, select a beautiful template,
+        write your message and protect your surprise
+        with a WishLock challenge.
+    </p>
+
+</header>
+
+<div class="progress-wrap">
+
+<div class="progress">
+
+<div class="progress-item active" id="progress1">
+<div class="progress-circle">1</div>
+Occasion
 </div>
+
+<div class="progress-item" id="progress2">
+<div class="progress-circle">2</div>
+Template
+</div>
+
+<div class="progress-item" id="progress3">
+<div class="progress-circle">3</div>
+Your Wish
+</div>
+
+<div class="progress-item" id="progress4">
+<div class="progress-circle">4</div>
+WishLock
+</div>
+
+<div class="progress-item" id="progress5">
+<div class="progress-circle">5</div>
+Preview
+</div>
+
+</div>
+</div>
+
+<main class="creator">
+
+<!-- STEP 1 -->
+
+<section class="step active" id="step1">
 
 <div class="card">
 
-<div class="header">
+<div class="step-title">
 
-<div class="icon">💌</div>
+<small>STEP 1</small>
 
-<h1 id="wishTitle">
-A Special Wish ❤️
-</h1>
-
-<p id="fromText">
-Someone created something special for you.
-</p>
-
-</div>
-
-<div class="content">
-
-<img
-    id="wishPhoto"
-    class="photo"
-    alt="Wish photo"
->
-
-<div
-    id="wishMessage"
-    class="message"
->
-Loading your special wish...
-</div>
-
-
-<div
-    id="lockBox"
-    class="lock-box"
->
-
-<h2>🔐 WishLock</h2>
+<h2>Choose an Occasion</h2>
 
 <p>
-Answer these 3 questions correctly.
-You need <strong>40 out of 60 marks</strong>
-to unlock your special wish.
+Your occasion decides which templates and suggestions you will see.
 </p>
+
+</div>
+
+<div class="occasion-grid">
+
+<div class="occasion"
+data-occasion="Birthday"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">🎂</div>
+<h3>Birthday</h3>
+<p>Make their birthday unforgettable.</p>
+</div>
+
+<div class="occasion"
+data-occasion="Anniversary"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">💍</div>
+<h3>Anniversary</h3>
+<p>Celebrate beautiful memories.</p>
+</div>
+
+<div class="occasion"
+data-occasion="Raksha Bandhan"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">🪢</div>
+<h3>Raksha Bandhan</h3>
+<p>Celebrate the sibling bond.</p>
+</div>
+
+<div class="occasion"
+data-occasion="Durga Puja"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">🪔</div>
+<h3>Durga Puja</h3>
+<p>Share festive happiness.</p>
+</div>
+
+<div class="occasion"
+data-occasion="Diwali"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">✨</div>
+<h3>Diwali</h3>
+<p>Spread light and happiness.</p>
+</div>
+
+<div class="occasion"
+data-occasion="Eid"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">🌙</div>
+<h3>Eid</h3>
+<p>Send warm festive wishes.</p>
+</div>
+
+<div class="occasion"
+data-occasion="Christmas"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">🎄</div>
+<h3>Christmas</h3>
+<p>Share festive joy.</p>
+</div>
+
+<div class="occasion"
+data-occasion="Friendship Day"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">🤝</div>
+<h3>Friendship Day</h3>
+<p>Celebrate true friendship.</p>
+</div>
+
+<div class="occasion"
+data-occasion="Valentine's Day"
+onclick="selectOccasion(this)">
+<div class="occasion-icon">❤️</div>
+<h3>Valentine's Day</h3>
+<p>Share a heartfelt wish.</p>
+</div>
+
+</div>
+
+<div class="navigation">
+
+<div></div>
+
+<button
+class="btn btn-primary"
+onclick="nextStep()">
+Continue →
+</button>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- STEP 2 -->
+
+<section class="step" id="step2">
+
+<div class="card">
+
+<div class="step-title">
+
+<small>STEP 2</small>
+
+<h2>Pick Your Template 🎨</h2>
+
+<p id="templateDescription">
+Choose the design that feels right.
+</p>
+
+</div>
+
+<div class="template-grid">
+
+<div class="template"
+onclick="selectTemplate(this,'From The Heart')">
+
+<div class="template-preview t1">
+<h3>❤️ From The Heart</h3>
+</div>
+
+<div class="template-info">
+<h3>From The Heart</h3>
+<p>Warm & elegant</p>
+</div>
+
+</div>
+
+<div class="template"
+onclick="selectTemplate(this,'Rose & Memories')">
+
+<div class="template-preview t2">
+<h3>🌹 Rose & Memories</h3>
+</div>
+
+<div class="template-info">
+<h3>Rose & Memories</h3>
+<p>Soft & premium</p>
+</div>
+
+</div>
+
+<div class="template"
+onclick="selectTemplate(this,'Love Note')">
+
+<div class="template-preview t3">
+<h3>💌 Love Note</h3>
+</div>
+
+<div class="template-info">
+<h3>Love Note</h3>
+<p>Sweet & personal</p>
+</div>
+
+</div>
+
+<div class="template"
+onclick="selectTemplate(this,'Forever Moment')">
+
+<div class="template-preview t4">
+<h3>✨ Forever Moment</h3>
+</div>
+
+<div class="template-info">
+<h3>Forever Moment</h3>
+<p>Modern & clean</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="navigation">
+
+<button
+class="btn btn-secondary"
+onclick="prevStep()">
+← Back
+</button>
+
+<button
+class="btn btn-primary"
+onclick="nextStep()">
+Continue →
+</button>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- STEP 3 -->
+
+<section class="step" id="step3">
+
+<div class="card">
+
+<div class="step-title">
+
+<small>STEP 3</small>
+
+<h2>Add Your Wish ✍️</h2>
+
+<p>
+Photo is optional. Your words are what make the surprise special.
+</p>
+
+</div>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>Your Name</label>
+
+<input
+id="senderName"
+type="text"
+placeholder="Enter your name">
+
+</div>
+
+<div class="field">
+
+<label>Recipient Name</label>
+
+<input
+id="recipientName"
+type="text"
+placeholder="Who are you wishing?">
+
+</div>
+
+<div class="field full">
+
+<label>Your Wish</label>
+
+<textarea
+id="wishMessage"
+placeholder="Write your heartfelt message here..."></textarea>
+
+</div>
+
+<div class="field full">
+
+<label>📸 Add a Photo (Optional)</label>
+
+<div class="photo-box">
+
+<div>
+You can create a beautiful wish without uploading a photo.
+</div>
+
+<input
+type="file"
+id="photoInput"
+accept="image/*"
+onchange="previewPhoto(event)">
+
+<img
+id="photoPreview"
+class="photo-preview"
+alt="Selected photo">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="navigation">
+
+<button
+class="btn btn-secondary"
+onclick="prevStep()">
+← Back
+</button>
+
+<button
+class="btn btn-primary"
+onclick="nextStep()">
+Add WishLock →
+</button>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- STEP 4 -->
+
+<section class="step" id="step4">
+
+<div class="card">
+
+<div class="step-title">
+
+<small>STEP 4</small>
+
+<h2>🔐 Add Your WishLock Challenge</h2>
+
+<p>
+Your recipient must answer these 3 questions before your surprise can be unlocked.
+</p>
+
+</div>
+
+<div class="lock-intro">
+
+<strong>How it works:</strong>
+
+Every correct answer gives
+<strong>20 marks</strong>.
+
+The recipient needs
+<strong>40/60</strong>
+to unlock the Wish.
+
+</div>
 
 <div id="questionsContainer"></div>
 
+<div class="lock-rules">
+
+<div class="rule">❓ 3 Questions</div>
+<div class="rule">⭐ 20 Marks Each</div>
+<div class="rule">🏆 Pass: 40</div>
+<div class="rule">🔓 40+ Unlocks</div>
+
+</div>
+
+<div class="navigation">
+
 <button
-    class="unlock-btn"
-    onclick="checkAnswers()"
->
-🔓 Unlock My Wish
+class="btn btn-secondary"
+onclick="prevStep()">
+← Back
 </button>
 
+<button
+class="btn btn-primary"
+onclick="nextStep()">
+Preview My Wish →
+</button>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- STEP 5 -->
+
+<section class="step" id="step5">
+
+<div class="card">
+
+<div class="step-title">
+
+<small>STEP 5</small>
+
+<h2>Your Wish Is Ready 🎁</h2>
+
+<p>
+Check everything before creating your surprise.
+</p>
+
+</div>
+
+<div class="preview-box">
+
+<div class="preview-icon">💌</div>
+
+<h2 id="previewTitle">
+A Special Wish ❤️
+</h2>
+
+<p id="previewFrom">
+From someone special
+</p>
+
 <div
-    id="result"
-    class="result"
-></div>
-
+class="preview-message"
+id="previewMessage">
+Your beautiful message will appear here.
 </div>
 
 </div>
 
+<div id="resultMessage"></div>
+
+<div class="navigation">
+
+<button
+class="btn btn-secondary"
+onclick="prevStep()">
+← Edit
+</button>
+
+<button
+class="btn btn-success"
+onclick="createWish()">
+❤️ Create & Share My Wish
+</button>
+
 </div>
 
-<div class="footer">
+</div>
+</section>
+
+</main>
+
+<footer>
 © 2026 WishNow — Make Every Moment Special. 🎁
-</div>
-
-</div>
+</footer>
 
 
 <script>
 
-/* ================================
+/* =========================================
    SUPABASE
-================================ */
+========================================= */
 
 const SUPABASE_URL =
 "https://izvlpqxsxjcvligkgduh.supabase.co";
@@ -297,249 +1054,597 @@ supabase.createClient(
 );
 
 
-/* ================================
-   GET LINK DATA
-================================ */
+/* =========================================
+   DATA
+========================================= */
 
-const params =
-new URLSearchParams(
-    window.location.search
+let currentStep = 1;
+
+let selectedOccasion = "";
+
+let selectedTemplate = "";
+
+let photoData = "";
+
+
+/* =========================================
+   QUESTIONS
+========================================= */
+
+const questionsContainer =
+document.getElementById(
+    "questionsContainer"
 );
 
-const wishId =
-params.get("id");
+for(let i = 1; i <= 3; i++){
 
-const urlName =
-params.get("name");
+    questionsContainer.innerHTML += `
 
+    <div class="question-card">
 
-/* ================================
-   LOAD WISH
-================================ */
+        <div class="question-top">
 
-let wishData = null;
-let questionData = [];
-
-
-async function loadWish(){
-
-    const messageBox =
-        document.getElementById("wishMessage");
-
-    if(!wishId){
-
-        messageBox.textContent =
-            "❌ This Wish link is invalid.";
-
-        document.getElementById("lockBox")
-            .classList.add("hidden");
-
-        return;
-    }
-
-
-    try{
-
-        const { data: wish, error } =
-            await supabaseClient
-            .from("wishes")
-            .select("*")
-            .eq("id",wishId)
-            .single();
-
-        if(error)
-            throw error;
-
-        if(!wish){
-
-            messageBox.textContent =
-                "❌ Wish not found.";
-
-            return;
-        }
-
-        wishData = wish;
-
-
-        /* CHECK EXPIRY */
-
-        if(
-            wish.expires_at &&
-            new Date(wish.expires_at) < new Date()
-        ){
-
-            messageBox.textContent =
-                "⏰ This Wish link has expired.";
-
-            document.getElementById("lockBox")
-                .classList.add("hidden");
-
-            return;
-        }
-
-
-        /* SHOW NAME */
-
-        document.getElementById("wishTitle")
-            .textContent =
-            "A Special " +
-            wish.occasion +
-            " Wish for " +
-            wish.recipient_name +
-            " ❤️";
-
-        document.getElementById("fromText")
-            .textContent =
-            "From " +
-            wish.sender_name +
-            " • " +
-            wish.template;
-
-
-        messageBox.textContent =
-            wish.message;
-
-
-        /* PHOTO */
-
-        if(wish.photo_url){
-
-            const photo =
-                document.getElementById("wishPhoto");
-
-            photo.src =
-                wish.photo_url;
-
-            photo.style.display =
-                "block";
-        }
-
-
-        /* QUESTIONS */
-
-        const { data: questions, error: qError } =
-            await supabaseClient
-            .from("wish_questions")
-            .select("*")
-            .eq("wish_id",wishId)
-            .order("question_no");
-
-        if(qError)
-            throw qError;
-
-        questionData =
-            questions || [];
-
-        renderQuestions();
-
-
-    }catch(error){
-
-        console.error(error);
-
-        messageBox.textContent =
-            "❌ Unable to load this Wish.";
-
-        document.getElementById("lockBox")
-            .classList.add("hidden");
-    }
-}
-
-
-/* ================================
-   SHOW 3 QUESTIONS
-================================ */
-
-function renderQuestions(){
-
-    const container =
-        document.getElementById(
-            "questionsContainer"
-        );
-
-    container.innerHTML = "";
-
-    questionData.forEach((item,index)=>{
-
-        container.innerHTML += `
-
-            <div class="question">
-
-                <strong>
-                    ${index + 1}. ${escapeHtml(item.question)}
-                </strong>
-
-                <input
-                    id="answer${index}"
-                    type="text"
-                    placeholder="Your answer"
-                    autocomplete="off"
-                >
-
+            <div class="question-number">
+                QUESTION ${i}
             </div>
 
-        `;
-    });
+            <div class="mark">
+                +20 MARKS
+            </div>
+
+        </div>
+
+        <input
+            id="q${i}"
+            type="text"
+            placeholder="Write your question"
+        >
+
+        <input
+            id="a${i}"
+            type="text"
+            placeholder="Correct answer"
+        >
+
+        ${
+            i === 1
+            ?
+            `
+            <div class="hint">
+                💡 The correct answer stays hidden from the recipient.
+            </div>
+            `
+            :
+            ""
+        }
+
+    </div>
+
+    `;
 }
 
 
-/* ================================
-   CHECK ANSWERS
-================================ */
+/* =========================================
+   OCCASION
+========================================= */
 
-async function checkAnswers(){
+function selectOccasion(element){
 
-    if(!questionData.length){
+    document
+    .querySelectorAll(".occasion")
+    .forEach(item =>
+        item.classList.remove("selected")
+    );
+
+    element.classList.add("selected");
+
+    selectedOccasion =
+        element.dataset.occasion;
+
+    document.getElementById(
+        "templateDescription"
+    ).textContent =
+        selectedOccasion +
+        " templates are ready for your special wish.";
+}
+
+
+/* =========================================
+   TEMPLATE
+========================================= */
+
+function selectTemplate(element,name){
+
+    document
+    .querySelectorAll(".template")
+    .forEach(item =>
+        item.classList.remove("selected")
+    );
+
+    element.classList.add("selected");
+
+    selectedTemplate = name;
+}
+
+
+/* =========================================
+   PHOTO
+========================================= */
+
+function previewPhoto(event){
+
+    const file =
+        event.target.files[0];
+
+    if(!file) return;
+
+    if(file.size > 2 * 1024 * 1024){
 
         alert(
-            "No WishLock questions were found."
+            "📸 Please choose an image smaller than 2MB."
         );
+
+        event.target.value = "";
 
         return;
     }
 
+    const reader =
+        new FileReader();
 
-    let score = 0;
+    reader.onload =
+        function(e){
+
+            photoData =
+                e.target.result;
+
+            const preview =
+                document.getElementById(
+                    "photoPreview"
+                );
+
+            preview.src =
+                photoData;
+
+            preview.style.display =
+                "block";
+        };
+
+    reader.readAsDataURL(file);
+}
 
 
-    questionData.forEach((item,index)=>{
+/* =========================================
+   VALIDATION
+========================================= */
 
-        const input =
-            document.getElementById(
-                "answer"+index
-            );
+function validateStep(){
 
-        const userAnswer =
-            input.value
-            .trim()
-            .toLowerCase();
+    if(
+        currentStep === 1 &&
+        !selectedOccasion
+    ){
 
-        const correctAnswer =
-            String(item.answer)
-            .trim()
-            .toLowerCase();
+        alert(
+            "🎯 Please choose an occasion first."
+        );
+
+        return false;
+    }
+
+
+    if(
+        currentStep === 2 &&
+        !selectedTemplate
+    ){
+
+        alert(
+            "🎨 Please choose a template first."
+        );
+
+        return false;
+    }
+
+
+    if(currentStep === 3){
+
+        const sender =
+            document
+            .getElementById("senderName")
+            .value
+            .trim();
+
+        const recipient =
+            document
+            .getElementById("recipientName")
+            .value
+            .trim();
+
+        const message =
+            document
+            .getElementById("wishMessage")
+            .value
+            .trim();
 
         if(
-            userAnswer &&
-            userAnswer === correctAnswer
+            !sender ||
+            !recipient ||
+            !message
         ){
 
-            score += 20;
-        }
+            alert(
+                "✍️ Please complete your name, recipient name and wish."
+            );
 
+            return false;
+        }
+    }
+
+
+    if(currentStep === 4){
+
+        for(let i = 1; i <= 3; i++){
+
+            const question =
+                document
+                .getElementById("q" + i)
+                .value
+                .trim();
+
+            const answer =
+                document
+                .getElementById("a" + i)
+                .value
+                .trim();
+
+            if(!question || !answer){
+
+                alert(
+                    "🔐 Please complete all 3 questions and correct answers."
+                );
+
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+
+/* =========================================
+   NEXT
+========================================= */
+
+function nextStep(){
+
+    if(!validateStep())
+        return;
+
+    if(currentStep < 5){
+
+        currentStep++;
+
+        showStep();
+    }
+}
+
+
+/* =========================================
+   PREVIOUS
+========================================= */
+
+function prevStep(){
+
+    if(currentStep > 1){
+
+        currentStep--;
+
+        showStep();
+    }
+}
+
+
+/* =========================================
+   SHOW STEP
+========================================= */
+
+function showStep(){
+
+    document
+    .querySelectorAll(".step")
+    .forEach(step =>
+        step.classList.remove("active")
+    );
+
+    document
+    .getElementById("step" + currentStep)
+    .classList.add("active");
+
+
+    for(let i = 1; i <= 5; i++){
+
+        const progress =
+            document.getElementById(
+                "progress" + i
+            );
+
+        progress.classList.remove(
+            "active",
+            "done"
+        );
+
+        if(i < currentStep)
+            progress.classList.add("done");
+
+        if(i === currentStep)
+            progress.classList.add("active");
+    }
+
+
+    if(currentStep === 5)
+        updatePreview();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
     });
+}
+
+
+/* =========================================
+   PREVIEW
+========================================= */
+
+function updatePreview(){
+
+    const sender =
+        document
+        .getElementById("senderName")
+        .value
+        .trim();
+
+    const recipient =
+        document
+        .getElementById("recipientName")
+        .value
+        .trim();
+
+    const message =
+        document
+        .getElementById("wishMessage")
+        .value
+        .trim();
+
+
+    document.getElementById(
+        "previewTitle"
+    ).textContent =
+        "A Special " +
+        selectedOccasion +
+        " Wish for " +
+        recipient +
+        " ❤️";
+
+
+    document.getElementById(
+        "previewFrom"
+    ).textContent =
+        "Created with " +
+        selectedTemplate +
+        " • From " +
+        sender;
+
+
+    document.getElementById(
+        "previewMessage"
+    ).textContent =
+        message;
+}
+
+
+/* =========================================
+   CREATE WISH
+========================================= */
+
+async function createWish(){
+
+    if(!validateStep())
+        return;
 
 
     const result =
-        document.getElementById("result");
+        document.getElementById(
+            "resultMessage"
+        );
+
 
     result.style.display =
         "block";
 
+    result.style.background =
+        "#fff7e8";
 
-    /* PASS */
+    result.style.color =
+        "#8a5a00";
 
-    if(score >= 40){
+    result.textContent =
+        "⏳ Creating your Wish...";
+
+
+    try{
+
+        /* =========================
+           GET FORM DATA
+        ========================= */
+
+        const sender =
+            document
+            .getElementById("senderName")
+            .value
+            .trim();
+
+        const recipient =
+            document
+            .getElementById("recipientName")
+            .value
+            .trim();
+
+        const message =
+            document
+            .getElementById("wishMessage")
+            .value
+            .trim();
+
+
+        /* =========================
+           INSERT WISH
+        ========================= */
+
+        const {
+            data: wish,
+            error: wishError
+        } =
+        await supabaseClient
+        .from("wishes")
+        .insert({
+
+            sender_name: sender,
+
+            recipient_name: recipient,
+
+            occasion: selectedOccasion,
+
+            template: selectedTemplate,
+
+            message: message,
+
+            photo_url: photoData || null,
+
+            user_type: "free",
+
+            score: 0,
+
+            unlocked: false,
+
+            expires_at:
+                new Date(
+                    Date.now() +
+                    30 * 24 * 60 * 60 * 1000
+                ).toISOString()
+
+        })
+        .select()
+        .single();
+
+
+        if(wishError){
+
+            console.error(
+                "WISH INSERT ERROR:",
+                wishError
+            );
+
+            throw new Error(
+                wishError.message
+            );
+        }
+
+
+        if(!wish || !wish.id){
+
+            throw new Error(
+                "Wish ID was not returned by Supabase."
+            );
+        }
+
+
+        /* =========================
+           INSERT 3 QUESTIONS
+        ========================= */
+
+        const questionRows = [];
+
+
+        for(let i = 1; i <= 3; i++){
+
+            questionRows.push({
+
+                wish_id: wish.id,
+
+                question_number: i,
+
+                question:
+                    document
+                    .getElementById("q" + i)
+                    .value
+                    .trim(),
+
+                correct_answer:
+                    document
+                    .getElementById("a" + i)
+                    .value
+                    .trim()
+
+            });
+        }
+
+
+        const {
+            error: questionError
+        } =
+        await supabaseClient
+        .from("wish_questions")
+        .insert(questionRows);
+
+
+        if(questionError){
+
+            console.error(
+                "QUESTION INSERT ERROR:",
+                questionError
+            );
+
+
+            /* Delete wish if questions fail */
+
+            await supabaseClient
+            .from("wishes")
+            .delete()
+            .eq("id",wish.id);
+
+
+            throw new Error(
+                questionError.message
+            );
+        }
+
+
+        /* =========================
+           PERSONALIZED LINK
+        ========================= */
+
+        const cleanName =
+            recipient
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g,"-")
+            .replace(/^-+|-+$/g,"");
+
+
+        const resultUrl =
+            window.location.origin +
+            "/wish-result.html" +
+            "?name=" +
+            encodeURIComponent(cleanName) +
+            "&id=" +
+            encodeURIComponent(wish.id);
+
+
+        /* =========================
+           SUCCESS
+        ========================= */
 
         result.style.background =
             "#effff5";
@@ -547,53 +1652,108 @@ async function checkAnswers(){
         result.style.color =
             "#177245";
 
+
         result.innerHTML = `
-            🎉 <strong>Congratulations!</strong>
-            <br>
-            You scored ${score}/60.
+
+            🎉
+            <strong>
+                Your Wish has been created!
+            </strong>
+
             <br><br>
-            🔓 Your Wish has been unlocked!
+
+            Your personalized Wish link for
+            <strong>
+                ${escapeHtml(recipient)}
+            </strong>
+            is ready.
+
+            <br><br>
+
+            <input
+                id="createdLink"
+                value="${escapeHtml(resultUrl)}"
+                readonly
+                style="
+                    width:100%;
+                    padding:12px;
+                    border:1px solid #ccebd8;
+                    border-radius:12px;
+                    margin-bottom:10px;
+                    background:white;
+                "
+            >
+
+            <button
+                onclick="copyCreatedLink()"
+                style="
+                    width:100%;
+                    border:0;
+                    padding:13px;
+                    border-radius:25px;
+                    background:#177245;
+                    color:white;
+                    font-weight:900;
+                "
+            >
+                📋 Copy Wish Link
+            </button>
+
+            <br><br>
+
+            <a
+                href="${resultUrl}"
+                style="
+                    display:block;
+                    text-align:center;
+                    color:#7337c8;
+                    font-weight:900;
+                "
+            >
+                🔗 Open My Wish
+            </a>
+
         `;
 
 
-        document.getElementById("lockBox")
-            .classList.add("hidden");
+    }catch(error){
 
+        console.error(
+            "CREATE WISH ERROR:",
+            error
+        );
 
-        /* UPDATE DATABASE */
-
-        await supabaseClient
-            .from("wishes")
-            .update({
-                score:score,
-                unlocked:true
-            })
-            .eq("id",wishId);
-
-
-    }else{
 
         result.style.background =
-            "#fff7e8";
+            "#fff0f0";
 
         result.style.color =
-            "#8a5a00";
+            "#a12626";
+
 
         result.innerHTML = `
-            🔒 <strong>Not unlocked yet.</strong>
-            <br>
-            You scored ${score}/60.
+
+            ❌
+            <strong>
+                Could not create the Wish.
+            </strong>
+
             <br><br>
-            You need at least 40/60.
-            Try again!
+
+            ${escapeHtml(error.message)}
+
+            <br><br>
+
+            Please send this error to the website administrator.
+
         `;
     }
 }
 
 
-/* ================================
+/* =========================================
    ESCAPE HTML
-================================ */
+========================================= */
 
 function escapeHtml(text){
 
@@ -607,9 +1767,70 @@ function escapeHtml(text){
 }
 
 
-/* LOAD */
+/* =========================================
+   COPY LINK
+========================================= */
 
-loadWish();
+async function copyCreatedLink(){
+
+    const input =
+        document.getElementById(
+            "createdLink"
+        );
+
+    try{
+
+        await navigator.clipboard
+            .writeText(input.value);
+
+        alert(
+            "✅ Wish link copied!"
+        );
+
+    }catch(error){
+
+        input.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+        alert(
+            "✅ Wish link copied!"
+        );
+    }
+}
+
+
+/* =========================================
+   URL OCCASION
+========================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const urlOccasion =
+    params.get("occasion");
+
+
+if(urlOccasion){
+
+    document
+    .querySelectorAll(".occasion")
+    .forEach(card => {
+
+        if(
+            card.dataset.occasion ===
+            urlOccasion
+        ){
+
+            selectOccasion(card);
+        }
+
+    });
+}
 
 </script>
 
