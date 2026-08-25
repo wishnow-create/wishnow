@@ -1746,6 +1746,15 @@ setInterval(nextSlide,5000);
 function createWish(occasion){
 
   if(occasion){
+    window.location.href =
+      "wish.html?occasion=" + encodeURIComponent(occasion);
+  }else{
+    window.location.href = "wish.html";
+  }
+
+}
+
+  if(occasion){
 
     alert(
       "✨ " +
