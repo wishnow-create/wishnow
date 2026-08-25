@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WishNow — Create Your Wish</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:#fff7fb;
+  color:#29152f;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+.topbar{
+  padding:18px 6%;
+  background:#fff;
+  border-bottom:1px solid #f1e4ef;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+}
+
+.logo span{
+  color:#e83e8c;
+}
+
+.back{
+  border:0;
+  background:#f9edf6;
+  color:#54205f;
+  padding:10px 18px;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.creator{
+  width:min(1150px,92%);
+  margin:auto;
+  padding:45px 0 70px;
+}
+
+.heading{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.heading .tag{
+  color:#df3983;
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.heading h1{
+  font-size:clamp(34px,5vw,55px);
+  margin:10px 0;
+}
+
+.heading p{
+  color:#806f83;
+}
+
+.creator-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #f0e2ee;
+  border-radius:26px;
+  padding:28px;
+  box-shadow:0 15px 40px rgba(60,20,70,.06);
+}
+
+.card h2{
+  margin-bottom:20px;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  margin-bottom:7px;
+  font-weight:800;
+  font-size:14px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  padding:13px 15px;
+  border:1px solid #ead9e8;
+  border-radius:14px;
+  outline:none;
+  background:#fff;
+  color:#29152f;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#d9418c;
+}
+
+textarea{
+  min-height:125px;
+  resize:vertical;
+}
+
+.occasion-options{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.occasion-btn{
+  border:1px solid #ead9e8;
+  background:#fff;
+  padding:11px 6px;
+  border-radius:13px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.occasion-btn.active{
+  background:#fce8f3;
+  border-color:#e63c8b;
+  color:#b7286d;
+  font-weight:800;
+}
+
+.upload{
+  border:2px dashed #e5cde0;
+  border-radius:17px;
+  padding:22px;
+  text-align:center;
+  cursor:pointer;
+  background:#fffafd;
+}
+
+.upload input{
+  display:none;
+}
+
+.upload strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.upload span{
+  color:#88758b;
+  font-size:13px;
+}
+
+.templates{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.template{
+  height:105px;
+  border-radius:16px;
+  border:3px solid transparent;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:900;
+  color:#fff;
+  padding:10px;
+}
+
+.template.active{
+  border-color:#29152f;
+}
+
+.t1{
+  background:linear-gradient(135deg,#ff4d91,#8f39d9);
+}
+
+.t2{
+  background:linear-gradient(135deg,#ff9966,#ff5e62);
+}
+
+.t3{
+  background:linear-gradient(135deg,#4776e6,#8e54e9);
+}
+
+.preview{
+  min-height:500px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.preview-card{
+  width:100%;
+  max-width:460px;
+  min-height:430px;
+  border-radius:28px;
+  padding:35px 25px;
+  color:#fff;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.preview-card::before{
+  content:"✨";
+  position:absolute;
+  font-size:150px;
+  opacity:.08;
+  top:-20px;
+  right:-10px;
+}
+
+.preview-emoji{
+  font-size:52px;
+  margin-bottom:15px;
+}
+
+.preview-card h2{
+  font-size:34px;
+  margin-bottom:12px;
+}
+
+.preview-card p{
+  line-height:1.7;
+  color:rgba(255,255,255,.9);
+}
+
+.preview-photo{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:15px;
+  border:4px solid rgba(255,255,255,.8);
+  display:none;
+}
+
+.preview-name{
+  font-weight:900;
+  font-size:20px;
+  margin-bottom:12px;
+}
+
+.create-final{
+  width:100%;
+  margin-top:22px;
+  border:0;
+  padding:15px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#ff4d91,#8f39d9);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.create-final:hover{
+  transform:translateY(-2px);
+}
+
+.result{
+  display:none;
+  margin-top:20px;
+  padding:18px;
+  border-radius:16px;
+  background:#f3fff7;
+  color:#237047;
+  text-align:center;
+  font-weight:700;
+}
+
+@media(max-width:800px){
+  .creator-grid{
+    grid-template-columns:1fr;
+  }
+
+  .preview{
+    min-height:auto;
+  }
+}
+
+@media(max-width:500px){
+  .creator{
+    width:92%;
+    padding-top:30px;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .occasion-options{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .templates{
+    grid-template-columns:1fr;
+  }
+
+  .preview-card{
+    min-height:390px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="logo">Wish<span>Now</span> ✨</div>
+
+  <button class="back" onclick="history.back()">
+    ← Back
+  </button>
+</header>
+
+
+<main class="creator">
+
+  <div class="heading">
+    <div class="tag">STEP 2 — WISH CREATOR</div>
+
+    <h1>Create Something Special ✨</h1>
+
+    <p>
+      Add your words, memories and choose a beautiful design.
+    </p>
+  </div>
+
+
+  <div class="creator-grid">
+
+    <!-- FORM -->
+
+    <section class="card">
+
+      <h2>💌 Your Wish</h2>
+
+
+      <div class="form-group">
+
+        <label>Choose Occasion</label>
+
+        <div class="occasion-options">
+
+          <button class="occasion-btn active"
+                  onclick="selectOccasion(this,'Birthday','🎂')">
+            🎂 Birthday
+          </button>
+
+          <button class="occasion-btn"
+                  onclick="selectOccasion(this,'Anniversary','💍')">
+            💍 Anniversary
+          </button>
+
+          <button class="occasion-btn"
+                  onclick="selectOccasion(this,'Festival','🎉')">
+            🎉 Festival
+          </button>
+
+          <button class="occasion-btn"
+                  onclick="selectOccasion(this,'Raksha Bandhan','🪢')">
+            🪢 Raksha
+          </button>
+
+          <button class="occasion-btn"
+                  onclick="selectOccasion(this,'Diwali','✨')">
+            ✨ Diwali
+          </button>
+
+          <button class="occasion-btn"
+                  onclick="selectOccasion(this,'Christmas','🎄')">
+            🎄 Christmas
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="name">
+          Person's Name
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          placeholder="Enter their name"
+          oninput="updatePreview()"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="message">
+          Your Message
+        </label>
+
+        <textarea
+          id="message"
+          placeholder="Write something from your heart..."
+          oninput="updatePreview()"
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>📷 Add a Memory Photo</label>
+
+        <label class="upload">
+
+          <strong>Click to upload a photo</strong>
+
+          <span>
+            JPG, PNG or WEBP
+          </span>
+
+          <input
+            type="file"
+            accept="image/*"
+            onchange="loadPhoto(event)"
+          >
+
+        </label>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>🎨 Choose Template</label>
+
+        <div class="templates">
+
+          <div
+            class="template t1 active"
+            onclick="selectTemplate(this,'t1')">
+            Dreamy
+          </div>
+
+          <div
+            class="template t2"
+            onclick="selectTemplate(this,'t2')">
+            Celebration
+          </div>
+
+          <div
+            class="template t3"
+            onclick="selectTemplate(this,'t3')">
+            Memories
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button class="create-final" onclick="createFinalWish()">
+        ✨ Create My Wish
+      </button>
+
+      <div class="result" id="result"></div>
+
+    </section>
+
+
+    <!-- PREVIEW -->
+
+    <section class="card preview">
+
+      <div class="preview-card t1" id="previewCard">
+
+        <div class="preview-emoji" id="previewEmoji">
+          🎂
+        </div>
+
+        <img
+          class="preview-photo"
+          id="previewPhoto"
+          alt="Wish photo"
+        >
+
+        <div class="preview-name" id="previewName">
+          Someone Special
+        </div>
+
+        <h2 id="previewTitle">
+          Happy Birthday!
+        </h2>
+
+        <p id="previewMessage">
+          May your special day be filled with
+          happiness, beautiful memories and lots of smiles. ✨
+        </p>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script>
+
+let selectedOccasion = "Birthday";
+let selectedEmoji = "🎂";
+let selectedTemplate = "t1";
+
+
+function selectOccasion(button,occasion,emoji){
+
+  document.querySelectorAll(".occasion-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+
+  selectedOccasion = occasion;
+  selectedEmoji = emoji;
+
+  updatePreview();
+}
+
+
+function selectTemplate(element,template){
+
+  document.querySelectorAll(".template")
+    .forEach(item => item.classList.remove("active"));
+
+  element.classList.add("active");
+
+  selectedTemplate = template;
+
+  const preview = document.getElementById("previewCard");
+
+  preview.classList.remove("t1","t2","t3");
+  preview.classList.add(template);
+}
+
+
+function updatePreview(){
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const message =
+    document.getElementById("message").value.trim();
+
+
+  document.getElementById("previewEmoji").textContent =
+    selectedEmoji;
+
+
+  document.getElementById("previewName").textContent =
+    name || "Someone Special";
+
+
+  document.getElementById("previewTitle").textContent =
+    "Happy " + selectedOccasion + "!";
+
+
+  document.getElementById("previewMessage").textContent =
+    message ||
+    "May your special day be filled with happiness, beautiful memories and lots of smiles. ✨";
+}
+
+
+function loadPhoto(event){
+
+  const file = event.target.files[0];
+
+  if(!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+
+    const photo =
+      document.getElementById("previewPhoto");
+
+    photo.src = e.target.result;
+    photo.style.display = "block";
+
+  };
+
+  reader.readAsDataURL(file);
+}
+
+
+function createFinalWish(){
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const message =
+    document.getElementById("message").value.trim();
+
+  const result =
+    document.getElementById("result");
+
+
+  if(!name){
+
+    alert("Please enter the person's name. 😊");
+    return;
+
+  }
+
+
+  if(!message){
+
+    alert("Please write your wish message. 💌");
+    return;
+
+  }
+
+
+  result.style.display = "block";
+
+  result.innerHTML =
+    "🎉 Your wish is ready!<br><br>" +
+    "The shareable Wish page/link system will be connected next.";
+
+  result.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+}
+
+</script>
+
+</body>
+</html>
