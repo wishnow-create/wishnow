@@ -1,635 +1,1284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>WishNow — Make Every Moment Special</title>
-  <meta name="description" content="WishNow helps you create beautiful wishes for birthdays, anniversaries, festivals and every special moment.">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: #222;
-    }
-
-    /* NAVBAR */
-
-    nav {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 20;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 20px 6%;
-      color: white;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .nav-btn {
-      border: 1px solid rgba(255,255,255,.7);
-      background: rgba(255,255,255,.15);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 30px;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-    }
-
-    /* HERO */
-
-    .hero {
-      position: relative;
-      height: 650px;
-      min-height: 600px;
-      overflow: hidden;
-      color: white;
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      opacity: 0;
-      transition: opacity 1s ease;
-
-      background-size: cover;
-      background-position: center;
-    }
-
-    .slide.active {
-      opacity: 1;
-    }
-
-    .slide::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(0,0,0,.75),
-        rgba(0,0,0,.35),
-        rgba(0,0,0,.2)
-      );
-    }
-
-    .slide-content {
-      position: relative;
-      z-index: 2;
-      width: min(900px, 88%);
-      text-align: center;
-    }
-
-    .slide-content small {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 8px 16px;
-
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.4);
-      border-radius: 30px;
-
-      backdrop-filter: blur(8px);
-    }
-
-    .slide-content h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.05;
-      margin-bottom: 20px;
-    }
-
-    .slide-content p {
-      font-size: clamp(17px, 2vw, 22px);
-      max-width: 650px;
-      margin: 0 auto 30px;
-      line-height: 1.6;
-    }
-
-    .primary-btn {
-      display: inline-block;
-      padding: 14px 28px;
-
-      border: none;
-      border-radius: 30px;
-
-      background: white;
-      color: #222;
-
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-
-      transition: transform .2s ease;
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-3px);
-    }
-
-    /* SLIDE BACKGROUNDS */
-
-    .slide:nth-child(1) {
-      background-image: url("https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1800&q=80");
-    }
-
-    .slide:nth-child(2) {
-      background-image: url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80");
-    }
-
-    .slide:nth-child(3) {
-      background-image: url("https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1800&q=80");
-    }
-
-    .slide:nth-child(4) {
-      background-image: url("https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1800&q=80");
-    }
-
-    /* DOTS */
-
-    .dots {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-
-      display: flex;
-      gap: 9px;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.5);
-      cursor: pointer;
-      transition: .3s;
-    }
-
-    .dot.active {
-      width: 28px;
-      border-radius: 20px;
-      background: white;
-    }
-
-    /* OCCASIONS */
-
-    .section {
-      padding: 70px 6%;
-      max-width: 1250px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .section-title h2 {
-      font-size: clamp(30px, 5vw, 44px);
-      margin-bottom: 12px;
-    }
-
-    .section-title p {
-      color: #777;
-      font-size: 17px;
-    }
-
-    .occasion-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .occasion {
-      padding: 25px;
-      border: 1px solid #eee;
-      border-radius: 18px;
-      background: white;
-
-      cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .occasion:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(0,0,0,.08);
-    }
-
-    .occasion .emoji {
-      font-size: 35px;
-      margin-bottom: 12px;
-    }
-
-    .occasion h3 {
-      margin-bottom: 7px;
-    }
-
-    .occasion p {
-      color: #777;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    /* PREMIUM */
-
-    .premium {
-      margin-top: 30px;
-      padding: 60px 6%;
-      text-align: center;
-
-      background: #171717;
-      color: white;
-    }
-
-    .premium h2 {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-
-    .premium p {
-      color: #ccc;
-      max-width: 650px;
-      margin: auto;
-      line-height: 1.6;
-    }
-
-    .premium-btn {
-      display: inline-block;
-      margin-top: 25px;
-
-      padding: 13px 25px;
-      border-radius: 30px;
-
-      background: white;
-      color: #111;
-
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    /* FOOTER */
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      color: #777;
-      font-size: 14px;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 800px) {
-
-      nav {
-        padding: 17px 5%;
-      }
-
-      .logo {
-        font-size: 24px;
-      }
-
-      .hero {
-        height: 620px;
-      }
-
-      .occasion-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 520px) {
-
-      .nav-btn {
-        padding: 8px 13px;
-        font-size: 13px;
-      }
-
-      .hero {
-        min-height: 580px;
-        height: 580px;
-      }
-
-      .slide-content h1 {
-        font-size: 43px;
-      }
-
-      .slide-content p {
-        font-size: 16px;
-      }
-
-      .occasion-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section {
-        padding: 55px 5%;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WishNow — Make Every Moment Special</title>
+<meta name="description" content="Create beautiful wishes, discover thoughtful gifts and make every special moment unforgettable with WishNow.">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:#faf9f7;
+  color:#171717;
+  overflow-x:hidden;
+}
+
+button,
+a{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:50;
+  padding:22px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:#fff;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-1.5px;
+}
+
+.logo span{
+  opacity:.7;
+}
+
+.nav-links{
+  display:flex;
+  gap:30px;
+  align-items:center;
+}
+
+.nav-links a{
+  font-size:14px;
+  color:rgba(255,255,255,.9);
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  color:#fff;
+}
+
+.nav-btn{
+  border:1px solid rgba(255,255,255,.5);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  padding:10px 19px;
+  border-radius:30px;
+  backdrop-filter:blur(10px);
+  transition:.25s;
+}
+
+.nav-btn:hover{
+  background:#fff;
+  color:#111;
+}
+
+.menu-btn{
+  display:none;
+  border:0;
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  height:720px;
+  min-height:620px;
+  position:relative;
+  overflow:hidden;
+  color:#fff;
+}
+
+.slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 1s ease;
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+}
+
+.slide.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.slide::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.78) 0%,
+      rgba(0,0,0,.48) 48%,
+      rgba(0,0,0,.2) 100%
+    );
+}
+
+.slide:nth-child(1){
+  background-image:url("https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=2000&q=85");
+}
+
+.slide:nth-child(2){
+  background-image:url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=2000&q=85");
+}
+
+.slide:nth-child(3){
+  background-image:url("https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=2000&q=85");
+}
+
+.slide:nth-child(4){
+  background-image:url("https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=2000&q=85");
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  width:min(900px,88%);
+  margin-left:8%;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 15px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.12);
+  border-radius:30px;
+  backdrop-filter:blur(12px);
+  font-size:13px;
+  margin-bottom:22px;
+}
+
+.hero h1{
+  max-width:850px;
+  font-size:clamp(46px,7vw,86px);
+  line-height:.98;
+  letter-spacing:-4px;
+  margin-bottom:24px;
+}
+
+.hero p{
+  max-width:620px;
+  font-size:19px;
+  line-height:1.65;
+  color:rgba(255,255,255,.85);
+  margin-bottom:32px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 24px;
+  border-radius:30px;
+  border:1px solid transparent;
+  font-weight:700;
+  transition:.25s;
+}
+
+.btn-light{
+  background:#fff;
+  color:#111;
+}
+
+.btn-light:hover{
+  transform:translateY(-3px);
+}
+
+.btn-glass{
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.4);
+  color:#fff;
+  backdrop-filter:blur(10px);
+}
+
+.btn-glass:hover{
+  background:#fff;
+  color:#111;
+}
+
+.slider-controls{
+  position:absolute;
+  z-index:10;
+  bottom:34px;
+  left:8%;
+  display:flex;
+  gap:8px;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:20px;
+  border:0;
+  background:rgba(255,255,255,.45);
+  transition:.3s;
+}
+
+.dot.active{
+  width:34px;
+  background:#fff;
+}
+
+/* ================= GENERAL ================= */
+
+.section{
+  width:min(1200px,88%);
+  margin:auto;
+  padding:90px 0;
+}
+
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:38px;
+}
+
+.section-label{
+  color:#777;
+  text-transform:uppercase;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+
+.section-title{
+  font-size:clamp(30px,4vw,48px);
+  letter-spacing:-2px;
+}
+
+.section-description{
+  color:#777;
+  line-height:1.6;
+  max-width:470px;
+}
+
+/* ================= CELEBRATING ================= */
+
+.celebrating{
+  background:#fff;
+}
+
+.celebrate-card{
+  position:relative;
+  min-height:300px;
+  border-radius:30px;
+  overflow:hidden;
+  background:
+    linear-gradient(100deg,rgba(0,0,0,.72),rgba(0,0,0,.2)),
+    url("https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?auto=format&fit=crop&w=1600&q=85")
+    center/cover;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  padding:55px;
+}
+
+.celebrate-content{
+  max-width:600px;
+}
+
+.live{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:20px;
+  background:rgba(255,255,255,.15);
+  font-size:12px;
+  margin-bottom:18px;
+}
+
+.live::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+}
+
+.celebrate-card h2{
+  font-size:clamp(34px,5vw,58px);
+  letter-spacing:-2px;
+  margin-bottom:12px;
+}
+
+.celebrate-card p{
+  color:rgba(255,255,255,.8);
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+/* ================= OCCASIONS ================= */
+
+.occasion-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.occasion{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:20px;
+  padding:24px;
+  transition:.25s;
+  cursor:pointer;
+}
+
+.occasion:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 45px rgba(0,0,0,.08);
+}
+
+.icon{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:#f4f2ef;
+  font-size:25px;
+  margin-bottom:18px;
+}
+
+.occasion h3{
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+.occasion p{
+  color:#888;
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* ================= GIFT CARDS ================= */
+
+.gift-section{
+  background:#f1eee9;
+}
+
+.gift-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.gift-card{
+  position:relative;
+  min-height:250px;
+  border-radius:25px;
+  overflow:hidden;
+  color:#fff;
+  display:flex;
+  align-items:end;
+  padding:25px;
+  background-size:cover;
+  background-position:center;
+}
+
+.gift-card:nth-child(1){
+  background-image:linear-gradient(0deg,rgba(0,0,0,.7),transparent),
+  url("https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=900&q=80");
+}
+
+.gift-card:nth-child(2){
+  background-image:linear-gradient(0deg,rgba(0,0,0,.7),transparent),
+  url("https://images.unsplash.com/photo-1513884923967-4b182ef167ab?auto=format&fit=crop&w=900&q=80");
+}
+
+.gift-card:nth-child(3){
+  background-image:linear-gradient(0deg,rgba(0,0,0,.7),transparent),
+  url("https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=900&q=80");
+}
+
+.gift-card h3{
+  font-size:23px;
+  margin-bottom:5px;
+}
+
+.gift-card p{
+  font-size:13px;
+  color:rgba(255,255,255,.8);
+}
+
+/* ================= STORE ================= */
+
+.store-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.product{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:24px;
+  overflow:hidden;
+  transition:.25s;
+}
+
+.product:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 40px rgba(0,0,0,.07);
+}
+
+.product-image{
+  height:220px;
+  background-size:cover;
+  background-position:center;
+}
+
+.product:nth-child(1) .product-image{
+  background-image:url("https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=900&q=80");
+}
+
+.product:nth-child(2) .product-image{
+  background-image:url("https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=900&q=80");
+}
+
+.product:nth-child(3) .product-image{
+  background-image:url("https://images.unsplash.com/photo-1513884923967-4b182ef167ab?auto=format&fit=crop&w=900&q=80");
+}
+
+.product-info{
+  padding:20px;
+}
+
+.discount{
+  display:inline-block;
+  background:#171717;
+  color:#fff;
+  border-radius:20px;
+  padding:5px 9px;
+  font-size:10px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.product h3{
+  margin-bottom:8px;
+}
+
+.price{
+  font-weight:800;
+  font-size:18px;
+}
+
+.old-price{
+  color:#999;
+  text-decoration:line-through;
+  font-size:13px;
+  margin-left:5px;
+}
+
+/* ================= PREMIUM ================= */
+
+.premium{
+  background:#171717;
+  color:#fff;
+}
+
+.premium-box{
+  width:min(1200px,88%);
+  margin:auto;
+  padding:90px 0;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  align-items:center;
+  gap:60px;
+}
+
+.premium h2{
+  font-size:clamp(38px,5vw,65px);
+  letter-spacing:-3px;
+  margin-bottom:20px;
+}
+
+.premium p{
+  color:#aaa;
+  line-height:1.7;
+  max-width:600px;
+  margin-bottom:25px;
+}
+
+.premium-features{
+  display:grid;
+  gap:12px;
+}
+
+.feature{
+  padding:18px;
+  border:1px solid #333;
+  border-radius:16px;
+  background:#202020;
+}
+
+.feature strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.feature span{
+  color:#999;
+  font-size:13px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:#111;
+  color:#777;
+  text-align:center;
+  padding:30px 20px;
+  font-size:13px;
+}
+
+/* ================= MOBILE MENU ================= */
+
+.mobile-menu{
+  display:none;
+  position:absolute;
+  top:75px;
+  right:5%;
+  width:220px;
+  padding:18px;
+  background:rgba(20,20,20,.95);
+  border:1px solid #333;
+  border-radius:18px;
+  backdrop-filter:blur(15px);
+}
+
+.mobile-menu.open{
+  display:grid;
+  gap:15px;
+}
+
+.mobile-menu a{
+  color:#fff;
+  font-size:14px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .hero-content{
+    margin-left:6%;
+  }
+
+  .occasion-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .gift-grid,
+  .store-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .premium-box{
+    grid-template-columns:1fr;
+    gap:35px;
+  }
+}
+
+@media(max-width:600px){
+
+  .navbar{
+    padding:18px 5%;
+  }
+
+  .logo{
+    font-size:23px;
+  }
+
+  .hero{
+    height:650px;
+    min-height:650px;
+  }
+
+  .hero-content{
+    width:88%;
+    margin-left:6%;
+  }
+
+  .hero h1{
+    font-size:46px;
+    letter-spacing:-2.5px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .section{
+    width:90%;
+    padding:65px 0;
+  }
+
+  .section-head{
+    display:block;
+  }
+
+  .section-description{
+    margin-top:12px;
+  }
+
+  .occasion-grid,
+  .gift-grid,
+  .store-grid{
+    grid-template-columns:1fr;
+  }
+
+  .celebrate-card{
+    min-height:400px;
+    padding:30px;
+  }
+
+  .celebrate-card h2{
+    font-size:40px;
+  }
+
+  .premium-box{
+    width:90%;
+    padding:70px 0;
+  }
+
+  .premium h2{
+    font-size:42px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+<!-- NAVBAR -->
 
-  <nav>
-    <div class="logo">WishNow ✨</div>
+<header class="navbar">
 
-    <button class="nav-btn" onclick="createWish()">
-      Create a Wish
-    </button>
+  <a href="#" class="logo">
+    WishNow <span>✦</span>
+  </a>
+
+  <nav class="nav-links">
+    <a href="#occasions">Wishes</a>
+    <a href="#gifts">Gift Cards</a>
+    <a href="#store">Gifts</a>
+    <a href="#premium">Premium</a>
   </nav>
 
+  <button class="nav-btn" onclick="createWish()">
+    Create a Wish
+  </button>
 
-  <!-- HERO SLIDER -->
+  <button class="menu-btn" onclick="toggleMenu()">
+    ☰
+  </button>
 
-  <section class="hero">
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#occasions" onclick="toggleMenu()">Wishes</a>
+    <a href="#gifts" onclick="toggleMenu()">Gift Cards</a>
+    <a href="#store" onclick="toggleMenu()">Gifts</a>
+    <a href="#premium" onclick="toggleMenu()">Premium</a>
+  </div>
 
-    <div class="slide active">
-      <div class="slide-content">
-        <small>🎂 Birthday</small>
-
-        <h1>Make Their Birthday Unforgettable</h1>
-
-        <p>
-          Create a beautiful personalized wish
-          and make someone's special day even more memorable.
-        </p>
-
-        <a href="#occasions" class="primary-btn">
-          Explore WishNow
-        </a>
-      </div>
-    </div>
+</header>
 
 
-    <div class="slide">
-      <div class="slide-content">
-        <small>💍 Anniversary</small>
+<!-- HERO -->
 
-        <h1>Turn Moments Into Memories</h1>
+<section class="hero">
 
-        <p>
-          Celebrate love, friendship and the beautiful
-          moments that matter most.
-        </p>
+  <div class="slide active">
+    <div class="hero-content">
 
-        <a href="#occasions" class="primary-btn">
-          Create Something Special
-        </a>
-      </div>
-    </div>
+      <div class="badge">🎂 Birthday Wishes</div>
 
-
-    <div class="slide">
-      <div class="slide-content">
-        <small>🎉 Festivals</small>
-
-        <h1>Celebrate Every Festival</h1>
-
-        <p>
-          Send beautiful wishes for Raksha Bandhan,
-          Durga Puja, Diwali, Eid, Christmas and more.
-        </p>
-
-        <a href="#occasions" class="primary-btn">
-          See Occasions
-        </a>
-      </div>
-    </div>
-
-
-    <div class="slide">
-      <div class="slide-content">
-        <small>🎥 Premium Video Wish</small>
-
-        <h1>Say It With Your Own Voice</h1>
-
-        <p>
-          Premium users will be able to create
-          personalized video messages for their loved ones.
-        </p>
-
-        <a href="#premium" class="primary-btn">
-          Discover Premium
-        </a>
-      </div>
-    </div>
-
-
-    <div class="dots">
-
-      <span class="dot active" onclick="showSlide(0)"></span>
-
-      <span class="dot" onclick="showSlide(1)"></span>
-
-      <span class="dot" onclick="showSlide(2)"></span>
-
-      <span class="dot" onclick="showSlide(3)"></span>
-
-    </div>
-
-  </section>
-
-
-  <!-- OCCASIONS -->
-
-  <section class="section" id="occasions">
-
-    <div class="section-title">
-
-      <h2>Celebrate Every Special Moment</h2>
+      <h1>
+        Make their day beautifully unforgettable.
+      </h1>
 
       <p>
-        Choose an occasion and create something beautiful.
+        Create thoughtful wishes, beautiful memories
+        and meaningful surprises for the people who matter.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#occasions" class="btn btn-light">
+          Create a Wish →
+        </a>
+
+        <a href="#gifts" class="btn btn-glass">
+          Explore Gifts
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="slide">
+    <div class="hero-content">
+
+      <div class="badge">💍 Anniversary</div>
+
+      <h1>
+        Turn special moments into lasting memories.
+      </h1>
+
+      <p>
+        Celebrate love, friendship and the moments
+        you'll want to remember forever.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#occasions" class="btn btn-light">
+          Create a Wish →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="slide">
+    <div class="hero-content">
+
+      <div class="badge">🎉 Festival Wishes</div>
+
+      <h1>
+        Celebrate every festival with a little more heart.
+      </h1>
+
+      <p>
+        Discover beautiful wishes for Diwali, Eid,
+        Christmas, Durga Puja and more.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#occasions" class="btn btn-light">
+          Explore Occasions →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="slide">
+    <div class="hero-content">
+
+      <div class="badge">✨ WishNow Premium</div>
+
+      <h1>
+        Give your wishes a more personal touch.
+      </h1>
+
+      <p>
+        Premium members will get exclusive designs,
+        personalization and gift tracking features.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#premium" class="btn btn-light">
+          Discover Premium →
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="slider-controls">
+
+    <button class="dot active" onclick="showSlide(0)"></button>
+    <button class="dot" onclick="showSlide(1)"></button>
+    <button class="dot" onclick="showSlide(2)"></button>
+    <button class="dot" onclick="showSlide(3)"></button>
+
+  </div>
+
+</section>
+
+
+<!-- CURRENTLY CELEBRATING -->
+
+<section class="section celebrating">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-label">Right Now</div>
+      <h2 class="section-title">Currently Celebrating</h2>
+    </div>
+
+    <p class="section-description">
+      Find the perfect wish for the occasion people
+      are celebrating right now.
+    </p>
+
+  </div>
+
+
+  <div class="celebrate-card">
+
+    <div class="celebrate-content">
+
+      <div class="live">
+        Featured Celebration
+      </div>
+
+      <h2>Make Every Celebration Feel Personal.</h2>
+
+      <p>
+        Choose an occasion, create a beautiful message
+        and share a moment they'll remember.
+      </p>
+
+      <a href="#occasions" class="btn btn-light">
+        Start Creating →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- POPULAR WISHES -->
+
+<section class="section" id="occasions">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-label">Most Loved</div>
+      <h2 class="section-title">Popular Wishes</h2>
+    </div>
+
+    <p class="section-description">
+      Start with one of the occasions people love
+      to celebrate most.
+    </p>
+
+  </div>
+
+
+  <div class="occasion-grid">
+
+    <div class="occasion" onclick="createWish('Birthday')">
+      <div class="icon">🎂</div>
+      <h3>Birthday</h3>
+      <p>Make someone's birthday extra special.</p>
+    </div>
+
+    <div class="occasion" onclick="createWish('Anniversary')">
+      <div class="icon">💍</div>
+      <h3>Anniversary</h3>
+      <p>Celebrate love and beautiful memories.</p>
+    </div>
+
+    <div class="occasion" onclick="createWish('Raksha Bandhan')">
+      <div class="icon">🪢</div>
+      <h3>Raksha Bandhan</h3>
+      <p>Celebrate the special bond between siblings.</p>
+    </div>
+
+    <div class="occasion" onclick="createWish('Diwali')">
+      <div class="icon">🪔</div>
+      <h3>Diwali</h3>
+      <p>Spread light, happiness and warm wishes.</p>
+    </div>
+
+    <div class="occasion" onclick="createWish('Eid')">
+      <div class="icon">🌙</div>
+      <h3>Eid</h3>
+      <p>Send beautiful Eid wishes to loved ones.</p>
+    </div>
+
+    <div class="occasion" onclick="createWish('Christmas')">
+      <div class="icon">🎄</div>
+      <h3>Christmas</h3>
+      <p>Share joy and festive greetings.</p>
+    </div>
+
+    <div class="occasion" onclick="createWish('Friendship Day')">
+      <div class="icon">🤝</div>
+      <h3>Friendship Day</h3>
+      <p>Celebrate the friends who make life better.</p>
+    </div>
+
+    <div class="occasion" onclick="createWish('Valentines Day')">
+      <div class="icon">❤️</div>
+      <h3>Valentine's Day</h3>
+      <p>Share a heartfelt message with someone special.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- GIFT CARDS -->
+
+<section class="gift-section" id="gifts">
+
+  <div class="section">
+
+    <div class="section-head">
+
+      <div>
+        <div class="section-label">Thoughtful Surprises</div>
+        <h2 class="section-title">Gift Cards</h2>
+      </div>
+
+      <p class="section-description">
+        Pick a beautiful card, personalize it and
+        make your gift feel truly yours.
       </p>
 
     </div>
 
 
-    <div class="occasion-grid">
+    <div class="gift-grid">
 
-      <div class="occasion" onclick="createWish('Birthday')">
-        <div class="emoji">🎂</div>
-        <h3>Birthday</h3>
-        <p>Make someone's birthday extra special.</p>
+      <div class="gift-card">
+        <div>
+          <h3>Birthday Card</h3>
+          <p>A little surprise for a big day.</p>
+        </div>
       </div>
 
-
-      <div class="occasion" onclick="createWish('Anniversary')">
-        <div class="emoji">💍</div>
-        <h3>Anniversary</h3>
-        <p>Celebrate love and beautiful memories.</p>
+      <div class="gift-card">
+        <div>
+          <h3>Love & Anniversary</h3>
+          <p>Celebrate a beautiful connection.</p>
+        </div>
       </div>
 
-
-      <div class="occasion" onclick="createWish('Raksha Bandhan')">
-        <div class="emoji">🪢</div>
-        <h3>Raksha Bandhan</h3>
-        <p>Celebrate the special bond between siblings.</p>
-      </div>
-
-
-      <div class="occasion" onclick="createWish('Durga Puja')">
-        <div class="emoji">🪔</div>
-        <h3>Durga Puja</h3>
-        <p>Share festive blessings and happiness.</p>
-      </div>
-
-
-      <div class="occasion" onclick="createWish('Diwali')">
-        <div class="emoji">✨</div>
-        <h3>Diwali</h3>
-        <p>Spread light, happiness and warm wishes.</p>
-      </div>
-
-
-      <div class="occasion" onclick="createWish('Eid')">
-        <div class="emoji">🌙</div>
-        <h3>Eid</h3>
-        <p>Send beautiful Eid wishes to your loved ones.</p>
-      </div>
-
-
-      <div class="occasion" onclick="createWish('Christmas')">
-        <div class="emoji">🎄</div>
-        <h3>Christmas</h3>
-        <p>Share joy and festive greetings.</p>
-      </div>
-
-
-      <div class="occasion" onclick="createWish('Friendship Day')">
-        <div class="emoji">🤝</div>
-        <h3>Friendship Day</h3>
-        <p>Celebrate the friends who make life better.</p>
-      </div>
-
-
-      <div class="occasion" onclick="createWish('Valentines Day')">
-        <div class="emoji">❤️</div>
-        <h3>Valentine's Day</h3>
-        <p>Share a heartfelt message with someone special.</p>
+      <div class="gift-card">
+        <div>
+          <h3>Special Moments</h3>
+          <p>Because every moment deserves a wish.</p>
+        </div>
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- PREMIUM -->
+<!-- GIFT STORE -->
 
-  <section class="premium" id="premium">
+<section class="section" id="store">
 
-    <h2>✨ WishNow Premium</h2>
+  <div class="section-head">
 
-    <p>
-      Unlock beautiful premium designs, advanced
-      personalization and video wishes. More features
-      are coming soon.
+    <div>
+      <div class="section-label">Give Something Special</div>
+      <h2 class="section-title">Gift Options</h2>
+    </div>
+
+    <p class="section-description">
+      Discover thoughtful gifts and special offers
+      for someone important.
     </p>
 
-    <a href="#" class="premium-btn">
-      Coming Soon
-    </a>
-
-  </section>
+  </div>
 
 
-  <!-- FOOTER -->
+  <div class="store-grid">
 
-  <footer>
+    <div class="product">
 
-    © 2026 WishNow — Make Every Moment Special. 🎁
+      <div class="product-image"></div>
 
-  </footer>
+      <div class="product-info">
 
+        <span class="discount">SPECIAL OFFER</span>
 
-  <!-- JAVASCRIPT -->
+        <h3>Beautiful Gift Box</h3>
 
-  <script>
+        <div class="price">
+          ₹799
+          <span class="old-price">₹999</span>
+        </div>
 
-    let currentSlide = 0;
+        <button class="btn" onclick="giftAlert()">
+          Gift Now →
+        </button>
 
-    const slides = document.querySelectorAll(".slide");
-    const dots = document.querySelectorAll(".dot");
+      </div>
 
-
-    function showSlide(index) {
-
-      slides.forEach((slide) => {
-        slide.classList.remove("active");
-      });
-
-      dots.forEach((dot) => {
-        dot.classList.remove("active");
-      });
-
-      slides[index].classList.add("active");
-      dots[index].classList.add("active");
-
-      currentSlide = index;
-    }
+    </div>
 
 
-    function nextSlide() {
+    <div class="product">
 
-      currentSlide++;
+      <div class="product-image"></div>
 
-      if (currentSlide >= slides.length) {
-        currentSlide = 0;
-      }
+      <div class="product-info">
 
-      showSlide(currentSlide);
-    }
+        <span class="discount">10% OFF</span>
+
+        <h3>Premium Surprise</h3>
+
+        <div class="price">
+          ₹1,199
+          <span class="old-price">₹1,399</span>
+        </div>
+
+        <button class="btn" onclick="giftAlert()">
+          Gift Now →
+        </button>
+
+      </div>
+
+    </div>
 
 
-    setInterval(nextSlide, 4000);
+    <div class="product">
+
+      <div class="product-image"></div>
+
+      <div class="product-info">
+
+        <span class="discount">LIMITED OFFER</span>
+
+        <h3>Special Celebration Gift</h3>
+
+        <div class="price">
+          ₹1,499
+          <span class="old-price">₹1,799</span>
+        </div>
+
+        <button class="btn" onclick="giftAlert()">
+          Gift Now →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
-    function createWish(occasion) {
+<!-- PREMIUM -->
 
-      if (occasion) {
-        alert(
-          "WishNow " +
-          occasion +
-          " wish creator is coming next! 🎁"
-        );
-      } else {
-        alert(
-          "Wish creator is coming next! 🎁"
-        );
-      }
+<section class="premium" id="premium">
 
-    }
+  <div class="premium-box">
 
-  </script>
+    <div>
+
+      <div class="section-label">
+        WishNow Premium
+      </div>
+
+      <h2>
+        Make every gift more personal.
+      </h2>
+
+      <p>
+        Premium members will get exclusive designs,
+        advanced personalization, a personal profile
+        and the ability to track gifts they've sent.
+      </p>
+
+      <button class="btn btn-light" onclick="premiumAlert()">
+        Explore Premium →
+      </button>
+
+    </div>
+
+
+    <div class="premium-features">
+
+      <div class="feature">
+        <strong>✨ Exclusive Designs</strong>
+        <span>Premium-only wish and gift designs.</span>
+      </div>
+
+      <div class="feature">
+        <strong>👤 Premium Profile</strong>
+        <span>Keep your wishes and gifts organized.</span>
+      </div>
+
+      <div class="feature">
+        <strong>📦 Gift Tracking</strong>
+        <span>Track gifts from order to delivery.</span>
+      </div>
+
+      <div class="feature">
+        <strong>🎥 Advanced Wishes</strong>
+        <span>More personalization options coming soon.</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+  © 2026 WishNow — Make Every Moment Special. 🎁
+</footer>
+
+
+<script>
+
+/* ================= SLIDER ================= */
+
+let currentSlide = 0;
+
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(index){
+
+  slides.forEach(slide => {
+    slide.classList.remove("active");
+  });
+
+  dots.forEach(dot => {
+    dot.classList.remove("active");
+  });
+
+  slides[index].classList.add("active");
+  dots[index].classList.add("active");
+
+  currentSlide = index;
+}
+
+function nextSlide(){
+
+  currentSlide++;
+
+  if(currentSlide >= slides.length){
+    currentSlide = 0;
+  }
+
+  showSlide(currentSlide);
+}
+
+setInterval(nextSlide,5000);
+
+
+/* ================= MOBILE MENU ================= */
+
+function toggleMenu(){
+
+  document
+    .getElementById("mobileMenu")
+    .classList.toggle("open");
+
+}
+
+
+/* ================= WISH CREATOR ================= */
+
+function createWish(occasion){
+
+  if(occasion){
+
+    alert(
+      "🎁 WishNow " +
+      occasion +
+      " creator is coming in Step 2!"
+    );
+
+  }else{
+
+    alert(
+      "✨ Wish Creator is coming in Step 2!"
+    );
+
+  }
+
+}
+
+
+/* ================= GIFTS ================= */
+
+function giftAlert(){
+
+  alert(
+    "🛍️ Gift Store checkout will be connected in a later step!"
+  );
+
+}
+
+
+/* ================= PREMIUM ================= */
+
+function premiumAlert(){
+
+  alert(
+    "✨ WishNow Premium is coming soon!"
+  );
+
+}
+
+</script>
 
 </body>
 </html>
