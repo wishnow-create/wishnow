@@ -304,6 +304,7 @@ textarea{
 }
 
 @media(max-width:800px){
+
   .creator-grid{
     grid-template-columns:1fr;
   }
@@ -314,6 +315,7 @@ textarea{
 }
 
 @media(max-width:500px){
+
   .creator{
     width:92%;
     padding-top:30px;
@@ -341,28 +343,39 @@ textarea{
 <body>
 
 <header class="topbar">
-  <div class="logo">Wish<span>Now</span> ✨</div>
+
+  <div class="logo">
+    Wish<span>Now</span> ✨
+  </div>
 
   <button class="back" onclick="history.back()">
     ← Back
   </button>
+
 </header>
 
 
 <main class="creator">
 
   <div class="heading">
-    <div class="tag">STEP 2 — WISH CREATOR</div>
 
-    <h1>Create Something Special ✨</h1>
+    <div class="tag">
+      STEP 2 — WISH CREATOR
+    </div>
+
+    <h1>
+      Create Something Special ✨
+    </h1>
 
     <p>
       Add your words, memories and choose a beautiful design.
     </p>
+
   </div>
 
 
   <div class="creator-grid">
+
 
     <!-- FORM -->
 
@@ -373,37 +386,45 @@ textarea{
 
       <div class="form-group">
 
-        <label>Choose Occasion</label>
+        <label>
+          Choose Occasion
+        </label>
 
         <div class="occasion-options">
 
-          <button class="occasion-btn active"
-                  onclick="selectOccasion(this,'Birthday','🎂')">
+          <button
+            class="occasion-btn active"
+            onclick="selectOccasion(this,'Birthday','🎂')">
             🎂 Birthday
           </button>
 
-          <button class="occasion-btn"
-                  onclick="selectOccasion(this,'Anniversary','💍')">
+          <button
+            class="occasion-btn"
+            onclick="selectOccasion(this,'Anniversary','💍')">
             💍 Anniversary
           </button>
 
-          <button class="occasion-btn"
-                  onclick="selectOccasion(this,'Festival','🎉')">
+          <button
+            class="occasion-btn"
+            onclick="selectOccasion(this,'Festival','🎉')">
             🎉 Festival
           </button>
 
-          <button class="occasion-btn"
-                  onclick="selectOccasion(this,'Raksha Bandhan','🪢')">
+          <button
+            class="occasion-btn"
+            onclick="selectOccasion(this,'Raksha Bandhan','🪢')">
             🪢 Raksha
           </button>
 
-          <button class="occasion-btn"
-                  onclick="selectOccasion(this,'Diwali','✨')">
+          <button
+            class="occasion-btn"
+            onclick="selectOccasion(this,'Diwali','✨')">
             ✨ Diwali
           </button>
 
-          <button class="occasion-btn"
-                  onclick="selectOccasion(this,'Christmas','🎄')">
+          <button
+            class="occasion-btn"
+            onclick="selectOccasion(this,'Christmas','🎄')">
             🎄 Christmas
           </button>
 
@@ -445,11 +466,15 @@ textarea{
 
       <div class="form-group">
 
-        <label>📷 Add a Memory Photo</label>
+        <label>
+          📷 Add a Memory Photo
+        </label>
 
         <label class="upload">
 
-          <strong>Click to upload a photo</strong>
+          <strong>
+            Click to upload a photo
+          </strong>
 
           <span>
             JPG, PNG or WEBP
@@ -468,7 +493,9 @@ textarea{
 
       <div class="form-group">
 
-        <label>🎨 Choose Template</label>
+        <label>
+          🎨 Choose Template
+        </label>
 
         <div class="templates">
 
@@ -495,11 +522,19 @@ textarea{
       </div>
 
 
-      <button class="create-final" onclick="createFinalWish()">
+      <button
+        class="create-final"
+        onclick="createFinalWish()">
+
         ✨ Create My Wish
+
       </button>
 
-      <div class="result" id="result"></div>
+
+      <div
+        class="result"
+        id="result">
+      </div>
 
     </section>
 
@@ -508,9 +543,13 @@ textarea{
 
     <section class="card preview">
 
-      <div class="preview-card t1" id="previewCard">
+      <div
+        class="preview-card t1"
+        id="previewCard">
 
-        <div class="preview-emoji" id="previewEmoji">
+        <div
+          class="preview-emoji"
+          id="previewEmoji">
           🎂
         </div>
 
@@ -520,7 +559,9 @@ textarea{
           alt="Wish photo"
         >
 
-        <div class="preview-name" id="previewName">
+        <div
+          class="preview-name"
+          id="previewName">
           Someone Special
         </div>
 
@@ -549,10 +590,16 @@ let selectedEmoji = "🎂";
 let selectedTemplate = "t1";
 
 
+/* =========================
+   OCCASION
+========================= */
+
 function selectOccasion(button,occasion,emoji){
 
   document.querySelectorAll(".occasion-btn")
-    .forEach(btn => btn.classList.remove("active"));
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
 
   button.classList.add("active");
 
@@ -560,112 +607,197 @@ function selectOccasion(button,occasion,emoji){
   selectedEmoji = emoji;
 
   updatePreview();
+
 }
 
+
+/* =========================
+   TEMPLATE
+========================= */
 
 function selectTemplate(element,template){
 
   document.querySelectorAll(".template")
-    .forEach(item => item.classList.remove("active"));
+    .forEach(item => {
+      item.classList.remove("active");
+    });
 
   element.classList.add("active");
 
   selectedTemplate = template;
 
-  const preview = document.getElementById("previewCard");
+  const preview =
+    document.getElementById("previewCard");
 
   preview.classList.remove("t1","t2","t3");
+
   preview.classList.add(template);
+
 }
 
+
+/* =========================
+   LIVE PREVIEW
+========================= */
 
 function updatePreview(){
 
   const name =
-    document.getElementById("name").value.trim();
+    document.getElementById("name")
+      .value
+      .trim();
 
   const message =
-    document.getElementById("message").value.trim();
+    document.getElementById("message")
+      .value
+      .trim();
 
 
-  document.getElementById("previewEmoji").textContent =
-    selectedEmoji;
+  document.getElementById("previewEmoji")
+    .textContent = selectedEmoji;
 
 
-  document.getElementById("previewName").textContent =
-    name || "Someone Special";
+  document.getElementById("previewName")
+    .textContent =
+      name || "Someone Special";
 
 
-  document.getElementById("previewTitle").textContent =
-    "Happy " + selectedOccasion + "!";
+  document.getElementById("previewTitle")
+    .textContent =
+      "Happy " + selectedOccasion + "!";
 
 
-  document.getElementById("previewMessage").textContent =
-    message ||
-    "May your special day be filled with happiness, beautiful memories and lots of smiles. ✨";
+  document.getElementById("previewMessage")
+    .textContent =
+      message ||
+      "May your special day be filled with happiness, beautiful memories and lots of smiles. ✨";
+
 }
 
+
+/* =========================
+   PHOTO
+========================= */
 
 function loadPhoto(event){
 
-  const file = event.target.files[0];
+  const file =
+    event.target.files[0];
 
   if(!file) return;
 
-  const reader = new FileReader();
 
-  reader.onload = function(e){
+  const reader =
+    new FileReader();
 
-    const photo =
-      document.getElementById("previewPhoto");
 
-    photo.src = e.target.result;
-    photo.style.display = "block";
+  reader.onload =
+    function(e){
 
-  };
+      const photo =
+        document.getElementById("previewPhoto");
+
+      photo.src =
+        e.target.result;
+
+      photo.style.display =
+        "block";
+
+    };
+
 
   reader.readAsDataURL(file);
+
 }
 
+
+/* =========================
+   CREATE FINAL WISH
+========================= */
 
 function createFinalWish(){
 
   const name =
-    document.getElementById("name").value.trim();
+    document.getElementById("name")
+      .value
+      .trim();
 
   const message =
-    document.getElementById("message").value.trim();
+    document.getElementById("message")
+      .value
+      .trim();
 
-  const result =
-    document.getElementById("result");
 
+  /* NAME CHECK */
 
   if(!name){
 
-    alert("Please enter the person's name. 😊");
+    alert(
+      "Please enter the person's name. 😊"
+    );
+
     return;
 
   }
 
+
+  /* MESSAGE CHECK */
 
   if(!message){
 
-    alert("Please write your wish message. 💌");
+    alert(
+      "Please write your wish message. 💌"
+    );
+
     return;
 
   }
 
 
-  result.style.display = "block";
+  /* SAVE PHOTO */
 
-  result.innerHTML =
-    "🎉 Your wish is ready!<br><br>" +
-    "The shareable Wish page/link system will be connected next.";
+  const photo =
+    document.getElementById("previewPhoto");
 
-  result.scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
+
+  if(
+    photo.src &&
+    photo.style.display !== "none"
+  ){
+
+    sessionStorage.setItem(
+      "wishPhoto",
+      photo.src
+    );
+
+  }else{
+
+    sessionStorage.removeItem(
+      "wishPhoto"
+    );
+
+  }
+
+
+  /* SEND DATA TO RESULT PAGE */
+
+  const params =
+    new URLSearchParams({
+
+      occasion:selectedOccasion,
+
+      name:name,
+
+      message:message,
+
+      template:selectedTemplate
+
+    });
+
+
+  window.location.href =
+    "wish-result.html?" +
+    params.toString();
 
 }
 
