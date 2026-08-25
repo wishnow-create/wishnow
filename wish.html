@@ -1,607 +1,1438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>WishNow — Create Your Wish ❤️</title>
 
-<meta
-  name="description"
-  content="Create a beautiful personalized WishNow surprise."
->
+<meta name="description"
+content="Create a beautiful personalized WishNow surprise with a private WishLock challenge.">
 
 <style>
-
-/* =========================
-   RESET
-========================= */
-
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:Inter,Arial,sans-serif;
-  background:#fff9fc;
-  color:#28182f;
-  overflow-x:hidden;
+    font-family:Inter,Arial,sans-serif;
+    background:#faf7fc;
+    color:#24172b;
+    overflow-x:hidden;
 }
 
 button,
 input,
 textarea{
-  font:inherit;
+    font:inherit;
 }
 
 button{
-  cursor:pointer;
+    cursor:pointer;
 }
 
+a{
+    text-decoration:none;
+}
 
 /* =========================
    NAVBAR
 ========================= */
 
 .navbar{
-
-  position:sticky;
-  top:0;
-  z-index:100;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:16px 6%;
-
-  background:rgba(255,250,253,.9);
-
-  backdrop-filter:blur(18px);
-
-  border-bottom:1px solid #eee0ec;
-
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:17px 6%;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid #eee3f0;
 }
 
 .logo{
-
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:-1px;
-
+    font-size:25px;
+    font-weight:900;
+    color:#351449;
 }
 
 .logo span{
-  color:#d83b83;
+    color:#e83f91;
 }
 
 .back-btn{
-
-  border:1px solid #eadce9;
-
-  background:#fff;
-
-  color:#4b2056;
-
-  padding:9px 17px;
-
-  border-radius:25px;
-
-  font-weight:800;
-
+    padding:9px 17px;
+    border:1px solid #eadbea;
+    border-radius:25px;
+    background:#fff;
+    color:#4b2855;
+    font-weight:700;
 }
-
 
 /* =========================
-   HERO
+   PAGE HEADER
 ========================= */
 
-.creator-hero{
-
-  text-align:center;
-
-  padding:70px 6% 50px;
-
-  background:
-
-    radial-gradient(
-      circle at 15% 20%,
-      #ffd9ea 0,
-      transparent 28%
-    ),
-
-    radial-gradient(
-      circle at 85% 15%,
-      #e6d9ff 0,
-      transparent 28%
-    ),
-
-    linear-gradient(
-      135deg,
-      #fff7fb,
-      #f8f1ff
-    );
-
+.page-header{
+    text-align:center;
+    width:min(850px,90%);
+    margin:55px auto 35px;
 }
 
-.creator-badge{
-
-  display:inline-block;
-
-  padding:8px 16px;
-
-  border-radius:25px;
-
-  background:#fff;
-
-  border:1px solid #eadcef;
-
-  color:#c62d77;
-
-  font-size:13px;
-
-  font-weight:900;
-
+.creator-label{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:30px;
+    background:#fff0f7;
+    color:#d92f7c;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.8px;
+    margin-bottom:15px;
 }
 
-.creator-hero h1{
-
-  max-width:850px;
-
-  margin:17px auto 12px;
-
-  font-size:clamp(38px,6vw,68px);
-
-  line-height:1.04;
-
-  letter-spacing:-2px;
-
+.page-header h1{
+    font-size:clamp(34px,5vw,58px);
+    line-height:1.05;
+    letter-spacing:-1.8px;
+    margin-bottom:15px;
 }
 
-.creator-hero p{
-
-  max-width:680px;
-
-  margin:auto;
-
-  color:#79697e;
-
-  line-height:1.7;
-
+.page-header p{
+    color:#806f83;
+    line-height:1.7;
 }
 
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-wrap{
+    width:min(900px,90%);
+    margin:0 auto 30px;
+}
+
+.progress{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+}
+
+.progress-item{
+    text-align:center;
+    font-size:12px;
+    color:#a092a5;
+    font-weight:800;
+}
+
+.progress-circle{
+    width:38px;
+    height:38px;
+    margin:0 auto 7px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#eee7f0;
+    color:#8b7c90;
+    transition:.3s;
+}
+
+.progress-item.active .progress-circle,
+.progress-item.done .progress-circle{
+    background:linear-gradient(135deg,#ff4d91,#8d3bd4);
+    color:#fff;
+}
+
+.progress-item.active{
+    color:#8d3bd4;
+}
 
 /* =========================
    MAIN
 ========================= */
 
-.container{
-
-  width:min(1120px,92%);
-
-  margin:auto;
-
-  padding:30px 0 80px;
-
+.creator{
+    width:min(1000px,92%);
+    margin:auto;
 }
-
-
-/* =========================
-   STEP CARD
-========================= */
 
 .step{
-
-  background:#fff;
-
-  border:1px solid #eee1ed;
-
-  border-radius:28px;
-
-  padding:30px;
-
-  margin-bottom:22px;
-
-  box-shadow:
-    0 15px 45px rgba(61,24,70,.06);
-
+    display:none;
+    animation:fadeUp .35s ease;
 }
 
-.step-head{
-
-  display:flex;
-
-  gap:14px;
-
-  align-items:flex-start;
-
-  margin-bottom:24px;
-
+.step.active{
+    display:block;
 }
 
-.step-number{
-
-  min-width:42px;
-
-  height:42px;
-
-  display:grid;
-
-  place-items:center;
-
-  border-radius:14px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff4d91,
-      #8f39d9
-    );
-
-  color:#fff;
-
-  font-weight:900;
-
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.step-head h2{
-
-  font-size:25px;
-
-  margin-bottom:4px;
-
+.card{
+    background:#fff;
+    border:1px solid #eee3f0;
+    border-radius:30px;
+    padding:35px;
+    box-shadow:0 18px 50px rgba(57,20,70,.07);
 }
 
-.step-head p{
-
-  color:#8a798e;
-
-  font-size:14px;
-
-  line-height:1.5;
-
+.step-title{
+    margin-bottom:25px;
 }
 
+.step-title small{
+    color:#d63b83;
+    font-weight:900;
+}
+
+.step-title h2{
+    font-size:30px;
+    margin:7px 0;
+}
+
+.step-title p{
+    color:#85758a;
+    line-height:1.6;
+}
 
 /* =========================
    OCCASIONS
 ========================= */
 
 .occasion-grid{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(5,1fr);
-
-  gap:12px;
-
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
 }
 
 .occasion{
-
-  border:1px solid #eee0ec;
-
-  background:#fffafd;
-
-  border-radius:18px;
-
-  padding:17px 10px;
-
-  text-align:center;
-
-  transition:.25s;
-
+    padding:20px;
+    border:2px solid #eee4ef;
+    border-radius:20px;
+    background:#fff;
+    transition:.25s;
 }
 
 .occasion:hover{
-
-  transform:translateY(-3px);
-
-  box-shadow:
-    0 10px 25px rgba(80,25,90,.08);
-
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(60,20,70,.08);
 }
 
-.occasion.active{
-
-  border-color:#d83b83;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff0f7,
-      #f8efff
-    );
-
-  box-shadow:
-    0 8px 24px rgba(216,59,131,.12);
-
+.occasion.selected{
+    border-color:#d83d88;
+    background:#fff5fa;
 }
 
 .occasion-icon{
-
-  display:block;
-
-  font-size:28px;
-
-  margin-bottom:7px;
-
+    font-size:32px;
+    margin-bottom:10px;
 }
 
-.occasion-name{
-
-  font-size:13px;
-
-  font-weight:900;
-
+.occasion h3{
+    font-size:17px;
+    margin-bottom:5px;
 }
 
-.occasion-note{
-
-  margin-top:15px;
-
-  padding:13px 15px;
-
-  border-radius:14px;
-
-  background:#fff7fb;
-
-  color:#795d73;
-
-  font-size:13px;
-
+.occasion p{
+    color:#8d7d91;
+    font-size:13px;
 }
-
 
 /* =========================
    TEMPLATES
 ========================= */
 
 .template-grid{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:16px;
-
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
 }
 
 .template{
-
-  position:relative;
-
-  overflow:hidden;
-
-  min-height:215px;
-
-  border-radius:23px;
-
-  border:3px solid transparent;
-
-  transition:.25s;
-
+    overflow:hidden;
+    border:2px solid #eee4ef;
+    border-radius:24px;
+    background:#fff;
+    transition:.25s;
 }
 
-.template.active{
-
-  border-color:#d83b83;
-
-  transform:translateY(-4px);
-
-  box-shadow:
-    0 15px 35px rgba(216,59,131,.16);
-
+.template:hover{
+    transform:translateY(-4px);
 }
 
-.template button{
-
-  width:100%;
-
-  height:100%;
-
-  min-height:215px;
-
-  border:0;
-
-  padding:22px;
-
-  text-align:left;
-
-  color:#fff;
-
-  position:relative;
-
-  overflow:hidden;
-
+.template.selected{
+    border-color:#d83d88;
+    box-shadow:0 12px 35px rgba(216,61,136,.16);
 }
 
-.template button::after{
-
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(0,0,0,.02),
-      rgba(0,0,0,.40)
-    );
-
+.template-preview{
+    min-height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
 }
 
-.template-icon{
-
-  position:relative;
-
-  z-index:2;
-
-  font-size:52px;
-
+.template-preview::after{
+    content:"✨";
+    position:absolute;
+    right:15px;
+    bottom:5px;
+    font-size:80px;
+    opacity:.12;
 }
 
-.template h3{
-
-  position:relative;
-
-  z-index:2;
-
-  margin-top:14px;
-
-  font-size:20px;
-
+.t1{
+    background:linear-gradient(135deg,#ff4d91,#8e3bd4);
 }
 
-.template small{
-
-  position:relative;
-
-  z-index:2;
-
-  display:block;
-
-  margin-top:5px;
-
-  opacity:.9;
-
+.t2{
+    background:linear-gradient(135deg,#b85c78,#43204f);
 }
 
-.template-1{
-  background:
-    linear-gradient(
-      135deg,
-      #ff5b9d,
-      #ffb56b
-    );
+.t3{
+    background:linear-gradient(135deg,#e85b86,#ffb36b);
 }
 
-.template-2{
-  background:
-    linear-gradient(
-      135deg,
-      #6d43cf,
-      #d83b83
-    );
+.t4{
+    background:linear-gradient(135deg,#30204d,#a13c91);
 }
 
-.template-3{
-  background:
-    linear-gradient(
-      135deg,
-      #3b9bd8,
-      #6f51d9
-    );
+.template-preview h3{
+    font-size:28px;
 }
 
-.template-4{
-  background:
-    linear-gradient(
-      135deg,
-      #d97735,
-      #b13e65
-    );
+.template-info{
+    padding:17px;
 }
 
-.template-5{
-  background:
-    linear-gradient(
-      135deg,
-      #2f806e,
-      #d4a74b
-    );
+.template-info h3{
+    margin-bottom:4px;
 }
 
-.template-6{
-  background:
-    linear-gradient(
-      135deg,
-      #56306d,
-      #25203d
-    );
+.template-info p{
+    color:#8b7b90;
+    font-size:13px;
 }
-
 
 /* =========================
    FORM
 ========================= */
 
 .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
 
-  display:grid;
+.field{
+    margin-bottom:20px;
+}
 
-  grid-template-columns:
-    1fr 1fr;
+.field.full{
+    grid-column:1/-1;
+}
 
-  gap:18px;
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:800;
+    font-size:14px;
+}
+
+.field input,
+.field textarea{
+    width:100%;
+    border:1px solid #e4d9e6;
+    border-radius:15px;
+    padding:13px 15px;
+    outline:none;
+    background:#fff;
+    color:#2a1930;
+}
+
+.field input:focus,
+.field textarea:focus{
+    border-color:#d83d88;
+    box-shadow:0 0 0 3px rgba(216,61,136,.08);
+}
+
+.field textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+.photo-box{
+    border:2px dashed #dfd1e2;
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    background:#fcf9fd;
+}
+
+.photo-box input{
+    margin-top:12px;
+}
+
+.photo-preview{
+    max-width:180px;
+    max-height:180px;
+    margin:15px auto 0;
+    border-radius:16px;
+    display:none;
+    object-fit:cover;
+}
+
+/* =========================
+   QUESTIONS
+========================= */
+
+.lock-intro{
+    padding:18px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#fff4f8,#f4efff);
+    margin-bottom:25px;
+}
+
+.lock-intro strong{
+    color:#b22c70;
+}
+
+.question-card{
+    padding:22px;
+    margin-bottom:15px;
+    border:1px solid #eee3ef;
+    border-radius:20px;
+    background:#fff;
+}
+
+.question-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.question-number{
+    font-weight:900;
+}
+
+.mark{
+    padding:5px 10px;
+    border-radius:15px;
+    background:#fff1c9;
+    color:#9a6b00;
+    font-size:12px;
+    font-weight:900;
+}
+
+.question-card input{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #e2d7e5;
+    border-radius:13px;
+    margin-bottom:10px;
+    outline:none;
+}
+
+.question-card input:focus{
+    border-color:#c43c83;
+}
+
+.hint{
+    color:#918295;
+    font-size:12px;
+}
+
+.lock-rules{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:22px;
+}
+
+.rule{
+    padding:15px;
+    text-align:center;
+    border-radius:16px;
+    background:#faf7fc;
+    font-size:13px;
+    font-weight:800;
+}
+
+/* =========================
+   PREVIEW
+========================= */
+
+.preview-box{
+    overflow:hidden;
+    border-radius:26px;
+    background:linear-gradient(135deg,#351449,#8d3478);
+    color:#fff;
+    padding:45px 30px;
+    text-align:center;
+}
+
+.preview-box .preview-icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+.preview-box h2{
+    font-size:clamp(28px,5vw,46px);
+    margin-bottom:10px;
+}
+
+.preview-box p{
+    max-width:650px;
+    margin:0 auto;
+    line-height:1.7;
+    color:rgba(255,255,255,.86);
+}
+
+.preview-message{
+    margin:25px auto 0;
+    max-width:650px;
+    padding:22px;
+    border-radius:20px;
+    background:rgba(255,255,255,.1);
+    line-height:1.7;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.navigation{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:25px;
+}
+
+.btn{
+    border:0;
+    padding:13px 22px;
+    border-radius:28px;
+    font-weight:900;
+}
+
+.btn-secondary{
+    background:#eee8f0;
+    color:#4c3155;
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#ff4d91,#8d3bd4);
+    color:#fff;
+    box-shadow:0 10px 25px rgba(141,59,212,.18);
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+
+.btn-success{
+    background:linear-gradient(135deg,#e83f91,#7337c8);
+    color:#fff;
+    width:100%;
+    padding:16px;
+}
+
+/* =========================
+   RESULT
+========================= */
+
+#resultMessage{
+    display:none;
+    margin-top:18px;
+    padding:18px;
+    border-radius:18px;
+    background:#effff5;
+    color:#177245;
+    font-weight:800;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:70px;
+    padding:30px;
+    text-align:center;
+    color:#8a7c8f;
+    font-size:13px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:720px){
+
+    .navbar{
+        padding:14px 5%;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .back-btn{
+        padding:8px 12px;
+        font-size:12px;
+    }
+
+    .page-header{
+        margin-top:35px;
+    }
+
+    .page-header h1{
+        font-size:34px;
+    }
+
+    .card{
+        padding:22px;
+        border-radius:23px;
+    }
+
+    .occasion-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .occasion{
+        padding:16px;
+    }
+
+    .template-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .lock-rules{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .navigation{
+        flex-direction:column-reverse;
+    }
+
+    .navigation .btn{
+        width:100%;
+    }
+}
+
+@media(max-width:420px){
+
+    .occasion-grid{
+        grid-template-columns:1fr;
+    }
+
+    .progress-item{
+        font-size:10px;
+    }
+
+    .progress-circle{
+        width:32px;
+        height:32px;
+        font-size:12px;
+    }
+
+    .step-title h2{
+        font-size:25px;
+    }
+
+    .lock-rules{
+        grid-template-columns:1fr 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        Wish<span>Now</span> ✨
+    </div>
+
+    <a class="back-btn" href="index.html">
+        ← Home
+    </a>
+
+</nav>
+
+
+<header class="page-header">
+
+    <div class="creator-label">
+        ✨ WISHNOW CREATOR
+    </div>
+
+    <h1>
+        Create a Wish They'll Remember ❤️
+    </h1>
+
+    <p>
+        Choose an occasion, select a beautiful template,
+        write your message and protect your surprise
+        with a WishLock challenge.
+    </p>
+
+</header>
+
+
+<div class="progress-wrap">
+
+    <div class="progress">
+
+        <div class="progress-item active" id="progress1">
+            <div class="progress-circle">1</div>
+            Occasion
+        </div>
+
+        <div class="progress-item" id="progress2">
+            <div class="progress-circle">2</div>
+            Template
+        </div>
+
+        <div class="progress-item" id="progress3">
+            <div class="progress-circle">3</div>
+            Your Wish
+        </div>
+
+        <div class="progress-item" id="progress4">
+            <div class="progress-circle">4</div>
+            WishLock
+        </div>
+
+        <div class="progress-item" id="progress5">
+            <div class="progress-circle">5</div>
+            Preview
+        </div>
+
+    </div>
+
+</div>
+
+
+<main class="creator">
+
+<!-- =========================
+     STEP 1
+========================= -->
+
+<section class="step active" id="step1">
+
+<div class="card">
+
+    <div class="step-title">
+
+        <small>STEP 1</small>
+
+        <h2>
+            Choose an Occasion
+        </h2>
+
+        <p>
+            Your occasion decides which templates
+            and suggestions you will see.
+        </p>
+
+    </div>
+
+
+    <div class="occasion-grid">
+
+        <div class="occasion"
+             data-occasion="Birthday"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">🎂</div>
+            <h3>Birthday</h3>
+            <p>Make their birthday unforgettable.</p>
+        </div>
+
+        <div class="occasion"
+             data-occasion="Anniversary"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">💍</div>
+            <h3>Anniversary</h3>
+            <p>Celebrate beautiful memories.</p>
+        </div>
+
+        <div class="occasion"
+             data-occasion="Raksha Bandhan"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">🪢</div>
+            <h3>Raksha Bandhan</h3>
+            <p>Celebrate the sibling bond.</p>
+        </div>
+
+        <div class="occasion"
+             data-occasion="Durga Puja"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">🪔</div>
+            <h3>Durga Puja</h3>
+            <p>Share festive happiness.</p>
+        </div>
+
+        <div class="occasion"
+             data-occasion="Diwali"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">✨</div>
+            <h3>Diwali</h3>
+            <p>Spread light and happiness.</p>
+        </div>
+
+        <div class="occasion"
+             data-occasion="Eid"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">🌙</div>
+            <h3>Eid</h3>
+            <p>Send warm festive wishes.</p>
+        </div>
+
+        <div class="occasion"
+             data-occasion="Christmas"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">🎄</div>
+            <h3>Christmas</h3>
+            <p>Share festive joy.</p>
+        </div>
+
+        <div class="occasion"
+             data-occasion="Friendship Day"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">🤝</div>
+            <h3>Friendship Day</h3>
+            <p>Celebrate true friendship.</p>
+        </div>
+
+        <div class="occasion"
+             data-occasion="Valentine's Day"
+             onclick="selectOccasion(this)">
+            <div class="occasion-icon">❤️</div>
+            <h3>Valentine's Day</h3>
+            <p>Share a heartfelt wish.</p>
+        </div>
+
+    </div>
+
+
+    <div class="navigation">
+
+        <div></div>
+
+        <button class="btn btn-primary"
+                onclick="nextStep()">
+            Continue →
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     STEP 2
+========================= -->
+
+<section class="step" id="step2">
+
+<div class="card">
+
+    <div class="step-title">
+
+        <small>STEP 2</small>
+
+        <h2>
+            Pick Your Template 🎨
+        </h2>
+
+        <p id="templateDescription">
+            Choose the design that feels right.
+        </p>
+
+    </div>
+
+
+    <div class="template-grid">
+
+        <div class="template"
+             onclick="selectTemplate(this,'From The Heart')">
+
+            <div class="template-preview t1">
+                <h3>❤️ From The Heart</h3>
+            </div>
+
+            <div class="template-info">
+                <h3>From The Heart</h3>
+                <p>Warm & elegant</p>
+            </div>
+
+        </div>
+
+
+        <div class="template"
+             onclick="selectTemplate(this,'Rose & Memories')">
+
+            <div class="template-preview t2">
+                <h3>🌹 Rose & Memories</h3>
+            </div>
+
+            <div class="template-info">
+                <h3>Rose & Memories</h3>
+                <p>Soft & premium</p>
+            </div>
+
+        </div>
+
+
+        <div class="template"
+             onclick="selectTemplate(this,'Love Note')">
+
+            <div class="template-preview t3">
+                <h3>💌 Love Note</h3>
+            </div>
+
+            <div class="template-info">
+                <h3>Love Note</h3>
+                <p>Sweet & personal</p>
+            </div>
+
+        </div>
+
+
+        <div class="template"
+             onclick="selectTemplate(this,'Forever Moment')">
+
+            <div class="template-preview t4">
+                <h3>✨ Forever Moment</h3>
+            </div>
+
+            <div class="template-info">
+                <h3>Forever Moment</h3>
+                <p>Modern & clean</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="navigation">
+
+        <button class="btn btn-secondary"
+                onclick="prevStep()">
+            ← Back
+        </button>
+
+        <button class="btn btn-primary"
+                onclick="nextStep()">
+            Continue →
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     STEP 3
+========================= -->
+
+<section class="step" id="step3">
+
+<div class="card">
+
+    <div class="step-title">
+
+        <small>STEP 3</small>
+
+        <h2>
+            Add Your Wish ✍️
+        </h2>
+
+        <p>
+            Photo is optional. Your words are what make
+            the surprise special.
+        </p>
+
+    </div>
+
+
+    <div class="form-grid">
+
+        <div class="field">
+
+            <label>Your Name</label>
+
+            <input
+                id="senderName"
+                type="text"
+                placeholder="Enter your name">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Recipient Name</label>
+
+            <input
+                id="recipientName"
+                type="text"
+                placeholder="Who are you wishing?">
+
+        </div>
+
+
+        <div class="field full">
+
+            <label>Your Wish</label>
+
+            <textarea
+                id="wishMessage"
+                placeholder="Write your heartfelt message here..."></textarea>
+
+        </div>
+
+
+        <div class="field full">
+
+            <label>📸 Add a Photo (Optional)</label>
+
+            <div class="photo-box">
+
+                <div>
+                    You can create a beautiful wish
+                    without uploading a photo.
+                </div>
+
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/*"
+                    onchange="previewPhoto(event)">
+
+                <img
+                    id="photoPreview"
+                    class="photo-preview"
+                    alt="Selected photo">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="navigation">
+
+        <button class="btn btn-secondary"
+                onclick="prevStep()">
+            ← Back
+        </button>
+
+        <button class="btn btn-primary"
+                onclick="nextStep()">
+            Add WishLock →
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     STEP 4
+========================= -->
+
+<section class="step" id="step4">
+
+<div class="card">
+
+    <div class="step-title">
+
+        <small>STEP 4</small>
+
+        <h2>
+            🔐 Add Your WishLock Challenge
+        </h2>
+
+        <p>
+            Your recipient must answer these questions
+            before your surprise can be unlocked.
+        </p>
+
+    </div>
+
+
+    <div class="lock-intro">
+
+        <strong>How it works:</strong>
+
+        Every correct answer gives
+        <strong>20 marks</strong>.
+
+        The recipient needs
+        <strong>60/100</strong>
+        to unlock the Wish.
+    </div>
+
+
+    <!-- QUESTION 1 -->
+
+    <div class="question-card">
+
+        <div class="question-top">
+
+            <div class="question-number">
+                QUESTION 1
+            </div>
+
+            <div class="mark">
+                +20 MARKS
+            </div>
+
+        </div>
+
+        <input
+            id="q1"
+            type="text"
+            placeholder="Write your question">
+
+        <input
+            id="a1"
+            type="text"
+            placeholder="Correct answer">
+
+        <div class="hint">
+            💡 The answer stays hidden from the recipient.
+        </div>
+
+    </div>
+
+
+    <!-- QUESTION 2 -->
+
+    <div class="question-card">
+
+        <div class="question-top">
+
+            <div class="question-number">
+                QUESTION 2
+            </div>
+
+            <div class="mark">
+                +20 MARKS
+            </div>
+
+        </div>
+
+        <input
+            id="q2"
+            type="text"
+            placeholder="Write your question">
+
+        <input
+            id="a2"
+            type="text"
+            placeholder="Correct answer">
+
+    </div>
+
+
+    <!-- QUESTION 3 -->
+
+    <div class="question-card">
+
+        <div class="question-top">
+
+            <div class="question-number">
+                QUESTION 3
+            </div>
+
+            <div class="mark">
+                +20 MARKS
+            </div>
+
+        </div>
+
+        <input
+            id="q3"
+            type="text"
+            placeholder="Write your question">
+
+        <input
+            id="a3"
+            type="text"
+            placeholder="Correct answer">
+
+    </div>
+
+
+    <!-- QUESTION 4 -->
+
+    <div class="question-card">
+
+        <div class="question-top">
+
+            <div class="question-number">
+                QUESTION 4
+            </div>
+
+            <div class="mark">
+                +20 MARKS
+            </div>
+
+        </div>
+
+        <input
+            id="q4"
+            type="text"
+            placeholder="Write your question">
+
+        <input
+            id="a4"
+            type="text"
+            placeholder="Correct answer">
+
+    </div>
+
+
+    <!-- QUESTION 5 -->
+
+    <div class="question-card">
+
+        <div class="question-top">
+
+            <div class="question-number">
+                QUESTION 5
+            </div>
+
+            <div class="mark">
+                +20 MARKS
+            </div>
+
+        </div>
+
+        <input
+            id="q5"
+            type="text"
+            placeholder="Write your question">
+
+        <input
+            id="a5"
+            type="text"
+            placeholder="Correct answer">
+
+    </div>
+
+
+    <div class="lock-rules">
+
+        <div class="rule">
+            ❓ 5 Questions
+        </div>
+
+        <div class="rule">
+            ⭐ 20 Marks Each
+        </div>
+
+        <div class="rule">
+            🏆 Pass: 60
+        </div>
+
+        <div class="rule">
+            🔓 60+ Unlocks
+        </div>
+
+    </div>
+
+
+    <div class="navigation">
+
+        <button class="btn btn-secondary"
+                onclick="prevStep()">
+            ← Back
+        </button>
+
+        <button class="btn btn-primary"
+                onclick="nextStep()">
+            Preview My Wish →
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     STEP 5
+========================= -->
+
+<section class="step" id="step5">
+
+<div class="card">
+
+    <div class="step-title">
+
+        <small>STEP 5</small>
+
+        <h2>
+            Your Wish Is Ready 🎁
+        </h2>
+
+        <p>
+            Check everything before creating your surprise.
+        </p>
+
+    </div>
+
+
+    <div class="preview-box">
+
+        <div class="preview-icon">
+            💌
+        </div>
+
+        <h2 id="previewTitle">
+            A Special Wish ❤️
+        </h2>
+
+        <p id="previewFrom">
+            From someone special
+        </p>
+
+        <div class="preview-message"
+             id="previewMessage">
+            Your beautiful message will appear here.
+        </div>
+
+    </div>
+
+
+    <div id="resultMessage"></div>
+
+
+    <div class="navigation">
+
+        <button class="btn btn-secondary"
+                onclick="prevStep()">
+            ← Edit
+        </button>
+
+        <button class="btn btn-success"
+                onclick="createWish()">
+            ❤️ Create & Share My Wish
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+    © 2026 WishNow — Make Every Moment Special. 🎁
+</footer>
+
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+let currentStep = 1;
+
+let selectedOccasion = "";
+
+let selectedTemplate = "";
+
+let photoData = "";
+
+
+/* =========================
+   OCCASION
+========================= */
+
+function selectOccasion(element){
+
+    document
+        .querySelectorAll(".occasion")
+        .forEach(item => {
+            item.classList.remove("selected");
+        });
+
+    element.classList.add("selected");
+
+    selectedOccasion =
+        element.dataset.occasion;
+
+    document.getElementById("templateDescription").textContent =
+        selectedOccasion +
+        " templates are ready for your special wish.";
 
 }
 
-.full{
-  grid-column:1/-1;
-}
 
-label{
+/* =========================
+   TEMPLATE
+========================= */
 
-  display:block;
+function selectTemplate(element,name){
 
-  font-size:14px;
+    document
+        .querySelectorAll(".template")
+        .forEach(item => {
+            item.classList.remove("selected");
+        });
 
-  font-weight:800;
+    element.classList.add("selected");
 
-  margin-bottom:8px;
-
-}
-
-input,
-textarea{
-
-  width:100%;
-
-  border:1px solid #e7dbe6;
-
-  border-radius:14px;
-
-  padding:13px 14px;
-
-  outline:none;
-
-  background:#fff;
-
-  color:#2a182f;
-
-}
-
-input:focus,
-textarea:focus{
-
-  border-color:#d83b83;
-
-  box-shadow:
-    0 0 0 3px rgba(216,59,131,.1);
-
-}
-
-textarea{
-
-  min-height:140px;
-
-  resize:vertical;
+    selectedTemplate = name;
 
 }
 
@@ -610,1850 +1441,411 @@ textarea{
    PHOTO
 ========================= */
 
-.photo-box{
+function previewPhoto(event){
 
-  border:
-    1.5px dashed #d9c8d8;
+    const file =
+        event.target.files[0];
 
-  border-radius:18px;
+    if(!file){
+        return;
+    }
 
-  padding:22px;
+    const reader =
+        new FileReader();
 
-  text-align:center;
+    reader.onload =
+        function(e){
 
-  background:#fffafd;
+            photoData =
+                e.target.result;
 
-  color:#826f84;
+            const preview =
+                document.getElementById(
+                    "photoPreview"
+                );
 
-}
+            preview.src =
+                photoData;
 
-.photo-box input{
+            preview.style.display =
+                "block";
 
-  border:0;
+        };
 
-  padding:10px 0;
-
-}
-
-.optional{
-
-  font-size:12px;
-
-  color:#a08e9f;
-
-  font-weight:600;
-
-}
-
-
-/* =========================
-   QUESTIONS
-========================= */
-
-.questions{
-
-  display:grid;
-
-  gap:15px;
-
-}
-
-.question-card{
-
-  border:1px solid #eaddea;
-
-  border-radius:18px;
-
-  padding:18px;
-
-  background:#fffafd;
-
-}
-
-.question-top{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  margin-bottom:13px;
-
-}
-
-.question-number{
-
-  font-size:12px;
-
-  color:#c72f76;
-
-  font-weight:900;
-
-}
-
-.marks{
-
-  font-size:12px;
-
-  color:#8a6b8c;
-
-  font-weight:900;
-
-}
-
-.answer-field{
-
-  margin-top:13px;
-
-}
-
-.question-help{
-
-  margin-top:7px;
-
-  color:#a08e9f;
-
-  font-size:12px;
+    reader.readAsDataURL(file);
 
 }
 
 
 /* =========================
-   WISH LOCK
+   STEP VALIDATION
 ========================= */
 
-.wish-lock{
+function validateStep(){
 
-  background:
+    if(currentStep === 1){
 
-    linear-gradient(
-      135deg,
-      #201322,
-      #432050
-    );
+        if(!selectedOccasion){
 
-  color:#fff;
+            alert(
+                "🎯 Please choose an occasion first."
+            );
 
-  border-radius:28px;
-
-  padding:32px;
-
-}
-
-.wish-lock p{
-
-  color:#d8cbdc;
-
-  line-height:1.6;
-
-}
-
-.rules{
-
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:10px;
-
-  margin:18px 0;
-
-}
-
-.rule{
-
-  padding:9px 13px;
-
-  border-radius:20px;
-
-  background:rgba(255,255,255,.09);
-
-  font-size:13px;
-
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-.actions{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:12px;
-
-  flex-wrap:wrap;
-
-  margin-top:24px;
-
-}
-
-.primary-btn,
-.secondary-btn{
-
-  border-radius:28px;
-
-  padding:13px 23px;
-
-  font-weight:900;
-
-}
-
-.primary-btn{
-
-  border:0;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff4d91,
-      #8f39d9
-    );
-
-  color:#fff;
-
-}
-
-.secondary-btn{
-
-  border:1px solid #eadce9;
-
-  background:#fff;
-
-  color:#4a2055;
-
-}
-
-
-/* =========================
-   PREVIEW
-========================= */
-
-.preview{
-
-  display:none;
-
-  margin-top:22px;
-
-  padding:32px;
-
-  text-align:center;
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff5b9d,
-      #7d3bd1
-    );
-
-  color:#fff;
-
-}
-
-.preview.show{
-
-  display:block;
-
-}
-
-.preview-icon{
-
-  font-size:52px;
-
-}
-
-.preview-score{
-
-  font-size:48px;
-
-  font-weight:900;
-
-  margin:8px 0;
-
-}
-
-.preview-message{
-
-  max-width:700px;
-
-  margin:18px auto 0;
-
-  padding:22px;
-
-  border-radius:18px;
-
-  background:rgba(255,255,255,.12);
-
-  line-height:1.7;
-
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-
-  text-align:center;
-
-  padding:28px;
-
-  background:#110b14;
-
-  color:#8f8192;
-
-  font-size:13px;
-
-}
-
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-
-  position:fixed;
-
-  left:50%;
-
-  bottom:22px;
-
-  transform:
-    translate(-50%,20px);
-
-  opacity:0;
-
-  pointer-events:none;
-
-  z-index:200;
-
-  background:#211224;
-
-  color:#fff;
-
-  padding:12px 18px;
-
-  border-radius:25px;
-
-  transition:.25s;
-
-  font-size:13px;
-
-}
-
-.toast.show{
-
-  opacity:1;
-
-  transform:
-    translate(-50%,0);
-
-}
-
-
-/* =========================
-   TABLET
-========================= */
-
-@media(max-width:900px){
-
-  .occasion-grid{
-
-    grid-template-columns:
-      repeat(3,1fr);
-
-  }
-
-  .template-grid{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
-  }
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-  .navbar{
-
-    padding:
-      13px 5%;
-
-  }
-
-  .logo{
-
-    font-size:22px;
-
-  }
-
-  .back-btn{
-
-    padding:
-      8px 12px;
-
-    font-size:12px;
-
-  }
-
-  .creator-hero{
-
-    padding:
-      50px 5% 35px;
-
-  }
-
-  .creator-hero h1{
-
-    letter-spacing:-1px;
-
-  }
-
-  .container{
-
-    width:94%;
-
-  }
-
-  .step{
-
-    padding:22px;
-
-    border-radius:22px;
-
-  }
-
-  .occasion-grid{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
-  }
-
-  .template-grid{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .form-grid{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .full{
-
-    grid-column:auto;
-
-  }
-
-  .template,
-  .template button{
-
-    min-height:190px;
-
-  }
-
-}
-
-
-/* =========================
-   VERY SMALL
-========================= */
-
-@media(max-width:360px){
-
-  .occasion-grid{
-
-    grid-template-columns:1fr 1fr;
-
-  }
-
-  .step-head h2{
-
-    font-size:21px;
-
-  }
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<!-- =========================
-     NAVBAR
-========================= -->
-
-<nav class="navbar">
-
-  <div class="logo">
-
-    Wish<span>Now</span> ✨
-
-  </div>
-
-
-  <a
-    href="index.html"
-    class="back-btn">
-
-    ← Back to Home
-
-  </a>
-
-</nav>
-
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<header class="creator-hero">
-
-  <span class="creator-badge">
-
-    ✨ WISHNOW CREATOR
-
-  </span>
-
-
-  <h1>
-
-    Create a Wish They'll Remember ❤️
-
-  </h1>
-
-
-  <p>
-
-    Choose an occasion, pick a beautiful template,
-    write your message and add a fun WishLock challenge
-    before sharing your surprise.
-
-  </p>
-
-</header>
-
-
-
-<main class="container">
-
-
-<!-- =========================
-     STEP 1
-========================= -->
-
-<section class="step">
-
-  <div class="step-head">
-
-    <div class="step-number">
-
-      1
-
-    </div>
-
-
-    <div>
-
-      <h2>
-
-        Choose an Occasion
-
-      </h2>
-
-
-      <p>
-
-        Your occasion decides which templates
-        and question suggestions appear.
-
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="occasion-grid"
-    id="occasionGrid">
-  </div>
-
-
-  <div
-    class="occasion-note"
-    id="occasionNote">
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     STEP 2
-========================= -->
-
-<section class="step">
-
-  <div class="step-head">
-
-    <div class="step-number">
-
-      2
-
-    </div>
-
-
-    <div>
-
-      <h2>
-
-        Pick Your Template
-
-      </h2>
-
-
-      <p>
-
-        Beautiful templates will change according
-        to your selected occasion.
-
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="template-grid"
-    id="templateGrid">
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     STEP 3
-========================= -->
-
-<section class="step">
-
-  <div class="step-head">
-
-    <div class="step-number">
-
-      3
-
-    </div>
-
-
-    <div>
-
-      <h2>
-
-        Add Your Wish
-
-      </h2>
-
-
-      <p>
-
-        Write a personal message.
-        Photo is completely optional.
-
-      </p>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="form-grid">
-
-
-    <div>
-
-      <label for="sender">
-
-        Your Name
-
-      </label>
-
-
-      <input
-        id="sender"
-        placeholder="e.g. Your name">
-
-    </div>
-
-
-
-    <div>
-
-      <label for="recipient">
-
-        Recipient Name
-
-      </label>
-
-
-      <input
-        id="recipient"
-        placeholder="e.g. Someone special">
-
-    </div>
-
-
-
-    <div class="full">
-
-      <label for="message">
-
-        Your Wish
-
-      </label>
-
-
-      <textarea
-        id="message"
-        placeholder="Write your special message here...">
-      </textarea>
-
-    </div>
-
-
-
-    <div class="full">
-
-      <div class="photo-box">
-
-        <strong>
-
-          📸 Add a Photo
-
-          <span class="optional">
-
-            (Optional)
-
-          </span>
-
-        </strong>
-
-
-        <p
-          style="margin:7px 0 8px">
-
-          You can create a beautiful wish
-          without uploading any photo.
-
-        </p>
-
-
-        <input
-          id="photo"
-          type="file"
-          accept="image/*">
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     STEP 4
-========================= -->
-
-<section class="step">
-
-  <div class="step-head">
-
-    <div class="step-number">
-
-      4
-
-    </div>
-
-
-    <div>
-
-      <h2>
-
-        🔐 Add Your WishLock Challenge
-
-      </h2>
-
-
-      <p>
-
-        Create 5 questions.
-        Every correct answer gives 20 marks.
-        Pass mark is 60/100.
-
-      </p>
-
-    </div>
-
-  </div>
-
-
-
-  <div
-    class="questions"
-    id="questions">
-  </div>
-
-
-
-  <div class="occasion-note">
-
-    🔒 Correct answers stay hidden from the recipient.
-    Never use passwords, OTPs, banking details or
-    other sensitive information as questions or answers.
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     STEP 5
-========================= -->
-
-<section class="step">
-
-  <div class="wish-lock">
-
-
-    <h2>
-
-      🎁 Your Surprise Rules
-
-    </h2>
-
-
-    <p
-      style="margin-top:7px">
-
-      The recipient must answer the questions
-      before the Wish can be unlocked.
-
-    </p>
-
-
-
-    <div class="rules">
-
-
-      <span class="rule">
-
-        ❓ 5 Questions
-
-      </span>
-
-
-      <span class="rule">
-
-        ⭐ 20 Marks Each
-
-      </span>
-
-
-      <span class="rule">
-
-        🏆 Pass Mark: 60
-
-      </span>
-
-
-      <span class="rule">
-
-        🔓 60+ Unlocks Wish
-
-      </span>
-
-
-    </div>
-
-
-
-    <div class="actions">
-
-
-      <button
-        class="primary-btn"
-        onclick="previewWish()">
-
-        ✨ Preview My Wish
-
-      </button>
-
-
-      <button
-        class="secondary-btn"
-        onclick="saveDraft()">
-
-        💾 Save Draft
-
-      </button>
-
-
-    </div>
-
-
-
-    <!-- PREVIEW -->
-
-    <div
-      class="preview"
-      id="preview">
-
-
-      <div class="preview-icon">
-
-        🎉
-
-      </div>
-
-
-      <h2
-        id="previewTitle">
-
-        Your Wish Is Ready
-
-      </h2>
-
-
-      <div class="preview-score">
-
-        60/100
-
-      </div>
-
-
-      <p>
-
-        Demo preview of the WishLock
-        unlock experience.
-
-      </p>
-
-
-      <div
-        class="preview-message"
-        id="previewMessage">
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-  © 2026 WishNow — Make Every Moment Special. 🎁
-
-</footer>
-
-
-
-<div
-  class="toast"
-  id="toast">
-</div>
-
-
-
-<script>
-
-/* =========================
-   OCCASION DATA
-========================= */
-
-const occasionData = {
-
-
-  Birthday:{
-
-    icon:"🎂",
-
-    note:
-      "Birthday templates and birthday-memory question suggestions are shown here.",
-
-    templates:[
-
-      ["🎈","Birthday Party","Bright & joyful",1],
-
-      ["🎂","Sweet Birthday","Warm & cheerful",2],
-
-      ["✨","Elegant Birthday","Clean & premium",3],
-
-      ["🎉","Celebration","Fun & colorful",4]
-
-    ],
-
-    questions:[
-
-      "What is one birthday memory we both remember?",
-
-      "What is my favourite food?",
-
-      "Where did we first meet?",
-
-      "What is my favourite colour?",
-
-      "What is a special place we visited?"
-
-    ]
-
-  },
-
-
-  Anniversary:{
-
-    icon:"💍",
-
-    note:
-      "Anniversary templates are paired with relationship-memory question suggestions.",
-
-    templates:[
-
-      ["💍","Forever Moment","Elegant & warm",2],
-
-      ["🌹","Beautiful Memory","Soft & premium",4],
-
-      ["✨","Our Story","Premium & minimal",6],
-
-      ["💌","From The Heart","Sweet & personal",1]
-
-    ],
-
-    questions:[
-
-      "Where did we first meet?",
-
-      "What is our special date?",
-
-      "Where did we first go together?",
-
-      "What is our favourite shared memory?",
-
-      "Who said hello first?"
-
-    ]
-
-  },
-
-
-  "Raksha Bandhan":{
-
-    icon:"🪢",
-
-    note:
-      "Raksha Bandhan questions focus on shared memories, childhood and sibling moments.",
-
-    templates:[
-
-      ["🪢","Sibling Memories","Fun & warm",5],
-
-      ["❤️","Forever Bond","Bright & heartfelt",1],
-
-      ["✨","Special Sibling","Modern & clean",3],
-
-      ["🎁","Sweet Surprise","Playful & colorful",4]
-
-    ],
-
-    questions:[
-
-      "What game did we play most as children?",
-
-      "What is my favourite food?",
-
-      "What is our most memorable place together?",
-
-      "What nickname did we use for each other?",
-
-      "What is our funniest childhood memory?"
-
-    ]
-
-  },
-
-
-  "Durga Puja":{
-
-    icon:"🪔",
-
-    note:
-      "Festive templates and Puja-memory question suggestions are shown here.",
-
-    templates:[
-
-      ["🌺","Traditional Puja","Festive & graceful",4],
-
-      ["🪔","Festive Lights","Warm & bright",5],
-
-      ["🙏","Blessings","Elegant & peaceful",6],
-
-      ["✨","Modern Puja","Fresh & premium",2]
-
-    ],
-
-    questions:[
-
-      "Which Puja place do we like most?",
-
-      "What is my favourite Puja food?",
-
-      "Where did we go during last Puja?",
-
-      "Which pandal did we like most?",
-
-      "What is our favourite Puja memory?"
-
-    ]
-
-  },
-
-
-  Diwali:{
-
-    icon:"✨",
-
-    note:
-      "Diwali templates focus on lights, celebration and family memories.",
-
-    templates:[
-
-      ["🪔","Festival Lights","Warm & glowing",5],
-
-      ["✨","Golden Diwali","Bright & premium",4],
-
-      ["🎆","Celebration Night","Fun & colorful",2],
-
-      ["🌟","Light & Joy","Elegant & clean",3]
-
-    ],
-
-    questions:[
-
-      "What is my favourite Diwali sweet?",
-
-      "Where did we celebrate together?",
-
-      "What colour do I like for Diwali?",
-
-      "What was our favourite Diwali memory?",
-
-      "What do we usually do first on Diwali?"
-
-    ]
-
-  },
-
-
-  Eid:{
-
-    icon:"🌙",
-
-    note:
-      "Eid templates focus on celebration, family and meaningful memories.",
-
-    templates:[
-
-      ["🌙","Eid Mubarak","Elegant & festive",6],
-
-      ["✨","Eid Celebration","Bright & warm",2],
-
-      ["🤍","Warm Wishes","Soft & clean",3],
-
-      ["🎁","Eid Surprise","Joyful & colorful",1]
-
-    ],
-
-    questions:[
-
-      "What is my favourite Eid food?",
-
-      "Where did we celebrate together?",
-
-      "What is our favourite Eid memory?",
-
-      "What colour do I like most?",
-
-      "Who do we usually visit first?"
-
-    ]
-
-  },
-
-
-  Christmas:{
-
-    icon:"🎄",
-
-    note:
-      "Christmas templates focus on festive joy and memorable moments.",
-
-    templates:[
-
-      ["🎄","Christmas Joy","Bright & festive",1],
-
-      ["🎁","Gift Surprise","Fun & colorful",4],
-
-      ["✨","Winter Glow","Elegant & premium",6],
-
-      ["⭐","Merry Moments","Warm & cheerful",3]
-
-    ],
-
-    questions:[
-
-      "What is my favourite Christmas food?",
-
-      "What is our favourite Christmas memory?",
-
-      "Where did we celebrate together?",
-
-      "What gift do I remember most?",
-
-      "What is my favourite festive colour?"
-
-    ]
-
-  },
-
-
-  "Friendship Day":{
-
-    icon:"🤝",
-
-    note:
-      "Friendship templates focus on fun memories and shared moments.",
-
-    templates:[
-
-      ["🤝","Best Friends","Fun & bright",1],
-
-      ["😂","Crazy Memories","Playful & colorful",4],
-
-      ["✨","Forever Friends","Modern & premium",2],
-
-      ["📸","Our Memories","Photo-friendly",3]
-
-    ],
-
-    questions:[
-
-      "Where did we first meet?",
-
-      "What is my favourite food?",
-
-      "Where did we first hang out?",
-
-      "What is our funniest memory?",
-
-      "What is my favourite movie?"
-
-    ]
-
-  },
-
-
-  "Valentine's Day":{
-
-    icon:"❤️",
-
-    note:
-      "Valentine's Day templates focus on heartfelt memories and personal messages.",
-
-    templates:[
-
-      ["❤️","From The Heart","Warm & elegant",1],
-
-      ["🌹","Rose & Memories","Soft & premium",4],
-
-      ["💌","Love Note","Sweet & personal",2],
-
-      ["✨","Forever Moment","Modern & clean",6]
-
-    ],
-
-    questions:[
-
-      "Where did we first meet?",
-
-      "What is our favourite shared memory?",
-
-      "What is my favourite food?",
-
-      "What place is special to us?",
-
-      "What was our first special outing?"
-
-    ]
-
-  }
-
-};
-
-
-/* =========================
-   VARIABLES
-========================= */
-
-let selectedOccasion="Birthday";
-
-let selectedTemplate=0;
-
-
-/* =========================
-   RENDER OCCASIONS
-========================= */
-
-function renderOccasions(){
-
-  const grid=
-    document.getElementById("occasionGrid");
-
-  grid.innerHTML="";
-
-
-  Object.entries(occasionData)
-  .forEach(([name,data])=>{
-
-
-    const button=
-      document.createElement("button");
-
-
-    button.className=
-      "occasion"+
-      (
-        name===selectedOccasion
-        ? " active"
-        : ""
-      );
-
-
-    button.innerHTML=`
-
-      <span class="occasion-icon">
-
-        ${data.icon}
-
-      </span>
-
-      <span class="occasion-name">
-
-        ${name}
-
-      </span>
-
-    `;
-
-
-    button.onclick=()=>{
-
-      selectOccasion(name);
-
-    };
-
-
-    grid.appendChild(button);
-
-  });
-
-}
-
-
-/* =========================
-   SELECT OCCASION
-========================= */
-
-function selectOccasion(name){
-
-  selectedOccasion=name;
-
-  selectedTemplate=0;
-
-  renderOccasions();
-
-  renderTemplates();
-
-  renderQuestions();
-
-  document.getElementById(
-    "occasionNote"
-  ).textContent=
-    occasionData[name].note;
-
-}
-
-
-/* =========================
-   RENDER TEMPLATES
-========================= */
-
-function renderTemplates(){
-
-  const grid=
-    document.getElementById(
-      "templateGrid"
-    );
-
-  grid.innerHTML="";
-
-
-  occasionData[selectedOccasion]
-  .templates
-  .forEach((template,index)=>{
-
-
-    const card=
-      document.createElement("div");
-
-
-    card.className=
-      "template template-"+
-      template[3]+
-      (
-        index===selectedTemplate
-        ? " active"
-        : ""
-      );
-
-
-    card.innerHTML=`
-
-      <button
-        type="button"
-        onclick="selectTemplate(${index})">
-
-        <span class="template-icon">
-
-          ${template[0]}
-
-        </span>
-
-        <h3>
-
-          ${template[1]}
-
-        </h3>
-
-        <small>
-
-          ${template[2]}
-
-        </small>
-
-      </button>
-
-    `;
-
-
-    grid.appendChild(card);
-
-  });
-
-}
-
-
-/* =========================
-   SELECT TEMPLATE
-========================= */
-
-function selectTemplate(index){
-
-  selectedTemplate=index;
-
-  renderTemplates();
-
-}
-
-
-/* =========================
-   RENDER QUESTIONS
-========================= */
-
-function renderQuestions(){
-
-  const box=
-    document.getElementById(
-      "questions"
-    );
-
-  box.innerHTML="";
-
-
-  occasionData[selectedOccasion]
-  .questions
-  .forEach((suggestion,index)=>{
-
-
-    box.insertAdjacentHTML(
-      "beforeend",
-
-      `
-
-      <div class="question-card">
-
-        <div class="question-top">
-
-          <span class="question-number">
-
-            QUESTION ${index+1}
-
-          </span>
-
-          <span class="marks">
-
-            +20 MARKS
-
-          </span>
-
-        </div>
-
-
-        <label>
-
-          Question
-
-        </label>
-
-
-        <input
-          id="q${index}"
-          value="${escapeHtml(suggestion)}"
-          placeholder="Write your question">
-
-
-        <div class="answer-field">
-
-          <label>
-
-            Correct Answer
-
-          </label>
-
-
-          <input
-            id="a${index}"
-            placeholder="Write the correct answer">
-
-        </div>
-
-
-        <div class="answer-field">
-
-          <label>
-
-            Hint
-
-            <span class="optional">
-
-              (Optional)
-
-            </span>
-
-          </label>
-
-
-          <input
-            id="h${index}"
-            placeholder="Give a small hint if you want">
-
-        </div>
-
-
-      </div>
-
-      `
-
-    );
-
-  });
-
-}
-
-
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function escapeHtml(text){
-
-  return text
-
-    .replaceAll("&","&amp;")
-
-    .replaceAll("<","&lt;")
-
-    .replaceAll(">","&gt;")
-
-    .replaceAll('"',"&quot;");
-
-}
-
-
-/* =========================
-   PREVIEW
-========================= */
-
-function previewWish(){
-
-  const recipient=
-    document
-      .getElementById("recipient")
-      .value
-      .trim();
-
-
-  const message=
-    document
-      .getElementById("message")
-      .value
-      .trim();
-
-
-  if(!recipient){
-
-    showToast(
-      "Please enter the recipient name."
-    );
-
-    return;
-
-  }
-
-
-  if(!message){
-
-    showToast(
-      "Please write your wish first."
-    );
-
-    return;
-
-  }
-
-
-  for(let i=0;i<5;i++){
-
-    const question=
-      document
-        .getElementById("q"+i)
-        .value
-        .trim();
-
-
-    const answer=
-      document
-        .getElementById("a"+i)
-        .value
-        .trim();
-
-
-    if(!question || !answer){
-
-      showToast(
-        "Please complete all 5 questions and answers."
-      );
-
-      return;
+            return false;
+        }
 
     }
 
-  }
+
+    if(currentStep === 2){
+
+        if(!selectedTemplate){
+
+            alert(
+                "🎨 Please choose a template first."
+            );
+
+            return false;
+        }
+
+    }
 
 
-  document
-    .getElementById("previewTitle")
-    .textContent=
-      "A Special Wish for "+
-      recipient+
-      " ❤️";
+    if(currentStep === 3){
+
+        const sender =
+            document.getElementById(
+                "senderName"
+            ).value.trim();
+
+        const recipient =
+            document.getElementById(
+                "recipientName"
+            ).value.trim();
+
+        const message =
+            document.getElementById(
+                "wishMessage"
+            ).value.trim();
+
+        if(!sender ||
+           !recipient ||
+           !message){
+
+            alert(
+                "✍️ Please complete your name, recipient name and wish."
+            );
+
+            return false;
+        }
+
+    }
 
 
-  document
-    .getElementById("previewMessage")
-    .textContent=
-      message;
+    if(currentStep === 4){
+
+        for(let i=1;i<=5;i++){
+
+            const question =
+                document.getElementById(
+                    "q"+i
+                ).value.trim();
+
+            const answer =
+                document.getElementById(
+                    "a"+i
+                ).value.trim();
+
+            if(!question || !answer){
+
+                alert(
+                    "🔐 Please complete all 5 questions and correct answers."
+                );
+
+                return false;
+            }
+
+        }
+
+    }
+
+    return true;
+
+}
 
 
-  document
-    .getElementById("preview")
-    .classList
-    .add("show");
+/* =========================
+   NEXT
+========================= */
+
+function nextStep(){
+
+    if(!validateStep()){
+        return;
+    }
+
+    if(currentStep < 5){
+
+        currentStep++;
+
+        showStep();
+
+    }
+
+}
 
 
-  document
-    .getElementById("preview")
-    .scrollIntoView({
+/* =========================
+   PREVIOUS
+========================= */
 
-      behavior:"smooth",
+function prevStep(){
 
-      block:"center"
+    if(currentStep > 1){
 
+        currentStep--;
+
+        showStep();
+
+    }
+
+}
+
+
+/* =========================
+   SHOW STEP
+========================= */
+
+function showStep(){
+
+    document
+        .querySelectorAll(".step")
+        .forEach(step => {
+            step.classList.remove("active");
+        });
+
+    document
+        .getElementById(
+            "step"+currentStep
+        )
+        .classList.add("active");
+
+
+    for(let i=1;i<=5;i++){
+
+        const progress =
+            document.getElementById(
+                "progress"+i
+            );
+
+        progress.classList.remove(
+            "active",
+            "done"
+        );
+
+        if(i < currentStep){
+            progress.classList.add("done");
+        }
+
+        if(i === currentStep){
+            progress.classList.add("active");
+        }
+
+    }
+
+
+    if(currentStep === 5){
+
+        updatePreview();
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
     });
 
 }
 
 
 /* =========================
-   SAVE DRAFT
+   PREVIEW
 ========================= */
 
-function saveDraft(){
+function updatePreview(){
 
-  const draft={
+    const sender =
+        document.getElementById(
+            "senderName"
+        ).value.trim();
 
-    occasion:
-      selectedOccasion,
+    const recipient =
+        document.getElementById(
+            "recipientName"
+        ).value.trim();
 
-    template:
-      selectedTemplate,
-
-    sender:
-      document
-        .getElementById("sender")
-        .value,
-
-    recipient:
-      document
-        .getElementById("recipient")
-        .value,
-
-    message:
-      document
-        .getElementById("message")
-        .value,
-
-    questions:
-      [...Array(5)]
-      .map((_,i)=>({
-
-        question:
-          document
-            .getElementById("q"+i)
-            .value,
-
-        answer:
-          document
-            .getElementById("a"+i)
-            .value,
-
-        hint:
-          document
-            .getElementById("h"+i)
-            .value
-
-      }))
-
-  };
+    const message =
+        document.getElementById(
+            "wishMessage"
+        ).value.trim();
 
 
-  localStorage.setItem(
-    "wishnowDraft",
-    JSON.stringify(draft)
-  );
+    document.getElementById(
+        "previewTitle"
+    ).textContent =
+        "A Special " +
+        selectedOccasion +
+        " Wish for " +
+        recipient +
+        " ❤️";
 
 
-  showToast(
-    "Draft saved on this device."
-  );
+    document.getElementById(
+        "previewFrom"
+    ).textContent =
+        "Created with " +
+        selectedTemplate +
+        " • From " +
+        sender;
+
+
+    document.getElementById(
+        "previewMessage"
+    ).textContent =
+        message;
 
 }
 
 
 /* =========================
-   TOAST
+   CREATE WISH
 ========================= */
 
-function showToast(text){
+function createWish(){
 
-  const toast=
-    document.getElementById("toast");
-
-
-  toast.textContent=text;
+    if(!validateStep()){
+        return;
+    }
 
 
-  toast.classList.add("show");
+    const wishData = {
+
+        occasion:
+            selectedOccasion,
+
+        template:
+            selectedTemplate,
+
+        sender:
+            document.getElementById(
+                "senderName"
+            ).value.trim(),
+
+        recipient:
+            document.getElementById(
+                "recipientName"
+            ).value.trim(),
+
+        message:
+            document.getElementById(
+                "wishMessage"
+            ).value.trim(),
+
+        photo:
+            photoData,
+
+        questions:[
+            {
+                q:document.getElementById("q1").value.trim(),
+                a:document.getElementById("a1").value.trim()
+            },
+            {
+                q:document.getElementById("q2").value.trim(),
+                a:document.getElementById("a2").value.trim()
+            },
+            {
+                q:document.getElementById("q3").value.trim(),
+                a:document.getElementById("a3").value.trim()
+            },
+            {
+                q:document.getElementById("q4").value.trim(),
+                a:document.getElementById("a4").value.trim()
+            },
+            {
+                q:document.getElementById("q5").value.trim(),
+                a:document.getElementById("a5").value.trim()
+            }
+        ],
+
+        created:
+            new Date().toISOString()
+
+    };
 
 
-  setTimeout(()=>{
+    /*
+       Demo/local version:
+       Data is stored in this browser.
 
-    toast.classList.remove("show");
+       Later we can connect this to a backend/database
+       so the recipient can open a real shareable link.
+    */
 
-  },2600);
+    localStorage.setItem(
+        "wishNowCurrentWish",
+        JSON.stringify(wishData)
+    );
+
+
+    document.getElementById(
+        "resultMessage"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "resultMessage"
+    ).textContent =
+        "🎉 Your Wish has been prepared! The next step is connecting the secure share link to wish-result.html.";
 
 }
 
 
 /* =========================
-   START
+   URL OCCASION
 ========================= */
 
-document
-  .getElementById("occasionNote")
-  .textContent=
-    occasionData[selectedOccasion]
-    .note;
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const urlOccasion =
+    params.get("occasion");
 
 
-renderOccasions();
+if(urlOccasion){
 
-renderTemplates();
+    const occasionCards =
+        document.querySelectorAll(
+            ".occasion"
+        );
 
-renderQuestions();
+    occasionCards.forEach(card => {
+
+        if(
+            card.dataset.occasion ===
+            urlOccasion
+        ){
+
+            selectOccasion(card);
+
+        }
+
+    });
+
+}
 
 </script>
 
-
 </body>
-
 </html>
